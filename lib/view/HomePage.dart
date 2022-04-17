@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
 import 'package:new_shop/view/chatting/Chat.dart';
 import 'package:new_shop/view/Favorite.dart';
-import 'package:new_shop/view/ShopsPage.dart';
+import 'package:new_shop/view/ShopsPages/ShopsPage.dart';
 import '../logic/controllers/HomePageController.dart';
 import '../utls/Themes.dart';
 import 'Products.dart';
@@ -47,7 +47,7 @@ class HomePage extends GetView<AppBarController> {
               color: Colors.white,
             ),
             Icon(
-              Icons.home_repair_service,
+              Icons.shopping_bag,
               size: 25,
               color: Colors.white,
             ),

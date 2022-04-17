@@ -5,6 +5,8 @@ import 'package:new_shop/logic/controllers/FavoriteController.dart';
 import 'package:new_shop/logic/controllers/OrderController.dart';
 import 'package:new_shop/routes/routes.dart';
 
+import 'logic/binding/Shops_Binding.dart';
+
 
 void main() {
   runApp( MyApp());

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
 import 'package:new_shop/logic/controllers/ProductController.dart';
-import 'package:new_shop/view/AppBar.dart';
 import 'package:new_shop/view/Seggestions.dart';
-
-import 'Drawer.dart';
+import 'ConstantPages/AppBar.dart';
+import 'ConstantPages/Drawer.dart';
 
 class Product extends GetView<ProductController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();

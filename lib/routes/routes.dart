@@ -1,14 +1,14 @@
-
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:new_shop/logic/binding/ChatBinding.dart';
 import 'package:new_shop/logic/binding/Favorite_Binding.dart';
+import 'package:new_shop/view/auth/WelcomPage.dart';
 import 'package:new_shop/view/chatting/ChatDetails.dart';
 import 'package:new_shop/view/Favorite.dart';
 
 import '../logic/binding/Home_Binding.dart';
 import '../view/HomePage.dart';
-import '../view/ShopProfile.dart';
-import '../view/ShopsPage.dart';
+import '../view/ShopsPages/ShopProfile.dart';
+import '../view/ShopsPages/ShopsPage.dart';
 import '../view/auth/LoginView.dart';
 import '../view/auth/RegesterView.dart';
 
@@ -47,8 +47,11 @@ class AppPages {
       page: () => ChatDetails(),
       binding: ChatBinding(),
     ),
-///ChatDetails
-
+    ///ChatDetails
+    GetPage(
+      name: Routes.WelcomPage,
+      page: () => WelcomPage(),
+    ),
   ];
 }
 
@@ -61,6 +64,8 @@ class Routes {
 
   static const ChatDetails = '/ChatDetails';
   static const ShopsProfile = '/shops_profile';
+  static const WelcomPage = '/welcom_page';
+
 
 
 }

@@ -33,9 +33,14 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  curved_navigation_bar:
+  bubble:
+  flutter_dialogflow:
+  intl:
+  flutter_custom_clippers:
   cupertino_icons: ^1.0.2
-  get: ^4.6.1
-  curved_navigation_bar: ^1.0.3
+  get:
+
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +57,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -59,9 +65,39 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/
+    - images/1.jpg
+    -  images/1.jpg
+    -  images/2.jpg
+    -  images/3.jpg
+    -  images/4.jpg
+    -  images/5.jpg
+    -  images/8.jpg
+    -  images/9.jpg
+    -  images/11.jpg
+    -  images/44.jpg
+    -  images/55.jpg
+    -  images/66.jpg
+    -  images/88.jpg
+    -  images/99.jpg
+    -  images/100.jpg
+    -  images/shop.png
+    -  images/shop2.jpg
+    -  images/ss.jpg
+    -  images/00.jpg
+    -  images/jk.jpg
+    -  images/th.jpg
+    -  images/tt.jpg
+    -  images/5w.jpg
+    -  images/6w.jpg
+    -  images/7w.jpg
+    -  images/8w.jpg
+    -  images/9w.jpg
+    -  images/10w.jpg
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

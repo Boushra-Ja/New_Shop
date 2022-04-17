@@ -2,30 +2,39 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/logic/controllers/AppBarController.dart';
+import 'package:new_shop/view/chatting/Chat.dart';
+import 'package:new_shop/view/Favorite.dart';
 import 'package:new_shop/view/ShopsPage.dart';
 import '../logic/controllers/HomePageController.dart';
 import '../utls/Themes.dart';
 import 'Products.dart';
 
-class HomePage extends GetView<HomePageController> {
+class HomePage extends GetView<AppBarController> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomePageController>(builder: (controller) {
+    return GetBuilder<AppBarController>(builder: (controller) {
       return Scaffold(
+
         body: SafeArea(
-          child: IndexedStack(
+
+          child:
+
+          IndexedStack(
             index: controller.tabIndex,
             children: [
-              Text("ds"),
-              Text("ds"),
+              Favorite(),
+              TopBar(),
               ShopsPage(),
               Product(),
             ],
           ),
         ),
         bottomNavigationBar: CurvedNavigationBar(
-          height: 55,
-          index: controller.tabIndex,
+        //  height: 55,
+          height: 75,
+
+        index: controller.tabIndex,
           color: Themes.color,
           buttonBackgroundColor: Themes.color,
           backgroundColor: Colors.white,
@@ -53,6 +62,26 @@ class HomePage extends GetView<HomePageController> {
             ),
           ],
           onTap: (index) {
+
+
+                   if(controller.getscaffoldKey().currentState!.isDrawerOpen && index==2)
+{print("ppppppppp");
+Navigator.of(context).pop();
+
+}
+                    else if(
+                       index==3 )
+                   {print("ppppuuuuuuuuuuuppppp");
+
+
+
+
+
+                   }
+
+
+
+
             print(index);
             // controller.tabIndex;
 

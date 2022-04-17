@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/logic/controllers/AppBarController.dart';
+import 'package:new_shop/logic/controllers/ProductController.dart';
+import 'package:new_shop/view/AppBar.dart';
+import 'package:new_shop/view/Seggestions.dart';
 
-class Product extends GetView<HeroController> {
+import 'Drawer.dart';
+
+class Product extends GetView<ProductController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final sampleController = Get.put(AppBarController(),permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -12,81 +19,70 @@ class Product extends GetView<HeroController> {
       home: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          key: _scaffoldKey,
-          drawer: Drawer(
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                  ),
-                  child: Text('Drawer Header'),
-                ),
-                ListTile(
-                  title: const Text('Item 1'),
-                  onTap: () {
-                  },
-                ),
-                ListTile(
-                  title: const Text('Item 2'),
-                  onTap: () {
 
-                  },
-                ),
-              ],
-            ),
-          ),
+          key: sampleController.getscaffoldKey2(),
+          drawer: myDrawer()
+       ,
+        //  endDrawerEnableOpenDragGesture: true,
+
           body: Column(children: <Widget>[
             Expanded(
               flex: 1,
-              child: Stack(children: [
-                Positioned(
-                  top: 5,
-                  child: IconButton(
-                      onPressed: () {
-                        _scaffoldKey.currentState!.openDrawer();
-                      },
-                      icon: Icon(
-                        Icons.menu,
-                        size: 50,
-                      )),
-                ),
-                Positioned(
-                  top: 20,
-                  right: 80,
-                  child: Container(
-                    width: 250,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 3,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(children: [
-                      IconButton(
-                        onPressed: () {
-                          print("search");
-                        },
-                        icon: const Icon(Icons.search),
-                      ),
-                      Text(" انقر هنا للبحث ..."),
-                    ]),
-                  ),
-                ),
-                Positioned(
-                  top: 5,
-                  left: 20,
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.shopping_cart_outlined,
-                        size: 50,
-                        color: Colors.black,
-                      )),
-                ),
-              ]), // ListView
+              child:  Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                    myAppBar(),
+              ])),
+              // Stack(children: [
+              //   Positioned(
+              //     top: 5,
+              //     child: IconButton(
+              //         onPressed: () {
+              //           _scaffoldKey.currentState!.openDrawer();
+              //         },
+              //         icon: Icon(
+              //           Icons.menu,
+              //           size: 50,
+              //         )),
+              //   ),
+              //   Positioned(
+              //     top: 20,
+              //     right: 80,
+              //     child: Container(
+              //       width: 250,
+              //       height: 45,
+              //       decoration: BoxDecoration(
+              //         border: Border.all(
+              //           color: Colors.black,
+              //           width: 3,
+              //         ),
+              //         borderRadius: BorderRadius.circular(20),
+              //       ),
+              //       child: Row(children: [
+              //         IconButton(
+              //           onPressed: () {
+              //             print("search");
+              //           },
+              //           icon: const Icon(Icons.search),
+              //         ),
+              //         Text(" انقر هنا للبحث ..."),
+              //       ]),
+              //     ),
+              //   ),
+              //   Positioned(
+              //     top: 5,
+              //     left: 20,
+              //     child: IconButton(
+              //         onPressed: () {},
+              //         icon: Icon(
+              //           Icons.shopping_cart_outlined,
+              //           size: 50,
+              //           color: Colors.black,
+              //         )),
+              //   ),
+              // ]), // ListView
             ),
             Expanded(
                 flex: 1,
@@ -262,7 +258,7 @@ class Product extends GetView<HeroController> {
                   style: TextStyle(fontSize: 22, color: Colors.black),
                 ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {Get.to( ()=>Seggestions());},
                     icon: Icon(
                       Icons.arrow_forward,
                       color: Colors.pink[900],

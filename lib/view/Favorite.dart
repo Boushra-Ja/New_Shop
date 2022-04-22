@@ -18,11 +18,13 @@ class Favorite extends GetView<FavoriteController> {
             body:
 
             Column(children: <Widget>[
-              Expanded(   flex: 1,
+              Expanded(   flex: 2,
                 child:   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Container(margin:EdgeInsets.only(top:20,right:30,bottom: 10),child:Text("المفضله",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.pink[900],fontSize: 20),)),
+                         Container(
+                             margin:EdgeInsets.only(top:20,right:30),
+                             child:Text("المفضله",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.pink[900],fontSize: 20),)),
                          Divider(
                         thickness:  1 ,
                         color: Colors.black
@@ -107,10 +109,8 @@ class Favorite extends GetView<FavoriteController> {
 
                            decoration: BoxDecoration(
                                borderRadius: BorderRadius.circular(50)),
-                           margin: EdgeInsets.all(5),
-                           padding: EdgeInsets.all(5),
-                           child: Stack(
-                             children: [
+
+                           child:
                                Column(
                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                  children: [
@@ -124,24 +124,29 @@ class Favorite extends GetView<FavoriteController> {
                                            radius: 90,
                                          )),
                                    ),
-                                   Row(
-                                     children: [
-                                       Text(
-                                         '  اسم المتجر  ',
-                                         style: TextStyle(
-                                           fontSize: 18,
-                                           fontWeight: FontWeight.bold,
+                                   Container(
+                                     margin: EdgeInsets.only(right: 40),
+                                     child: Row(
+                                       children: [
+                                         Text(
+                                           'اسم المتجر',
+                                           style: TextStyle(
+                                             fontSize: 18,
+                                             fontWeight: FontWeight.bold,
+                                           ),
                                          ),
-                                       ),
-                                       Icon(
-                                         Icons.star_outline_rounded,
-                                         color: Colors.purple,
-                                         size: 30,
-                                       ),
-                                     ],
+                                         Icon(
+                                           Icons.star_outline_rounded,
+                                           color: Colors.purple,
+                                           size: 30,
+                                         ),
+                                       ],
 
+                                     ),
                                    ),
-                                   Row(
+                                   Container(
+                                       margin: EdgeInsets.only(right: 40),
+                                       child: Row(
                                      children: [
                                        Text(
                                          '    مبيعات 10  ',
@@ -152,8 +157,10 @@ class Favorite extends GetView<FavoriteController> {
 
                                      ],
 
-                                   ),
-                                   Row(
+                                   )),
+                       Container(
+                       margin: EdgeInsets.only(right: 40),
+                       child: Row(
                                      children: const [
                                        Icon(
                                          Icons.star,
@@ -181,22 +188,22 @@ class Favorite extends GetView<FavoriteController> {
                                          size: 15,
                                        )
                                      ],
-                                   ),
+                                   )),
 
                                  ],
                                ),
-                             ],
-                           ),
+                           //   ],
+                           // ),
                          );
 
                      },
-                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                        crossAxisCount: 2,
-                       childAspectRatio: 1.0,
-                       crossAxisSpacing: 50.0,
-                       mainAxisSpacing: 50,
-                       mainAxisExtent: 264,
-                     ),
+                       // childAspectRatio: 1.0,
+                     //  crossAxisSpacing: 50.0,
+                       mainAxisSpacing: 50,//
+                      // mainAxisExtent: 200,
+                      ),
                    )
 
 
@@ -227,7 +234,9 @@ class Favorite extends GetView<FavoriteController> {
 
                                           ),
                                    ),
-                                   Row(
+                                   Container(
+                                    // margin: EdgeInsets.only(right: 30),
+                                     child: Row(
                                      children: [
                                        Text(
                                          '  اسم المتجر  ',
@@ -243,8 +252,10 @@ class Favorite extends GetView<FavoriteController> {
                                        ),
                                      ],
 
-                                   ),
-                                   Row(
+                                   )),
+                                   Container(
+                                      // margin: EdgeInsets.only(right: 30),
+                                       child: Row(
                                      children: [
                                        Text(
                                          '    مبيعات 10  ',
@@ -255,8 +266,10 @@ class Favorite extends GetView<FavoriteController> {
 
                                      ],
 
-                                   ),
-                                   Row(
+                                   )),
+                                   Container(
+                                    // margin: EdgeInsets.only(right: 30),
+                                     child: Row(
                                      children: const [
                                        Icon(
                                          Icons.star,
@@ -284,7 +297,7 @@ class Favorite extends GetView<FavoriteController> {
                                          size: 15,
                                        )
                                      ],
-                                   ),
+                                   )),
 
                                  ],
                                ),
@@ -295,10 +308,9 @@ class Favorite extends GetView<FavoriteController> {
                      },
                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                        crossAxisCount: 2,
-                       childAspectRatio: 1.0,
-                       crossAxisSpacing: 50.0,
                        mainAxisSpacing: 50,
-                       mainAxisExtent: 264,
+                        mainAxisExtent: 200,
+
                      ),
                    ),
 

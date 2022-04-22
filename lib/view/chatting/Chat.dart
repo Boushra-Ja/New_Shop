@@ -5,7 +5,7 @@ import 'package:new_shop/utls/Themes.dart';
 
 import '../ConstantPages/MyCustomCLipper.dart';
 
-class TopBar extends StatelessWidget {
+class Chat extends StatelessWidget {
   Color? colorh = Themes.color;
   Color colorh8 = Colors.grey.shade300;
 
@@ -141,7 +141,8 @@ class TopBar extends StatelessWidget {
                 child: ListTile(
                   trailing: Text( "4/7/2022"),
 
-                    leading: CircleAvatar(radius:40,backgroundImage: AssetImage(images[index]),),
+                    leading:
+                    CircleAvatar(radius:40,backgroundImage: AssetImage(images[index]),),
                     title: Text(title[index],style: TextStyle(color: Colors.black,fontSize: 20)),
                     subtitle: Text(subtitle[index],style: TextStyle(color: Colors.grey,fontSize: 15),),
                   ),

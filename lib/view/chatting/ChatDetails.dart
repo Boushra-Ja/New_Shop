@@ -29,7 +29,9 @@ class ChatDetails extends GetView<ChatController> {
 
                 children: <Widget>[
 
-                  SizedBox(height: 50,),
+                 //
+                  //
+                  SizedBox(height: 20,),
                     Card(
                       child: ListTile(
                       trailing:  IconButton(onPressed: (){  Get.back();  },
@@ -54,9 +56,9 @@ class ChatDetails extends GetView<ChatController> {
                           itemBuilder: (context, index) => chat(
                               messsages[index]["message"].toString(),
                               messsages[index]["data"]))),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
 
                   Divider(
                     height: 5.0,
@@ -66,7 +68,8 @@ class ChatDetails extends GetView<ChatController> {
                   Container(
 
 
-                    child: ListTile(
+                    child:
+                    ListTile(
 
                       leading: IconButton(
                         icon: Icon(Icons.camera_alt, color: Colors.pink[900], size: 35,), onPressed: () {  },
@@ -83,7 +86,7 @@ class ChatDetails extends GetView<ChatController> {
                         child: TextFormField(
                           controller: messageInsert,
                           decoration: InputDecoration(
-                            hintText: "Enter a Message...",
+                           // hintText: "  ادخل رسالتك ",
                             hintStyle: TextStyle(
                                 color: Colors.black26
                             ),
@@ -132,9 +135,9 @@ class ChatDetails extends GetView<ChatController> {
 
                   ),
 
-                  SizedBox(
-                    height: 60.0,
-                  )
+                 // SizedBox(
+                 //    height: 50.0,
+                 //  )
                 ],
               ),
             ),

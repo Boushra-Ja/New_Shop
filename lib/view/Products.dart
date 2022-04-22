@@ -27,61 +27,13 @@ class Product extends GetView<ProductController> {
           body: Column(children: <Widget>[
             Expanded(
               flex: 1,
-              child:  Padding(
-                padding: const EdgeInsets.all(8.0),
+
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                     myAppBar(),
-              ])),
-              // Stack(children: [
-              //   Positioned(
-              //     top: 5,
-              //     child: IconButton(
-              //         onPressed: () {
-              //           _scaffoldKey.currentState!.openDrawer();
-              //         },
-              //         icon: Icon(
-              //           Icons.menu,
-              //           size: 50,
-              //         )),
-              //   ),
-              //   Positioned(
-              //     top: 20,
-              //     right: 80,
-              //     child: Container(
-              //       width: 250,
-              //       height: 45,
-              //       decoration: BoxDecoration(
-              //         border: Border.all(
-              //           color: Colors.black,
-              //           width: 3,
-              //         ),
-              //         borderRadius: BorderRadius.circular(20),
-              //       ),
-              //       child: Row(children: [
-              //         IconButton(
-              //           onPressed: () {
-              //             print("search");
-              //           },
-              //           icon: const Icon(Icons.search),
-              //         ),
-              //         Text(" انقر هنا للبحث ..."),
-              //       ]),
-              //     ),
-              //   ),
-              //   Positioned(
-              //     top: 5,
-              //     left: 20,
-              //     child: IconButton(
-              //         onPressed: () {},
-              //         icon: Icon(
-              //           Icons.shopping_cart_outlined,
-              //           size: 50,
-              //           color: Colors.black,
-              //         )),
-              //   ),
-              // ]), // ListView
+              ])
+
             ),
             Expanded(
                 flex: 1,
@@ -100,7 +52,7 @@ class Product extends GetView<ProductController> {
                             height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color(0xFFAF3A88),
+                                color: Colors.grey,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(20),
@@ -130,7 +82,7 @@ class Product extends GetView<ProductController> {
                             height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color(0xFFAF3A88),
+                                color: Colors.grey,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(20),
@@ -161,7 +113,7 @@ class Product extends GetView<ProductController> {
                             height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color(0xFFAF3A88),
+                                color: Colors.grey,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(20),
@@ -192,7 +144,7 @@ class Product extends GetView<ProductController> {
                             height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color(0xFFAF3A88),
+                                color: Colors.grey,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(20),
@@ -224,7 +176,7 @@ class Product extends GetView<ProductController> {
                             decoration: BoxDecoration(
 
                               border: Border.all(
-                                color: Color(0xFFAF3A88),
+                                color: Colors.grey,
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(20),
@@ -250,210 +202,185 @@ class Product extends GetView<ProductController> {
                         ]),
                       ]),
                 )), // ListView
-            Row(
-              children: [
-                Text(
-                  "    اقتراحات قد تعجبك  ",
-                  style: TextStyle(fontSize: 22, color: Colors.black),
-                ),
-                IconButton(
-                    onPressed: () {Get.to( ()=>Seggestions());},
-                    icon: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.pink[900],
-                      size: 30,
-                    ))
-              ],
-            ),
+
 
             Expanded(
                 flex:5 ,
                 child: ListView(children: [
 
+                  Row(
+                    children: [
+                      InkWell(
+                        child: Container(
+                          margin:
+                          EdgeInsets.only(right:20),
+                          child: Text(
+                            "اقتراحات قد تعجبك",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
+                        ),
+                        onTap: (){Get.to( ()=>Seggestions());},
+                      ),
+                      IconButton(
+                          onPressed: () {Get.to( ()=>Seggestions());},
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.pink[900],
+                            size: 30,
+                          ))
+                    ],
+                  ),
                   Column(
                     children: [
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(children: <Widget>[
+
+
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
                                   image: DecorationImage(
-                                    image: ExactAssetImage('images/66.jpg'),
+                                    image: ExactAssetImage('images/tt.jpg'),
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(
-                                          Icons.face,
-                                          color: Colors.pink[900],
-                                        ),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text(
-                                    "568.8sp  ",
-                                    style: TextStyle(
-                                      color: Colors.pink[900],
-                                    ),
-                                  ),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: ExactAssetImage('images/1.jpg'),
+                                    image: ExactAssetImage('images/8.jpg'),
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-                                    color: Colors.black,
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face,
-                                            color: Colors.pink[900]),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: ExactAssetImage('images/2.jpg'),
+                                    image: ExactAssetImage('images/shop2.jpg'),
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-                                    color: Colors.black,
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/55.jpg'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
-                                  ),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
+
+
+
                         ]),
                       ),
                     ],
@@ -485,10 +412,14 @@ class Product extends GetView<ProductController> {
                   ),
                   Row(
                     children: [
-                      Text(
-                        "       الاقل سعرا   ",
-                        style: TextStyle(fontSize: 22),
-                      ),
+                      InkWell(
+                      child: Container(
+                      margin:
+                      EdgeInsets.only(right:20),
+                      child: Text(
+                        "الاقل سعرا ",
+                        style: TextStyle(fontSize: 18),
+                      ),),onTap: (){},),
                       IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -504,13 +435,11 @@ class Product extends GetView<ProductController> {
                         scrollDirection: Axis.horizontal,
                         child: Row(children: <Widget>[
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -518,89 +447,46 @@ class Product extends GetView<ProductController> {
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    "568.8sp  ",
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/3.jpg'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  border: Border.all(
-// color: Colors.pink[900],
-                                    width: 4,
-                                  ),
-                                  borderRadius: BorderRadius.circular(25),
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -608,43 +494,46 @@ class Product extends GetView<ProductController> {
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -652,35 +541,42 @@ class Product extends GetView<ProductController> {
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
+
+
                         ]),
                       ),
                     ],
@@ -715,10 +611,13 @@ class Product extends GetView<ProductController> {
 
                   Row(
                     children: [
-                      Text(
-                        "       عروص وحسومات  "
-                            "   ",
-                        style: TextStyle(fontSize: 22),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: Text(
+                          "عروض وحسومات",
+
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                       IconButton(
                           onPressed: () {},
@@ -735,147 +634,11 @@ class Product extends GetView<ProductController> {
                         scrollDirection: Axis.horizontal,
                         child: Row(children: <Widget>[
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/5.jpg'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  border: Border.all(
-//   color: Colors.pink[900],
-                                    width: 4,
-                                  ),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    "568.8sp  ",
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/55.jpg'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
-                                  ),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/44.jpg'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
-                                  ),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -883,34 +646,133 @@ class Product extends GetView<ProductController> {
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
+                          Column(
+
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height: 180,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: ExactAssetImage('images/44.jpg'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
+                            ],
+                          ),
+                          Column(
+
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height: 180,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: ExactAssetImage('images/8.jpg'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
+                            ],
                           ),
                         ]),
                       ),
@@ -944,10 +806,12 @@ class Product extends GetView<ProductController> {
 
                   Row(
                     children: [
-                      Text(
-                        "       الاكثر شيوعا   ",
-                        style: TextStyle(fontSize: 22),
-                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: Text(
+                        "الاكثر شيوعا",
+                        style: TextStyle(fontSize: 18),
+                      ),),
                       IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -963,59 +827,11 @@ class Product extends GetView<ProductController> {
                         scrollDirection: Axis.horizontal,
                         child: Row(children: <Widget>[
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/11.jpg'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  border: Border.all(
-//color: Colors.pink[900],
-                                    width: 4,
-                                  ),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    "568.8sp  ",
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -1023,43 +839,46 @@ class Product extends GetView<ProductController> {
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-//  color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -1067,77 +886,86 @@ class Product extends GetView<ProductController> {
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-// color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-//   child: Text("kkkkkkkkkkkkkkkk"),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+
                             children: [
                               Container(
-//padding: EdgeInsets.all(0.5),
-                                margin: EdgeInsets.only(right: 20),
-                                width: 358,
+                                margin: EdgeInsets.only(right: 10),
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: ExactAssetImage('images/1.jpg'),
+                                    image: ExactAssetImage('images/66.jpg'),
                                     fit: BoxFit.fill,
                                   ),
                                   border: Border.all(
-// color: Colors.pink[900],
-                                    width: 4,
+                                    color: Colors.grey,
+                                    width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 170),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "      اسم المنتج  ",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Icon(Icons.face),
-                                      ],
+
+                              Container(
+                                margin: EdgeInsets.only(right: 40),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "اسم المنتج ",
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
-                                  Text("568.8sp  "),
-                                ],
-                              )
+                                    Icon(Icons.tag_faces_outlined,
+                                        color: Colors.pink[900]),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Text(" 568.8"),
+                                    Text(" ل.س")
+                                  ],
+                                ),
+                              ),
+
                             ],
-                          ),
-                          SizedBox(
-                            width: 30,
                           ),
                         ]),
                       ),

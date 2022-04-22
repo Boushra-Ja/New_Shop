@@ -59,7 +59,7 @@ class Countdown extends AnimatedWidget {
   List<Map> messsages = [];
 
   void _incrementCounter() {
-    _counter = _counter + 30;
+    _counter = _counter + 29;
   }
 
   int i = 0;

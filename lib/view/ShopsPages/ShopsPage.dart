@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ConstantPages/AppBar.dart';
-import '../../logic/controllers/ShopPageController.dart';
+import '../../logic/controllers/ShopsController/ShopPageController.dart';
 import '../ConstantPages/Drawer.dart';
 import 'ShopProfile.dart';
 import 'ShopReview.dart';

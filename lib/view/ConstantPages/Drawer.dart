@@ -7,6 +7,8 @@ import 'package:new_shop/view/DrawerPages/SettingPage.dart';
 import 'package:new_shop/view/auth/LoginView.dart';
 import '../../utls/Themes.dart';
 import '../DrawerPages/GiftRequest.dart';
+import '../Mazad.dart';
+import '../chatting/Chat.dart';
 
 class myDrawer extends StatelessWidget {
 
@@ -49,6 +51,14 @@ class myDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.chat),
+            title: const Text('المحادثات', style: Themes.bodyText1,),
+            onTap: () {
+              Get.to(Chat()) ;
+
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.settings),
             title: const Text('الإعدادات', style: Themes.bodyText1,),
             onTap: () {
@@ -68,8 +78,9 @@ class myDrawer extends StatelessWidget {
             leading: Icon(Icons.logout),
             title: const Text('تسجيل الخروج', style: Themes.bodyText1,),
             onTap: () {
-              Get.to(LoginView()) ;
+             // Get.to(LoginView()) ;
 
+              Get.to(mazad());
             },
           ),
         ],

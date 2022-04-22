@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/utls/Themes.dart';
 
 
 class RegisterView extends GetView {
@@ -20,7 +21,7 @@ class RegisterView extends GetView {
                           height: MediaQuery.of(context).size.height *0.3,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: ExactAssetImage('images/img.png'),
+                              image: ExactAssetImage('images/login.jpg'),
                               fit: BoxFit.fill,
                             ),
                           ),),
@@ -37,7 +38,7 @@ class RegisterView extends GetView {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
-                              color: Colors.purple[50],
+                              color: Themes.color2,
                               elevation: 10,
                               child:
                               Form(
@@ -176,7 +177,7 @@ class RegisterView extends GetView {
                                   //   ),
                                   // ),
                                  InkWell(onTap:(){Get.toNamed('/HomePage'); },child:  CircleAvatar(
-                                   backgroundColor: Colors.pink[900],
+                                   backgroundColor: Themes.color,
                                    radius: 40,
                                    child: Text(
                                      "  انشاء حساب ",

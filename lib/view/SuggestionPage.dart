@@ -20,7 +20,7 @@ class SuggestionPage extends GetView{
             ClipPath(
               child: Container(
                 color: Themes.color,
-                height: MediaQuery.of(context).size.height*0.12,
+                height: MediaQuery.of(context).size.height*0.11,
                 width: MediaQuery.of(context).size.width,
                 child: Center(
                     child: Container(

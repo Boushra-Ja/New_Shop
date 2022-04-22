@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_shop/logic/controllers/ShopProfileController.dart';
+import 'package:new_shop/logic/controllers/ShopsController/ShopProfileController.dart';
 import 'dart:ui' as ui;
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ProductDeatil.dart';

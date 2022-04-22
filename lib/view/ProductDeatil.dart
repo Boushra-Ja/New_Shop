@@ -4,10 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/ProductDeatilController.dart';
 import 'package:new_shop/utls/Themes.dart';
+import 'package:new_shop/view/chatting/Chat.dart';
 
 import 'EvaluationDialoge.dart';
 import 'ShopsPages/ShopProfile.dart';
 import 'SuggestionPage.dart';
+import 'chatting/ChatDetails.dart';
 
 class ProductDeatil extends GetView<ProductDeatilController> {
   @override
@@ -206,7 +208,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                   ),
                   InkWell(
                     onTap: () {
-                      ///Get.to();
+                      Get.to(ChatDetails());
                     },
                     child: CircleAvatar(
                       backgroundColor: Themes.color2,

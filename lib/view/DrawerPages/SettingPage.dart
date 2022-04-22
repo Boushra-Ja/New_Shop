@@ -1,61 +1,265 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/view/ConstantPages/RoundedAppBar.dart';
 
 import '../../utls/Themes.dart';
 import '../ConstantPages/MyCustomCLipper.dart';
 
-class SettingPage extends StatelessWidget{
-
+class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Directionality(textDirection: TextDirection.rtl, child: Scaffold(
-
-     // appBar: RoundedAppBar(),
-      body: ListView(
-        children: [
-          ClipPath(
-            child: Container(
-              color: Themes.color,
-              height: MediaQuery.of(context).size.height*0.12,
-              width: MediaQuery.of(context).size.width,
-              child: Center(
-                  child: Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Themes.color2,
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {Get.back();},
-                                  icon: Icon(
-                                    Icons.arrow_back,
-                                    color: Themes.color,
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          // appBar: RoundedAppBar(),
+          body: ListView(
+            children: [
+              ClipPath(
+                child: Container(
+                  color: Themes.color,
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                      child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Themes.color2,
+                                  child: Center(
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_back,
+                                        color: Themes.color,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ]))
-
+                              ]))),
+                ),
+                clipper: MyCustomCLipper(),
               ),
-            ),
-            clipper: MyCustomCLipper(),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 25,
+                    ),
+                    ListTile(
+                      title: Text(
+                        "تعديل المعلومات الشخصية",
+                        style: Themes.bodyText1,
+                      ),
+                      trailing: Icon(Icons.edit),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Divider(),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ListTile(
+                      title: Text(
+                        "معلومات عن التطبيق",
+                        style: Themes.bodyText1,
+                      ),
+                      trailing: Icon(Icons.details),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Divider(),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ListTile(
+                        title: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "لغة التطبيق",
+                          style: Themes.bodyText1,
+                        ),
+                        SizedBox(
+                          width: 35,
+                        ),
+                        GetBuilder<SettingPageController>(
+                          init: SettingPageController(),
+                          builder: (controller) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: 35,
+                              child: DropdownButtonFormField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          10, 0.001, 12, 0.001),
+                                      filled: true,
+                                      fillColor: Colors.white),
+                                  hint: Text(
+                                    "العربية",
+                                    style: Themes.subtitle2,
+                                  ),
+                                  value: controller.selectedLanguage,
+                                  alignment: Alignment.center,
+                                  style: Themes.subtitle2,
+                                  onChanged: (newValue) {
+                                    controller.setselectedLanguage(
+                                        newValue.toString());
+                                  },
+                                  items: [
+                                    for (var data in controller.langList)
+                                      DropdownMenuItem(
+                                        child: Text(
+                                          "${data}",
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.start,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        value: "${data}",
+                                      )
+                                  ]),
+                            );
+                          },
+                        )
+                      ],
+                    )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Divider(),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ListTile(
+                        title: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "ألوان التطبيق",
+                          style: Themes.bodyText1,
+                        ),
+                        SizedBox(
+                          width: 25,
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                GetBuilder<SettingPageController>(
+                                  init: SettingPageController(),
+                                  builder: (controller) {
+                                    return Checkbox(
+                                      value: controller.chexboxlight,
+                                      activeColor: Themes.color,
+                                      onChanged: (value) {
+                                        controller
+                                            .setselectedcheckboxlight(value);
+                                        controller
+                                            .setselectedcheckboxdark(false);
+                                      },
+                                    );
+                                  },
+                                ),
+                                Text("نهاري")
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                GetBuilder<SettingPageController>(
+                                  init: SettingPageController(),
+                                  builder: (controller) {
+                                    return Checkbox(
+                                      activeColor: Themes.color,
+                                      value: controller.chexboxdark,
+                                      onChanged: (value) {
+                                        controller
+                                            .setselectedcheckboxdark(value);
+                                        controller
+                                            .setselectedcheckboxlight(false);
+                                      },
+                                    );
+                                  },
+                                ),
+                                Text("ليلي")
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    )),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.25,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('images/setting.png'),
+                            fit: BoxFit.contain),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Text(
+                  "الإصدار 1.0.0.0",
+                  style: Themes.subtitle2,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+            ],
           ),
-          Text("Setting"),
-          Text("Setting"),
-          Text("Setting"),
-          Text("Setting"),
-          Text("Setting"),
-
-        ],
-      ),
-    ));
+        ));
   }
 }

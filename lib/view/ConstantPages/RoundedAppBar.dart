@@ -47,7 +47,7 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.only(right: 15.0, top: 20),
             child: Align(
                 child: CircleAvatar(
-                  radius: 18,
+                  radius: 20,
                   child: Icon(
                     Icons.arrow_back_rounded,
                     color: Themes.color,

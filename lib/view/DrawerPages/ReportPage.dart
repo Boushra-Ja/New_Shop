@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_shop/logic/controllers/ReportPageController.dart';
+import 'package:new_shop/logic/controllers/DrawerController/ReportPageController.dart';
 import 'package:new_shop/utls/Themes.dart';
 
 class ReportPage extends GetView<ReportPageController>{

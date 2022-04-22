@@ -6,6 +6,7 @@ class AppBarController extends GetxController{
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldKey2 = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey3 = GlobalKey<ScaffoldState>();
 
   var tabIndex = 3;
 
@@ -19,6 +20,9 @@ class AppBarController extends GetxController{
 
   GlobalKey<ScaffoldState> getscaffoldKey (){
     return _scaffoldKey ;
+  }
+  GlobalKey<ScaffoldState> getscaffoldKey3 (){
+    return _scaffoldKey3 ;
   }
 
 }

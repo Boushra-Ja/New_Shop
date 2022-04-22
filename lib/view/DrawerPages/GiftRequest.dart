@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:new_shop/logic/controllers/GiftReqController.dart';
+import 'package:new_shop/logic/controllers/DrawerController/GiftReqController.dart';
 import 'package:new_shop/utls/Themes.dart';
-import '../ConstantPages/RoundedAppBar.dart';
+import '../ConstantPages/MyCustomCLipper.dart';
 import '../SuggestionPage.dart';
 
 class GiftRequest extends GetView<GiftReqController> {
@@ -15,9 +15,40 @@ class GiftRequest extends GetView<GiftReqController> {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          appBar: RoundedAppBar(),
+         // appBar: RoundedAppBar(),
           body: ListView(
             children: [
+              ClipPath(
+                child: Container(
+                  color: Themes.color,
+                  height: MediaQuery.of(context).size.height*0.11,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                      child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Themes.color2,
+                                  child: Center(
+                                    child: IconButton(
+                                      onPressed: () {Get.back();},
+                                      icon: Icon(
+                                        Icons.arrow_back,
+                                        color: Themes.color,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]))
+
+                  ),
+                ),
+                clipper: MyCustomCLipper(),
+              ),
+              SizedBox(height: 20,),
               Center(
                   child: Text(
                 "هل ترغب في إسعاد من تحب بهدية لطيفة ؟؟",

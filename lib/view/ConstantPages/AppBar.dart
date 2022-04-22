@@ -19,6 +19,8 @@ class myAppBar extends StatelessWidget{
 
                    controller.getscaffoldKey().currentState!.openDrawer();
                    controller.getscaffoldKey2().currentState!.openDrawer();
+                   controller..getscaffoldKey3().currentState!.openDrawer();
+
 
                 },
                 icon: Icon(

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
-import 'package:new_shop/view/Mazad.dart';
+import 'package:new_shop/view/My_Orders/Orders.dart';
 import 'package:new_shop/view/chatting/Chat.dart';
 import 'package:new_shop/view/Favorite.dart';
 import 'package:new_shop/view/ShopsPages/ShopsPage.dart';
@@ -25,8 +25,7 @@ class HomePage extends GetView<AppBarController> {
             index: controller.tabIndex,
             children: [
               Favorite(),
-              //mazad(),
-              Chat(),
+              Orders(),
               ShopsPage(),
               Product(),
             ],
@@ -34,7 +33,7 @@ class HomePage extends GetView<AppBarController> {
         ),
         bottomNavigationBar: CurvedNavigationBar(
           height: 55,
-          //height: 75,
+        //  height: 75,
 
         index: controller.tabIndex,
           color: Themes.color,
@@ -66,17 +65,30 @@ class HomePage extends GetView<AppBarController> {
           onTap: (index) {
 
 
+                   if(controller.getscaffoldKey().currentState!.isDrawerOpen && index==2)
+{print("ppppppppp");
+Navigator.of(context).pop();
+
+}
+                    else if(
+                       index==3 )
+                   {print("ppppuuuuuuuuuuuppppp");
+
+
+
+
+
+                   }
 
 
 
 
             print(index);
+            // controller.tabIndex;
 
             controller.changeTabIndex(index);
           },
         ),
-
-
       );
     });
   }

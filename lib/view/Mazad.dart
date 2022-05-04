@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ConstantPages/MyCustomCLipper.dart';
-
-
 
 class mazad extends StatefulWidget {
   @override
@@ -77,8 +75,8 @@ class Countdown extends AnimatedWidget {
             body: Column(children: <Widget>[
               ClipPath(
                 child: Container(
-                  color: Colors.pink[900],
-                  height: 70.0,
+                  color: Themes.color,
+                  height: MediaQuery.of(context).size.height * 0.11,
                   width: MediaQuery.of(context).size.width,
                   child: Center(
                       child: Container(
@@ -87,15 +85,16 @@ class Countdown extends AnimatedWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor: Colors.white,
+                                  radius: 20,
+                                  backgroundColor: Themes.color2,
                                   child: Center(
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.back();
+                                      },
                                       icon: Icon(
                                         Icons.arrow_back,
-                                        color: Colors.pink[900],
-                                        size: 15,
+                                        color: Themes.color,
                                       ),
                                     ),
                                   ),
@@ -106,50 +105,50 @@ class Countdown extends AnimatedWidget {
               ),
               Expanded(
                   flex: 2,
-                  child: Row(children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      //  height:150,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: ExactAssetImage('images/tt.jpg'),
-                          fit: BoxFit.fill,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: ExactAssetImage('images/8.jpg'),
+                              fit: BoxFit.fill,
+                            ),
+                            // border: Border.all(
+                            //   width: 1,
+                            // ),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
-                        // border: Border.all(
-                        //   width: 1,
-                        // ),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
 
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      //height: 60,
-                      child: Column(children: [
-                        Text(
-                          "الوقت المتبقي",
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Themes.color,
-                          ),
-                        ),
-                        Text(
-                          "$timerText",
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.black,
-                          ),
-                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          child: Column(children: [
+                            Text(
+                              "الوقت المتبقي",
+                              style: Themes.headline3,
+                            ),
+                            Text(
+                              "$timerText",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ]),
+                        )
+                        //   leading: CircleAvatar(radius:80,backgroundImage: AssetImage("images/2.jpg")),
                       ]),
-                    )
-                    //   leading: CircleAvatar(radius:80,backgroundImage: AssetImage("images/2.jpg")),
-                  ])),
-              Divider(thickness: 1, color: Colors.grey
-                  // indent: MediaQuery.of(context).size.width * 0.5
-
-                  ),
+                    ),
+                  )),
+              Divider(color: Colors.grey),
               Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: Container(
                       child: ListView.builder(
                           reverse: true,
@@ -165,16 +164,22 @@ class Countdown extends AnimatedWidget {
                       child: timerText == "0:00"
                           ? Center(
                               child: Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 child: Row(children: [
+                                  SizedBox(
+                                    width: 20,
+                                  ),
                                   Text(
-                                    "     المبلغ الحالي   ",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 18),
+                                    "المبلغ الحالي  ",
+                                    style: Themes.headline1,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
                                   ),
                                   Text(
                                     "${_counter}",
                                     style: TextStyle(
-                                        color: Colors.deepPurple, fontSize: 17),
+                                        color: Themes.color, fontSize: 18),
                                   ),
                                 ]),
                               ),
@@ -189,17 +194,22 @@ class Countdown extends AnimatedWidget {
                                   color: Colors.purple[50],
                                 ),
                                 child: Container(
+                                  color: Colors.grey.shade50,
                                   child: Row(children: [
+                                    SizedBox(
+                                      width: 20,
+                                    ),
                                     Text(
-                                      "     المبلغ الحالي   ",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 18),
+                                      "المبلغ الحالي  ",
+                                      style: Themes.headline1,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
                                     ),
                                     Text(
                                       "${_counter}",
                                       style: TextStyle(
-                                          color: Colors.deepPurple,
-                                          fontSize: 17),
+                                          color: Themes.color, fontSize: 18),
                                     ),
                                   ]),
                                 ),
@@ -208,7 +218,7 @@ class Countdown extends AnimatedWidget {
                                 width: MediaQuery.of(context).size.width * 0.5,
                                 height: 60,
                                 decoration: BoxDecoration(
-                                  color: Colors.purple[50],
+                                  color: Colors.grey.shade50,
                                 ),
 
                                 child: Row(
@@ -220,15 +230,15 @@ class Countdown extends AnimatedWidget {
                                         },
                                         icon: Icon(
                                           Icons.add_circle_outline_sharp,
-                                          color: Colors.black,
-                                          size: 30,
+                                          color: Colors.grey.shade600,
+                                          size: 25,
                                         ),
                                       ),
                                       IconButton(
                                           icon: Icon(
                                             Icons.send,
-                                            size: 30.0,
-                                            color: Colors.pink[900],
+                                            size: 25.0,
+                                            color: Colors.grey.shade600,
                                           ),
                                           onPressed: () {
                                             messsages.insert(0, {
@@ -277,7 +287,7 @@ class Countdown extends AnimatedWidget {
                 padding: EdgeInsets.all(10.0),
                 child: Bubble(
                     radius: Radius.circular(15.0),
-                    color: data == 0 ? Colors.pink[900] : Colors.purple[50],
+                    color: data == 0 ? Themes.color : Themes.color2,
                     elevation: 0.0,
                     child: Padding(
                       padding: EdgeInsets.all(2.0),

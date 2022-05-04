@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../utls/Themes.dart';
-import 'ConstantPages/MyCustomCLipper.dart';
 import 'ProductDeatil.dart';
 
 class ProductsList extends StatelessWidget {

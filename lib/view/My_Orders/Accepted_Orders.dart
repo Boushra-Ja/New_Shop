@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/utls/Themes.dart';
-
 import 'OrderDeatil.dart';
 
 class Accepted_Orders extends StatelessWidget {
@@ -21,8 +20,8 @@ class Accepted_Orders extends StatelessWidget {
                   shadowColor: Themes.color2,
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
-                    onTap: (){
-                      Get.to(OrderDeatil()) ;
+                    onTap: () {
+                      Get.to(OrderDeatil());
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -58,7 +57,6 @@ class Accepted_Orders extends StatelessWidget {
                         "تاريخ التسليم 2/3/2022",
                         style: Themes.subtitle3,
                       ),
-
                     ),
                   ),
                 ),

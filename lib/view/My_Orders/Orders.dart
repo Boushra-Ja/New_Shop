@@ -24,89 +24,99 @@ class Orders extends StatelessWidget {
                 body: GetBuilder<OrdersController>(
                   init: OrdersController(),
                   builder: (controller) {
-                    return Column(
-                      children: [
-                        myAppBar(),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: InkWell(
-                                onTap: () {
-                                  controller.setindex(0);
-                                },
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "المعلقة",
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Divider(
-                                      thickness: controller.index == 0 ? 3 : 1,
-                                      color: controller.index == 0
-                                          ? Themes.color
-                                          : Colors.grey.shade200,
-                                    )
-                                  ],
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Column(
+                        children: [
+                          myAppBar(),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.setindex(0);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "المعلقة",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Divider(
+                                        thickness:
+                                            controller.index == 0 ? 3 : 1,
+                                        color: controller.index == 0
+                                            ? Themes.color
+                                            : Colors.grey.shade200,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: InkWell(
-                                onTap: () {
-                                  controller.setindex(1);
-                                },
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "المقبولة",
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Divider(
-                                      thickness: controller.index == 1 ? 3 : 1,
-                                      color: controller.index == 1
-                                          ? Themes.color
-                                          : Colors.grey.shade200,
-                                    )
-                                  ],
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.setindex(1);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "المقبولة",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Divider(
+                                        thickness:
+                                            controller.index == 1 ? 3 : 1,
+                                        color: controller.index == 1
+                                            ? Themes.color
+                                            : Colors.grey.shade200,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: InkWell(
-                                onTap: () {
-                                  controller.setindex(2);
-                                },
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "المستلمة",
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Divider(
-                                      thickness: controller.index == 2 ? 3 : 1,
-                                      color: controller.index == 2
-                                          ? Themes.color
-                                          : Colors.grey.shade200,
-                                    )
-                                  ],
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.setindex(2);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "المستلمة",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Divider(
+                                        thickness:
+                                            controller.index == 2 ? 3 : 1,
+                                        color: controller.index == 2
+                                            ? Themes.color
+                                            : Colors.grey.shade200,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
 
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        controller.index == 0 ? PendingOrders() : controller.index == 1 ? Accepted_Orders() : OrderReceived()
-                        /////////
-                      ],
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          controller.index == 0
+                              ? PendingOrders()
+                              : controller.index == 1
+                                  ? Accepted_Orders()
+                                  : OrderReceived()
+                          /////////
+                        ],
+                      ),
                     );
                   },
                 ),

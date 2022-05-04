@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +7,7 @@ import '../../utls/Themes.dart';
 import 'BillPage.dart';
 import 'OrderDeatil.dart';
 
-class OrderReceived extends StatelessWidget{
-
+class OrderReceived extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -24,9 +22,8 @@ class OrderReceived extends StatelessWidget{
                   shadowColor: Themes.color2,
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
-                    onTap: (){
-                      Get.to(OrderDeatil()) ;
-
+                    onTap: () {
+                      Get.to(OrderDeatil());
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -64,7 +61,7 @@ class OrderReceived extends StatelessWidget{
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          Get.to(BillPage()) ;
+                          Get.to(BillPage());
                         },
                         icon: Icon(
                           Icons.payment,
@@ -77,7 +74,5 @@ class OrderReceived extends StatelessWidget{
                 ),
               );
             }));
-
-
   }
 }

@@ -28,9 +28,9 @@ class myAppBar extends StatelessWidget{
                   size: 40,
                 ));
           }) ,
-          SizedBox(width: 15,),
+          SizedBox(width: 20,),
           Container(
-            width: MediaQuery.of(context).size.width*0.6,
+            width: MediaQuery.of(context).size.width*0.65,
             height: 45,
             decoration: BoxDecoration(
               border: Border.all(
@@ -55,7 +55,7 @@ class myAppBar extends StatelessWidget{
 
 
 
-          SizedBox(width: 15,),
+          SizedBox(width: 8,),
           IconButton(
               onPressed: () {Get.to(()=>Orderes());},
               icon: Icon(

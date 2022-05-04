@@ -6,23 +6,19 @@ import 'package:new_shop/logic/controllers/OrderController.dart';
 import 'package:new_shop/routes/routes.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => FavoriteController(),fenix: true);
-    Get.lazyPut(() => OrderController(),fenix: true);
+    Get.lazyPut(() => FavoriteController(), fenix: true);
+    Get.lazyPut(() => OrderController(), fenix: true);
 
     return GetMaterialApp(
-      // home: MyHomePage(),
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.Regester,
+      initialRoute: Routes.WelcomPage,
       getPages: AppPages.routes,
-
     );
-
   }
 }

@@ -15,7 +15,6 @@ class GiftRequest extends GetView<GiftReqController> {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-         // appBar: RoundedAppBar(),
           body: ListView(
             children: [
               ClipPath(
@@ -402,7 +401,7 @@ class GiftRequest extends GetView<GiftReqController> {
                     Get.to(SuggestionPage());
                   },
                   color: Themes.color,
-                  child: Text("الاقتراحات"),
+                  child: Text("الاقتراحات" , style: Themes.bodyText4,),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),

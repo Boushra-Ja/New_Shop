@@ -4,13 +4,11 @@ import 'package:new_shop/logic/controllers/ShopsController/ShopProfileController
 import 'dart:ui' as ui;
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ProductDeatil.dart';
-import 'package:new_shop/view/SuggestionPage.dart';
+import '../Seggestions.dart';
 
 class ShopProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     return Directionality(
         textDirection: TextDirection.rtl,
         child: DefaultTabController(
@@ -313,13 +311,13 @@ class ShopProfile extends StatelessWidget {
                                               ),
                                               margin: EdgeInsets.all(10),
                                             ),
-                                          ) ,
+                                          ),
                                         ],
                                       ),
                                     );
                                   })
                               : SizedBox(
-                                  width: MediaQuery.of(context).size.width ,
+                                  width: MediaQuery.of(context).size.width,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 30.0),
@@ -341,7 +339,7 @@ class ShopProfile extends StatelessWidget {
                                           filled: true,
                                           fillColor: Colors.white),
                                       onChanged: (newValue) {
-                                        controller.setselectedSection(newValue) ;
+                                        controller.setselectedSection(newValue);
                                       },
                                       validator: (val) {
                                         return null;
@@ -366,122 +364,158 @@ class ShopProfile extends StatelessWidget {
                           const SizedBox(
                             height: 25,
                           ),
-                          !controller.check_tap.value ?  const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Divider(),
-                          ) : ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: 2,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Center(
-                                  child: Column(
-                                    children: [
-                                      InkWell(
-                                          child:  Text("خياطة", style: Themes.headline3) , onTap: (){
-                                            Get.to(SuggestionPage()) ;
-                                      },),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                        ),
-                                        itemCount: 4,
-                                        itemBuilder: (context, index) {
-                                          return  Container(
-                                              width: MediaQuery.of(context).size.width * 0.5,
-                                              height:
-                                              MediaQuery.of(context).size.height * 0.25,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0 , right:  8.0 , bottom: 10.0),
-                                                child:  Stack(
-                                                  children: <Widget>[
-                                                    InkWell(
-                                                      child: Container(
-
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(10),
-                                                          image: DecorationImage(
-                                                              image: AssetImage('images/2.jpg'),
-                                                              fit: BoxFit.fill),
+                          !controller.check_tap.value
+                              ? const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 60.0),
+                                  child: Divider(),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: 2,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Center(
+                                      child: Column(
+                                        children: [
+                                          InkWell(
+                                            child: Text("خياطة",
+                                                style: Themes.headline3),
+                                            onTap: () {
+                                              Get.to(
+                                                  Seggestions(title: "خياطة"));
+                                            },
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          GridView.builder(
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                            ),
+                                            itemCount: 4,
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.5,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.25,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0,
+                                                          right: 8.0,
+                                                          bottom: 10.0),
+                                                  child: Stack(
+                                                    children: <Widget>[
+                                                      InkWell(
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    'images/2.jpg'),
+                                                                fit: BoxFit
+                                                                    .fill),
+                                                          ),
                                                         ),
+                                                        onTap: () {
+                                                          Get.to(
+                                                              ProductDeatil());
+                                                        },
                                                       ),
-                                                      onTap: () {
-                                                          Get.to(ProductDeatil()) ;
-                                                      },
-                                                    ),
-                                                    Align(
-                                                      alignment: Alignment.topRight,
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.only(right: 8.0),
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            /////Action
-                                                          },
-                                                          child: CircleAvatar(
-                                                            child: Icon(
-                                                              Icons.favorite,
-                                                              color: Colors.red,
-                                                              size: 22,
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 8.0),
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              /////Action
+                                                            },
+                                                            child: CircleAvatar(
+                                                              child: Icon(
+                                                                Icons.favorite,
+                                                                color:
+                                                                    Colors.red,
+                                                                size: 22,
+                                                              ),
+                                                              backgroundColor:
+                                                                  Themes.color2,
+                                                              radius: 17,
                                                             ),
-                                                            backgroundColor: Themes.color2,
-                                                            radius: 17,
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Align(
-                                                      alignment: Alignment.bottomLeft,
-                                                        child:  Text("2500 ل.س" , style: TextStyle(color: Colors.red , fontSize: 12),)
-
-                                                    )
-                                                  ],
+                                                      Align(
+                                                          alignment: Alignment
+                                                              .bottomLeft,
+                                                          child: Text(
+                                                            "2500 ل.س",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12),
+                                                          ))
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                        },
+                                              );
+                                            },
+                                          ),
+                                          const SizedBox(
+                                            height: 25,
+                                          ),
+                                          InkWell(
+                                              child: Text("عرض المزيد",
+                                                  style: TextStyle(
+                                                    color: Colors.grey.shade600,
+                                                  )),
+                                              onTap: () {
+                                                Get.to(Seggestions(
+                                                    title: "خياطة"));
+                                              }),
+                                          const SizedBox(
+                                            height: 25,
+                                          ),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 30.0),
+                                            child: Divider(),
+                                          ),
+                                          const SizedBox(
+                                            height: 25,
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        height: 25,
-                                      ),
-                                      InkWell(
-                                        child: Text("عرض المزيد",
-                                            style: TextStyle(
-                                              color: Colors.grey.shade600,
-                                            )),
-                                        onTap: (){
-                                          Get.to(SuggestionPage()) ;
-
-                                        }
-
-                                      ),
-                                      const SizedBox(
-                                        height: 25,
-                                      ),
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                                        child: Divider(),
-                                      ),
-                                      const SizedBox(
-                                        height: 25,
-                                      ),
-                                    ],
+                                    );
+                                  }),
+                          !controller.check_tap.value
+                              ? Center(
+                                  child: InkWell(
+                                    child: Text("عرض الكل"),
+                                    onTap: () {
+                                      ////Action
+                                    },
                                   ),
-                                );
-                              }),
-                          !controller.check_tap.value ?   Center(
-                            child: InkWell(child: Text("عرض الكل")
-                            ,onTap: (){
-                              ////Action
-                              },
-                            ),
-                          ) : SizedBox.shrink(),
+                                )
+                              : SizedBox.shrink(),
                         ],
                       );
                     },

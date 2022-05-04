@@ -2,323 +2,280 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/FavoriteController.dart';
+import 'package:new_shop/view/ProductDeatil.dart';
+import 'package:new_shop/view/ShopsPages/ShopProfile.dart';
+import '../logic/controllers/AppBarController.dart';
 import '../utls/Themes.dart';
+import 'ConstantPages/AppBar.dart';
+import 'ConstantPages/Drawer.dart';
 
-class Favorite extends GetView<FavoriteController> {
+class Favorite extends StatelessWidget {
   var check_tap;
+
   @override
   Widget build(BuildContext context) {
-    return
-      GetBuilder<FavoriteController>(builder: (controller) {
-      return Directionality(
-        textDirection: TextDirection.rtl,
-        child:
-       Scaffold(
+    return GetBuilder<AppBarController>(
+        init: AppBarController(),
+        builder: (controller2) {
+          return Directionality(
+              textDirection: TextDirection.rtl,
+              child: Scaffold(
+                  key: controller2.getscaffoldKey4(),
+                  drawer: myDrawer(),
+                  body: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: GetBuilder<FavoriteController>(
+                      init: FavoriteController(),
+                      builder: (controller) {
+                        return Column(children: <Widget>[
+                          myAppBar(),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(children: [
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: InkWell(
+                                  child: Container(
+                                      child: Center(
+                                    child: Column(
+                                      children: [
+                                        Text("المنتجات",
+                                            style: controller.Tabbar.value == 2
+                                                ? Themes.bodyText5
+                                                : Themes.headline1,
+                                            textAlign: TextAlign.center),
+                                        Divider(
+                                          thickness:
+                                              controller.Tabbar.value == 1
+                                                  ? 3
+                                                  : 1,
+                                          color: controller.Tabbar.value == 1
+                                              ? Themes.color
+                                              : Colors.grey.shade200,
+                                          // indent: MediaQuery.of(context).size.width * 0.5
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                                  onTap: () {
+                                    controller.Tabbar.value = 1;
+                                    controller.changeTabbar(1);
+                                    print(controller.Tabbar.value);
+                                  },
+                                )),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: InkWell(
+                                  child: Container(
+                                      child: Center(
+                                    child: Column(
+                                      children: [
+                                        Text("المتاجر",
+                                            style: controller.Tabbar.value == 2
+                                                ? Themes.headline1
+                                                : Themes.bodyText5,
+                                            textAlign: TextAlign.center),
+                                        Divider(
+                                          thickness:
+                                              controller.Tabbar.value == 2
+                                                  ? 3
+                                                  : 1,
+                                          color: controller.Tabbar.value == 2
+                                              ? Themes.color
+                                              : Colors.grey.shade200,
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                                  onTap: () {
+                                    controller.Tabbar.value = 2;
+                                    controller.changeTabbar(2);
+                                    print(controller.Tabbar);
+                                  },
+                                ))
+                          ]),
 
-            body:
+                          SizedBox(
+                            height: 20,
+                          ),
 
-            Column(children: <Widget>[
-              Expanded(   flex: 2,
-                child:   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                         Container(
-                             margin:EdgeInsets.only(top:20,right:30),
-                             child:Text("المفضله",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.pink[900],fontSize: 20),)),
-                         Divider(
-                        thickness:  1 ,
-                        color: Colors.black
-                        )]),
-                   ),
-              Expanded(
-              flex: 1,
-              child:  Padding(
-                  padding: const EdgeInsets.only(top:10.0),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child:
-                          InkWell(
-                            child: Container( height: 50, child:  Center(child:
-
-                            Column(
-                              children: [
-                                Text("المتاجر", textAlign: TextAlign.center),
-                                Divider(
-                                  thickness: controller.Tabbar.value==1 ? 3 : 1,
-                                  color: controller.Tabbar.value==1
-                                      ? Colors.pink[900]
-                                      : Colors.grey.shade200,
-                                   // indent: MediaQuery.of(context).size.width * 0.5
-
+                          /////////////////////////////
+                          controller.Tabbar.value == 2
+                              ? Flexible(
+                                  child: GridView.builder(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    itemCount: 10,
+                                    itemBuilder: (ctx, i) {
+                                      return Container(
+                                        child: Column(
+                                          children: [
+                                            Center(
+                                                child: InkWell(
+                                              onTap: () {
+                                                Get.to(ShopProfile());
+                                              },
+                                              child: CircleAvatar(
+                                                backgroundImage: i == 0
+                                                    ? AssetImage(
+                                                        "images/shop2.jpg")
+                                                    : i == 1
+                                                        ? AssetImage(
+                                                            "images/4.jpg")
+                                                        : AssetImage(
+                                                            "images/8.jpg"),
+                                                //NetworkImage('https://cdn.pixabay.com/photo/2013/05/11/08/28/sunset-110305_1280.jpg'),
+                                                backgroundColor:
+                                                    Colors.red.shade800,
+                                                radius: 45,
+                                              ),
+                                            )),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 40),
+                                              child: Row(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.to(ShopProfile());
+                                                    },
+                                                    child: Text('اسم المتجر ',
+                                                        style:
+                                                            Themes.bodyText1),
+                                                  ),
+                                                  Icon(
+                                                    Icons.star_outline_rounded,
+                                                    color: Colors.blue,
+                                                    size: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 40),
+                                                child: Row(
+                                                  children: const [
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.yellow,
+                                                      size: 15,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.yellow,
+                                                      size: 15,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.yellow,
+                                                      size: 15,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.yellow,
+                                                      size: 15,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.pink,
+                                                      size: 15,
+                                                    )
+                                                  ],
+                                                )),
+                                          ],
+                                        ),
+                                        //   ],
+                                        // ),
+                                      );
+                                    },
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                    ),
+                                  ),
                                 )
-                              ],
-                            ),)),
-                            onTap: (){
-                              controller.Tabbar.value=1;
-                              controller.changeTabbar(1);
-                                print( controller.Tabbar.value);
-
-
-                            },
-                          )),
-
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child:
-                          InkWell(child: Container( height: 50, child:  Center(child:
-
-                          Column(
-                            children: [
-                              Text("المنتجات", textAlign: TextAlign.center),
-                              Divider(
-                                thickness: controller.Tabbar.value==2 ? 3 : 1,
-                                color: controller.Tabbar.value==2
-                                    ? Colors.pink[900]
-                                    : Colors.grey.shade200,
-
-                              )
-                            ],
-                          ),)),
-                          onTap: (){
-
-                            controller.Tabbar.value=2;
-                            controller.changeTabbar(2);
-                            print( controller.Tabbar);
-
-                          },))
-
-
-
-                    ]),
-               ),
-
-            ),
-              Expanded(flex: 7,
-
-                 child: controller.Tabbar.value==2?
-                  GridView.builder(
-                     shrinkWrap: true,
-                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                     itemCount: 3,
-                     itemBuilder: (ctx, i) {
-                       return
-                         Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-
-                           decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(50)),
-
-                           child:
-                               Column(
-                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                                 children: [
-                                   Expanded(
-                                     child:  Center(
-                                         child: CircleAvatar(
-                                           backgroundImage: i==0? AssetImage("images/shop2.jpg"):i==1?
-                                           AssetImage("images/4.jpg"):AssetImage("images/8.jpg"),
-                                           //NetworkImage('https://cdn.pixabay.com/photo/2013/05/11/08/28/sunset-110305_1280.jpg'),
-                                           backgroundColor: Colors.red.shade800,
-                                           radius: 90,
-                                         )),
-                                   ),
-                                   Container(
-                                     margin: EdgeInsets.only(right: 40),
-                                     child: Row(
-                                       children: [
-                                         Text(
-                                           'اسم المتجر',
-                                           style: TextStyle(
-                                             fontSize: 18,
-                                             fontWeight: FontWeight.bold,
-                                           ),
-                                         ),
-                                         Icon(
-                                           Icons.star_outline_rounded,
-                                           color: Colors.purple,
-                                           size: 30,
-                                         ),
-                                       ],
-
-                                     ),
-                                   ),
-                                   Container(
-                                       margin: EdgeInsets.only(right: 40),
-                                       child: Row(
-                                     children: [
-                                       Text(
-                                         '    مبيعات 10  ',
-                                         style:
-                                         Themes.subtitle2,
-
-                                       ),
-
-                                     ],
-
-                                   )),
-                       Container(
-                       margin: EdgeInsets.only(right: 40),
-                       child: Row(
-                                     children: const [
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.pink,
-                                         size: 15,
-                                       )
-                                     ],
-                                   )),
-
-                                 ],
-                               ),
-                           //   ],
-                           // ),
-                         );
-
-                     },
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                       crossAxisCount: 2,
-                       // childAspectRatio: 1.0,
-                     //  crossAxisSpacing: 50.0,
-                       mainAxisSpacing: 50,//
-                      // mainAxisExtent: 200,
-                      ),
-                   )
-
-
-                 : GridView.builder(
-                     shrinkWrap: true,
-                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                     itemCount: 4,
-                     itemBuilder: (ctx, i) {
-                       return
-                         Container(
-                           width: MediaQuery.of(context).size.width * 0.5,
-
-                           decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(50)),
-                           margin: EdgeInsets.all(5),
-                           padding: EdgeInsets.all(5),
-                           child: Stack(
-                             children: [
-                               Column(
-                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                                 children: [
-                                   Expanded(
-                                     child:  Center(
-                                         child: i==0?   Image.asset("images/th.jpg"):i==1?
-                                         Image.asset("images/tt.jpg"):i==3?  Image.asset("images/100.jpg"):
-                                         Image.asset("images/44.jpg"),
-
-
+                              : Flexible(
+                                  child: GridView.builder(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  itemCount: 4,
+                                  itemBuilder: (ctx, i) {
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      margin: EdgeInsets.all(5),
+                                      padding: EdgeInsets.all(5),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Expanded(
+                                            child: InkWell(
+                                              onTap: () {
+                                                Get.to(ProductDeatil());
+                                              },
+                                              child: Center(
+                                                child: i == 0
+                                                    ? Image.asset(
+                                                        "images/th.jpg")
+                                                    : i == 1
+                                                        ? Image.asset(
+                                                            "images/tt.jpg")
+                                                        : i == 3
+                                                            ? Image.asset(
+                                                                "images/100.jpg")
+                                                            : Image.asset(
+                                                                "images/44.jpg"),
+                                              ),
+                                            ),
                                           ),
-                                   ),
-                                   Container(
-                                    // margin: EdgeInsets.only(right: 30),
-                                     child: Row(
-                                     children: [
-                                       Text(
-                                         '  اسم المتجر  ',
-                                         style: TextStyle(
-                                           fontSize: 18,
-                                           fontWeight: FontWeight.bold,
-                                         ),
-                                       ),
-                                       Icon(
-                                         Icons.star_outline_rounded,
-                                         color: Colors.purple,
-                                         size: 30,
-                                       ),
-                                     ],
-
-                                   )),
-                                   Container(
-                                      // margin: EdgeInsets.only(right: 30),
-                                       child: Row(
-                                     children: [
-                                       Text(
-                                         '    مبيعات 10  ',
-                                         style:
-                                         Themes.subtitle2,
-
-                                       ),
-
-                                     ],
-
-                                   )),
-                                   Container(
-                                    // margin: EdgeInsets.only(right: 30),
-                                     child: Row(
-                                     children: const [
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.yellow,
-                                         size: 15,
-                                       ),
-                                       Icon(
-                                         Icons.star,
-                                         color: Colors.pink,
-                                         size: 15,
-                                       )
-                                     ],
-                                   )),
-
-                                 ],
-                               ),
-                             ],
-                           ),
-                         );
-
-                     },
-                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                       crossAxisCount: 2,
-                       mainAxisSpacing: 50,
-                        mainAxisExtent: 200,
-
-                     ),
-                   ),
-
-
-    ),])));
-      });
-  }}
-
-
-
-
+                                          Center(
+                                            child: InkWell(
+                                              onTap: () {
+                                                Get.to(ProductDeatil());
+                                              },
+                                              child: Text(
+                                                'حقيبة كروشيه',
+                                                style: Themes.bodyText1,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                              child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.tag_faces_outlined,
+                                                color: Colors.orange,
+                                                size: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 4,
+                                              ),
+                                              Text(
+                                                '(15 تقييم)',
+                                                style: Themes.subtitle3,
+                                              ),
+                                            ],
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                          )),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 50,
+                                    mainAxisExtent: 200,
+                                  ),
+                                )),
+                        ]);
+                      },
+                    ),
+                  )));
+        });
+  }
+}

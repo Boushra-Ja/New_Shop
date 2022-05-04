@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,8 +5,7 @@ import '../../utls/Themes.dart';
 import 'EditOrder.dart';
 import 'OrderDeatil.dart';
 
-class PendingOrders extends StatelessWidget{
-
+class PendingOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,9 +20,8 @@ class PendingOrders extends StatelessWidget{
                   shadowColor: Themes.color2,
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
-                    onTap: (){
-                      Get.to(OrderDeatil()) ;
-
+                    onTap: () {
+                      Get.to(OrderDeatil());
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -62,7 +59,7 @@ class PendingOrders extends StatelessWidget{
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          Get.to(EditOrder()) ;
+                          Get.to(EditOrder());
                         },
                         icon: Icon(
                           Icons.edit,
@@ -75,6 +72,5 @@ class PendingOrders extends StatelessWidget{
                 ),
               );
             }));
-
   }
 }

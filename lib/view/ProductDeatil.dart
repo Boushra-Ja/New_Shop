@@ -7,6 +7,7 @@ import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/chatting/Chat.dart';
 
 import 'EvaluationDialoge.dart';
+import 'Seggestions.dart';
 import 'ShopsPages/ShopProfile.dart';
 import 'SuggestionPage.dart';
 import 'chatting/ChatDetails.dart';
@@ -506,7 +507,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                 child: Center(
                     child: InkWell(
                   onTap: () {
-                    Get.to(SuggestionPage());
+                    Get.to(Seggestions(title: "منتجات مشابهة"));
                   },
                   child: Text(
                     "منتجات مشابهة",

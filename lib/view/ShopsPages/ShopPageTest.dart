@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,11 +10,14 @@ import '../ConstantPages/Drawer.dart';
 import 'ShopProfile.dart';
 import 'ShopReview.dart';
 
-class ShopsPage extends StatelessWidget {
-  ShopPageController _controller = Get.put(ShopPageController());
+class ShopPageTest extends StatelessWidget {
+
+  final _controller = Get.find<ShopPageController>() ;
+
 
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<AppBarController>(
       init: AppBarController(),
       builder: (controller) {
@@ -23,7 +27,7 @@ class ShopsPage extends StatelessWidget {
               key: controller.getscaffoldKey(),
               drawer: myDrawer(),
               body: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: const EdgeInsets.only(top : 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -42,7 +46,7 @@ class ShopsPage extends StatelessWidget {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(30)),
                                   contentPadding:
-                                      EdgeInsets.fromLTRB(10, 0.001, 12, 0.001),
+                                  EdgeInsets.fromLTRB(10, 0.001, 12, 0.001),
                                   filled: true,
                                   fillColor: Colors.white),
                               isExpanded: false,
@@ -76,20 +80,18 @@ class ShopsPage extends StatelessWidget {
                       height: 15,
                     ),
                     Flexible(
-                      child: ListView.builder(
-                          itemCount: 10,
+                      child: _controller.ShopList.length > 0 ? ListView.builder(
+                          itemCount: _controller.ShopList.length,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
                               onTap: () {
-                                _controller.selectedsortvalue == "الأكثر مبيعا"
-                                    ? Get.to(ShopProfile())
-                                    : Get.to(ShopReview());
+                                _controller.selectedsortvalue=="الأكثر مبيعا" ? Get.to(ShopProfile()) : Get.to(ShopReview());
                               },
                               child: Column(
                                 children: [
                                   Padding(
                                     padding:
-                                        const EdgeInsets.only(bottom: 20.0),
+                                    const EdgeInsets.only(bottom: 20.0),
                                     child: Row(
                                       children: [
                                         const Padding(
@@ -98,51 +100,26 @@ class ShopsPage extends StatelessWidget {
                                           child: CircleAvatar(
                                             radius: 50,
                                             backgroundImage:
-                                                AssetImage('images/shop2.jpg'),
+                                            AssetImage('images/shop2.jpg'),
                                           ),
                                         ),
                                         Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "اسم المتجر",
+                                            Text(
+                                              "${_controller.ShopList[index].shop_name}",
                                               style: Themes.headline1,
                                               maxLines: 2,
                                             ),
-                                            const Text(
-                                              "عدد المبيعات",
-                                              style: Themes.subtitle1,
-                                            ),
                                             Row(
-                                              children: const [
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.yellow,
-                                                  size: 18,
-                                                ),
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.yellow,
-                                                  size: 18,
-                                                ),
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.yellow,
-                                                  size: 18,
-                                                ),
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.yellow,
-                                                  size: 18,
-                                                ),
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.pink,
-                                                  size: 18,
-                                                )
+                                              children: [
+                                                const Text("عدد المبيعات ",
+                                                  style: Themes.subtitle1 , ),
+                                                Text("${_controller.ShopList[index].num_cell}" ,   style: Themes.subtitle1 ,)
                                               ],
                                             ),
+
                                           ],
                                         )
                                       ],
@@ -152,7 +129,9 @@ class ShopsPage extends StatelessWidget {
                                 ],
                               ),
                             );
-                          }),
+                          }) : Center(
+                        child: Text("لا يوجد متاجر "),
+                      ),
                     ),
                   ],
                 ),

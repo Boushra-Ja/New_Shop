@@ -47,7 +47,9 @@ class EvaluationDialoge extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10,) ,
+          SizedBox(
+            height: 10,
+          ),
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),

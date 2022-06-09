@@ -8,13 +8,17 @@ import 'dart:math';
 import 'package:new_shop/utls/Themes.dart';
 
 
-class WelcomPage extends GetView{
+class WelcomPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Stack(
+    return
+
+      Scaffold(
+      body:
+
+      Stack(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,

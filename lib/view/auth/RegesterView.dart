@@ -3,13 +3,84 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/utls/Themes.dart';
 
-class RegisterView extends GetView {
+import '../../logic/controllers/RegesterController.dart';
+
+class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Directionality(
             textDirection: TextDirection.rtl,
-            child: ListView(children: [
+            child:
+            // SafeArea(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(12),
+            //     child: Center(
+            //         child: Form(
+            //           key: controller.registerFormkey,
+            //           autovalidateMode: AutovalidateMode.onUserInteraction,
+            //           child: Column(
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               TextFormField(
+            //                 controller: controller.nameController,
+            //                 validator: (v) { },
+            //                 onSaved: (v) {controller.name=v!;},
+            //                 keyboardType: TextInputType.text,
+            //                 decoration: InputDecoration(
+            //                   border: OutlineInputBorder(
+            //                     borderRadius: BorderRadius.circular(10),
+            //                   ),
+            //                   labelText: "name",
+            //                   prefixIcon: const Icon(Icons.supervised_user_circle),
+            //                 ),
+            //               ),
+            //               const SizedBox(height: 10),
+            //               TextFormField(
+            //                 controller: controller.emailController,
+            //                 validator: (v) {  controller.validateEmail(v!);},
+            //                 onSaved: (v) {controller.email=v!;
+            //                 },
+            //                 keyboardType: TextInputType.emailAddress,
+            //                 decoration: InputDecoration(
+            //                   border: OutlineInputBorder(
+            //                     borderRadius: BorderRadius.circular(10),
+            //                   ),
+            //                   labelText: "email",
+            //                   prefixIcon: const Icon(Icons.email),
+            //                 ),
+            //               ),
+            //               const SizedBox(height: 10),
+            //               TextFormField(
+            //                 controller: controller.passwordController,
+            //                 validator: (v) {controller.validatePassword(v!);},
+            //                 onSaved: (v) {  controller.password=v!;},
+            //                 keyboardType: TextInputType.visiblePassword,
+            //                 obscureText: true,
+            //                 decoration: InputDecoration(
+            //                   border: OutlineInputBorder(
+            //                     borderRadius: BorderRadius.circular(10),
+            //                   ),
+            //                   labelText: "password",
+            //                   prefixIcon: const Icon(Icons.password),
+            //                 ),
+            //               ),
+            //               const SizedBox (height: 20),
+            //               Obx(()=>
+            //               controller.isLoading.value == true ?
+            //               const  Center(child:
+            //               CircularProgressIndicator ()): const Text("")),
+            //               ElevatedButton(
+            //                   onPressed: () {controller.doRegister();
+            //                   },
+            //                   child: const Text("Register"))
+            //             ],
+            //           ),
+            //         )),
+            //   ),
+            // ),
+
+            ListView(children: [
               Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -38,7 +109,10 @@ class RegisterView extends GetView {
                                 ),
                                 color: Themes.color2,
                                 elevation: 10,
-                                child: Form(
+                                child:
+
+                                Form(
+                                  key: controller.registerFormkey,
                                   child: Column(children: <Widget>[
                                     SizedBox(
                                       height: 40,
@@ -63,25 +137,57 @@ class RegisterView extends GetView {
                                       margin:
                                           EdgeInsets.only(left: 20, right: 15),
                                       child: TextFormField(
+                                       // key: controller.registerFormkeyn,
+                                        controller: controller.nameController,
+                                        validator: (v) {
+                                          if (v!.isEmpty)
+                                            return 'ادخل اسما صحيحا';
+                                          else if (v.length > 100)
+                                            return "لا يمكن ان يكون بهذا الحجم";
+                                          else if (v.length < 2)
+                                            return "لا يمكن ان تكون اقل من حرفين";
+                                          return null;                                        },
+                                        onSaved: (v) {controller.name=v!;
+
+                                        print("=============================================");
+                                        print("${controller.name}");
+                                        print("=============================================");
+                                        },
+
                                         style: TextStyle(
                                           //: 40.0,
                                           height: 1.0,
                                         ),
                                         autocorrect: true,
-                                        decoration: InputDecoration(
+                                        autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                                        decoration: const InputDecoration(
                                           hintText: ' ادخل اسمك....',
                                           hintStyle: Themes.subtitle2,
                                           filled: true,
+                                          errorMaxLines: 10,
                                           fillColor: Colors.white70,
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(100.0)),
                                             borderSide: BorderSide(
                                                 color: Colors.black, width: 1),
+                                          )
+                                          ,
+                                          errorBorder:OutlineInputBorder(
+
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(100.0)),
+
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 1),
+
+
                                           ),
+
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(50.0)),
+                                                Radius.circular(100.0)),
                                             borderSide:
                                                 BorderSide(color: Colors.red),
                                           ),
@@ -113,12 +219,32 @@ class RegisterView extends GetView {
                                           left: 20, right: 20, top: 5),
                                       height: 50,
                                       child: TextFormField(
+                                     //   key: controller.registerFormkeye,
+
+                                        controller: controller.emailController,
+                                        validator: (v) {
+                                          controller.validateEmail(v!);
+                                          if (v.isEmpty)
+                                            return 'ادخل ايميلا صحيحا';
+                                          else if (v.length > 100)
+                                            return "لا يمكن ان يكون بهذا الحجم";
+                                          else if (v.length < 2)
+                                            return "لا يمكن ان يكون اقل من حرفين";
+                                          return null;
+
+                                          },
+                                        onSaved: (v) {controller.email=v!;
+                                        },
                                         style: TextStyle(
                                           //: 40.0,
                                           height: 1.0,
                                         ),
                                         autocorrect: true,
+                                        autovalidateMode: AutovalidateMode.onUserInteraction,
+
                                         decoration: InputDecoration(
+                                          // errorStyle: TextStyle(),
+                                          // errorText: 'Please enter something',
                                           hintText:
                                               ' ادخل بريدك الالكتروني....',
                                           hintStyle: Themes.subtitle2,
@@ -143,6 +269,7 @@ class RegisterView extends GetView {
                                     SizedBox(
                                       height: 30,
                                     ),
+
                                     Container(
                                       margin:
                                           EdgeInsets.only(left: 20, right: 15),
@@ -164,12 +291,29 @@ class RegisterView extends GetView {
                                           left: 20, right: 20, top: 5),
                                       height: 50,
                                       child: TextFormField(
+                                        //key: controller.registerFormkeyp,
+                                             autovalidateMode: AutovalidateMode.onUserInteraction,
+                                        controller: controller.passwordController,
+                                        validator: (v) {
+                                          controller.validatePassword(v!);
+                                          if (v.isEmpty)
+                                            return 'ادخل كلمة مرور صحيحا';
+                                          else if (v.length > 100)
+                                            return "لا يمكن ان يكون بهذا الحجم";
+                                          else if (v.length < 2)
+                                            return "لا يمكن ان تكون اقل من حرفين";
+                                          return null;
+                                        },
+                                        onSaved: (v) {controller.password=v!;
+                                        },
                                         style: TextStyle(
                                           //: 40.0,
                                           height: 1.0,
                                         ),
                                         autocorrect: true,
                                         decoration: InputDecoration(
+                                          errorStyle: TextStyle(),
+                                          // errorText: 'Please enter something',
                                           hintText: ' ادخل كلمه المرور....',
                                           hintStyle: Themes.subtitle2,
                                           filled: true,
@@ -192,11 +336,25 @@ class RegisterView extends GetView {
                                     SizedBox(
                                       height: 30,
                                     ),
+
+
+
+                                    const SizedBox (height: 20),
+                                    Obx(()=>
+                                    controller.isLoading.value == true ?
+                                    const  Center(child:
+                                    CircularProgressIndicator ()): const Text("")),
+                                    // ElevatedButton(
+                                    //     onPressed: () {controller.doRegister();
+                                    //     },
+                                    //     child: const Text("Register")),
+
+
                                     RaisedButton(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 25),
                                       onPressed: () {
-                                        Get.toNamed('/HomePage');
+                                        controller.doRegister();
                                       },
                                       color: Themes.color,
                                       shape: RoundedRectangleBorder(
@@ -207,15 +365,6 @@ class RegisterView extends GetView {
                                         style: Themes.bodyText4,
                                       ),
                                     ),
-                                    // InkWell(onTap:(){Get.toNamed('/HomePage'); },child:  CircleAvatar(
-                                    //   backgroundColor: Themes.color,
-                                    //   radius: 40,
-                                    //   child: Text(
-                                    //     "  انشاء حساب ",
-                                    //     style:
-                                    //     TextStyle(fontSize: 12, color: Colors.white),
-                                    //   ), //Text
-                                    // ),), //,)
                                     SizedBox(
                                       height: 20,
                                     ),
@@ -269,6 +418,9 @@ class RegisterView extends GetView {
               SizedBox(
                 height: 50,
               ),
-            ])));
+            ])
+
+
+        ));
   }
 }

@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
@@ -18,7 +17,11 @@ class HomePage extends GetView<AppBarController> {
           child: IndexedStack(
             index: controller.tabIndex,
             children: [
-              Favorite(),
+            // Text("mmmmm"),
+            // Text("iiiiii"),
+            // Text("jjjoio"),
+            // Text("hhj"),
+             Favorite(),
               Orders(),
               ShopsPage(),
               Product(),
@@ -61,6 +64,11 @@ class HomePage extends GetView<AppBarController> {
                 index == 2) {
               Navigator.of(context).pop();
             }
+            print(index);
+            if(index==0)
+              {
+              //  Get.to(Favorite());
+              print("kkkkkkkkkkkkk");}
 
             controller.changeTabIndex(index);
           },

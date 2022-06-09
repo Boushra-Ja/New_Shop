@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/logic/controllers/LoginController.dart';
 import 'package:new_shop/utls/Themes.dart';
 
-class LoginView extends GetView {
+class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +44,7 @@ class LoginView extends GetView {
                                 color: Themes.color2,
                                 elevation: 10,
                                 child: Form(
+                                  key: controller.loginFormkey,
                                   child: Column(children: <Widget>[
                                     SizedBox(
                                       height: 40,
@@ -69,6 +71,20 @@ class LoginView extends GetView {
                                           left: 20, right: 20, top: 5),
                                       height: 50,
                                       child: TextFormField(
+                                        controller: controller.emailController,
+                                        validator: (v) {
+                                          controller.validateEmail(v!);
+                                          if (v.isEmpty)
+                                            return 'ادخل ايميلا صحيحا';
+                                          else if (v.length > 100)
+                                            return "لا يمكن ان يكون بهذا الحجم";
+                                          else if (v.length < 2)
+                                            return "لا يمكن ان يكون اقل من حرفين";
+                                          return null;
+
+                                        },
+                                        onSaved: (v) {controller.email=v!;
+                                        },
                                         style: TextStyle(
                                           //: 40.0,
                                           height: 1.0,
@@ -117,6 +133,19 @@ class LoginView extends GetView {
                                           left: 20, right: 20, top: 5),
                                       height: 50,
                                       child: TextFormField(
+                                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                                            controller: controller.passwordController,
+                                            validator: (v) {
+                                            controller.validatePassword(v!);
+                                            if (v.isEmpty)
+                                            return 'ادخل كلمة مرور صحيحا';
+                                            else if (v.length > 100)
+                                            return "لا يمكن ان يكون بهذا الحجم";
+                                            else if (v.length < 2)
+                                            return "لا يمكن ان تكون اقل من حرفين";
+                                            return null;
+                                            },
+                                            onSaved: (v) {controller.password=v!;},
                                         style: TextStyle(
                                           //: 40.0,
                                           height: 1.0,
@@ -145,11 +174,16 @@ class LoginView extends GetView {
                                     SizedBox(
                                       height: 40,
                                     ),
+
+                                    Obx(()=>
+                                    controller.isLoading.value == true ?
+                                    const  Center(child:
+                                    CircularProgressIndicator ()): const Text("")),
                                     RaisedButton(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 20),
                                       onPressed: () {
-                                        Get.toNamed('/HomePage');
+                                        controller.doLogin();
                                       },
                                       color: Themes.color,
                                       shape: RoundedRectangleBorder(

@@ -51,10 +51,10 @@ class products {
     id = json['id'];
     image = json['image'];
     discription = json['discription'];
-    gift = json['gift'];
+   // gift = json['gift'];
     name = json['name'];
-    preprationTime = json['prepration_time'];
-    party = json['party'];
+    //preprationTime = json['prepration_time'];
+    //party = json['party'];
     age = json['age'];
     sellingPrice = json['selling_price'];
     costPrice = json['cost_price'];
@@ -69,9 +69,9 @@ class products {
     data['id'] = this.id;
     data['image'] = this.image;
     data['discription'] = this.discription;
-    data['gift'] = this.gift;
+    //data['gift'] = this.gift;
     data['name'] = this.name;
-    data['prepration_time'] = this.preprationTime;
+    //data['prepration_time'] = this.preprationTime;
     data['party'] = this.party;
     data['age'] = this.age;
     data['selling_price'] = this.sellingPrice;

@@ -163,7 +163,7 @@ class RegisterView extends GetView<RegisterController> {
 
                                         decoration: const InputDecoration(
                                           hintText: ' ادخل اسمك....',
-                                          hintStyle: Themes.subtitle2,
+                                          hintStyle: Themes.subtitle1,
                                           filled: true,
                                           errorMaxLines: 10,
                                           fillColor: Colors.white70,

@@ -7,7 +7,7 @@ class AuthServices {
 
 
   static register({required name,required email,required password}) async {
-    var response = await http.post(Uri.parse('http://192.168.137.102:8000/api/Customer/register'),
+    var response = await http.post(Uri.parse('http://192.168.137.237:8000/api/Customer/register'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(<String, String>{
           "name": name,
@@ -27,7 +27,7 @@ class AuthServices {
     return null;}
   }
   static login({required email, password}) async {
-    var response = await http.post(Uri.parse('http://192.168.137.102:8000/api/Customer/login'),
+    var response = await http.post(Uri.parse('http://192.168.137.237:8000/api/Customer/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(<String, String>{
 
@@ -46,7 +46,7 @@ class AuthServices {
 
 
   static doo({required product_id}) async {
-    var response = await http.post(Uri.parse('http://192.168.137.102:8000/api/FavoriteProduct/Add_Favorite/$product_id'),
+    var response = await http.post(Uri.parse('http://192.168.137.237:8000/api/FavoriteProduct/Add_Favorite/$product_id'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(<String, int>{
           "product_id": product_id,

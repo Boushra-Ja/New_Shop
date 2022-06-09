@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../../../models/Boshra/Store/ShopModel.dart';
 
 class ShopPageController extends GetxController {
+  String api = 'http://192.168.137.237:8000' ;
 
   RxString selectedsortvalue = "جميع المتاجر".obs ;
   var items = [
@@ -27,7 +27,8 @@ class ShopPageController extends GetxController {
 
 
   Future<void>fetchALlStores()async{
-    final response = await http.get(Uri.parse('http://192.168.137.148:8000/api/stores')) ;
+    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores')) ;
+
     if(response.statusCode == 200)
       {
 
@@ -47,13 +48,17 @@ class ShopPageController extends GetxController {
                 ShopList[i].review = (ShopList[i].review /ShopList[i].all_review.length).toInt()  ;
 
           }
+
+        print('*****************') ;
+          print(ShopList.length);
+
       }else{
       print("errorrrrr") ;
     }
   }
 
   Future<void>StoresMoreSales()async{
-    final response = await http.get(Uri.parse('http://192.168.137.148:8000/api/stores/order/sales')) ;
+    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores/order/sales')) ;
     if(response.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
@@ -79,7 +84,7 @@ class ShopPageController extends GetxController {
   }
 
   Future<void>StoresMoreReview()async{
-    final response = await http.get(Uri.parse('http://192.168.137.148:8000/api/stores/order/reviews')) ;
+    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores/order/reviews')) ;
     if(response.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;

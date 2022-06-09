@@ -15,6 +15,7 @@ class ProductDeatilController extends GetxController{
   var size_list = 0.obs ;
   var new_size = 0.obs ;
 
+  String api = 'http://192.168.137.237:8000' ;
   Map<String , List<String>> options = HashMap() ;
   List<String>selected_values = [];
 
@@ -68,8 +69,8 @@ class ProductDeatilController extends GetxController{
   }
 
   Future<void> fetchProductInfo(var id)async{
-    final response = await http.get(Uri.parse('http://192.168.137.148:8000/api/products/$id')) ;
-    final response2= await http.get(Uri.parse('http://192.168.137.148:8000/api/similar_products/$id')) ;
+    final response = await http.get(Uri.parse('${api}/api/products/$id')) ;
+    final response2= await http.get(Uri.parse('${api}/api/similar_products/$id')) ;
 
     if(response.statusCode == 200 && response2.statusCode == 200)
     {
@@ -103,7 +104,7 @@ class ProductDeatilController extends GetxController{
 
 
   Future<void> get_options(var id)async{
-    final response= await http.get(Uri.parse('http://192.168.137.148:8000/api/option_for_product/$id')) ;
+    final response= await http.get(Uri.parse('${api}/api/option_for_product/$id')) ;
     if(response.statusCode == 200) {
       OptionModel optionModel = OptionModel.fromJson(jsonDecode(response.body)) ;
 

@@ -15,6 +15,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
   var id ;
   ProductDeatil(this.id);
 
+  String api = "http://192.168.137.237:8000" ;
   @override
   Widget build(BuildContext context) {
     ProductDeatilController controller = Get.put(ProductDeatilController(id));
@@ -40,7 +41,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                           height: MediaQuery.of(context).size.height * 0.4,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage('http://192.168.137.148:8000/uploads/product/${controller.product.image}'),
+                              image: NetworkImage('${api}/uploads/product/${controller.product.image}'),
                               fit: BoxFit.fill,
                             ),
                           ),

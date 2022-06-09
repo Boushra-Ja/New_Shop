@@ -13,6 +13,8 @@ class FavoriteController extends GetxController {
   var Tabbar = 1.obs;
   // var flist = <Favorite_product>[].obs;
 
+  String api = 'http://192.168.137.237:8000' ;
+
 
   void changeTabbar(int index) {
 
@@ -33,31 +35,31 @@ class FavoriteController extends GetxController {
 
   FetchData_favorite() async {
     final response =
-    await http.get(Uri.parse('http://192.168.137.102:8000/api/FavoriteProduct/Show_Favorite'));
+    await http.get(Uri.parse('${api}/api/FavoriteProduct/Show_Favorite'));
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
 
       return jsonResponse.map((data) => new Favorite_product.fromJson(data)).toList();
     } else
-      throw Exception('Unexpected error occured!');
+      return null;
   }
   FetchData_favorite_s() async {
     final response =
-    await http.get(Uri.parse('http://192.168.137.102:8000/api/FavoriteStore/Show_Favorite'));
+    await http.get(Uri.parse('${api}/api/FavoriteStore/Show_Favorite'));
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
 
       return jsonResponse.map((data) => new Favorite_Store.fromJson(data)).toList();
     } else
-      throw Exception('Unexpected error occured!');
+      return null;
   }
 
   @override
   void onInit() {
     getData();
-    getDataS();
+   // getDataS();
     print(listfavoitestore.length);
     print("========================================");
     super.onInit();
@@ -70,6 +72,7 @@ class FavoriteController extends GetxController {
 
       var result = await FetchData_favorite();
 
+      print(result) ;
       if (result != null) {
         listfavoite.assignAll(result);
       } else

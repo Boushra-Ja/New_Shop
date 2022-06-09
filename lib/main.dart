@@ -12,6 +12,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
+  static String api = "http://192.168.1.107:8000" ;
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => FavoriteController(), fenix: true);

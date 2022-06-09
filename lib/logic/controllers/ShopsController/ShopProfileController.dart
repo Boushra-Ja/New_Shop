@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../../main.dart';
 import '../../../models/Boshra/Store/ShopModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -41,7 +42,7 @@ class ShopProfileController extends GetxController{
 
   Future<void> fetchShopInfo()async{
 
-    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores/$shop_id')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/stores/$shop_id')) ;
 
     if(response.statusCode == 200)
     {

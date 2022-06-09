@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:new_shop/models/batool/Category2Model.dart';
 import 'package:new_shop/models/batool/CategoryModel.dart';
 import 'package:http/http.dart' as http;
+import '../../main.dart';
 import '../../models/batool/FavoriteProduct2Model.dart';
 import '../../models/batool/ProductModel.dart';
 
 class ProductController extends GetxController {
-  String api = 'http://192.168.137.237:8000';
   var flist = <int>[].obs;
 
   var loading = true.obs;
@@ -34,6 +34,7 @@ class ProductController extends GetxController {
   var nameuser = "".obs;
   var namepub = "".obs;
   var Col = 1.obs;
+
   void changeCol(var data, int col, int product_id) {
     if (data == "add") {
       print("to red");
@@ -45,24 +46,15 @@ class ProductController extends GetxController {
 
     update();
   }
-
   late String token;
-  //final storage=const FlutterSecureStorage();
 
   FetcDhataList_classification(/*{required  token}*/) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Show_p'),
-      // headers: {  'Authorization':'Bearer '+'${token}'
-      // }
+      Uri.parse('${MyApp.api}/api/Show_p')
     );
-    print(
-        "********************hhhhhh*******************************************hhhhhhh*************");
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      // print(response.body);
-      // print(jsonResponse);
-
       return jsonResponse.map((data) => new categories.fromJson(data)).toList();
     } else
       return ('Unexpected error occured!');
@@ -70,18 +62,11 @@ class ProductController extends GetxController {
 
   FetcDhataList_f(/*{required  token}*/) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Product_Allf'),
-      // headers: {  'Authorization':'Bearer '+'${token}'
-      // }
+      Uri.parse('${MyApp.api}/api/Product_Allf'),
     );
-    print(
-        "********************hhhhhh*******************************************hhhhhhh*************");
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      // print(response.body);
-      // print(jsonResponse);
-
       return jsonResponse
           .map((data) => new Favorite_product2.fromJson(data))
           .toList();
@@ -91,16 +76,11 @@ class ProductController extends GetxController {
 
   FetcDhataList_Secondary(id) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Product/ShowClassification2/$id'),
+      Uri.parse('${MyApp.api}/api/Product/ShowClassification2/$id'),
     );
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      // print(response.body);
-      //
-      // print('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
-      // print(jsonResponse);
-
       return jsonResponse
           .map((data) => new categories2.fromJson(data))
           .toList();
@@ -110,16 +90,12 @@ class ProductController extends GetxController {
 
   FetcDhataList_discount(/*{required  token}*/) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Product/Product_Order_discount'),
-      // headers: {  'Authorization':'Bearer '+'${token}'
-      // }
+      Uri.parse('${MyApp.api}/api/Product/Product_Order_discount'),
+
     );
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      // print(response.body);
-      // print(jsonResponse);
-
       return jsonResponse.map((data) => new products.fromJson(data)).toList();
     } else
       return null;
@@ -127,18 +103,11 @@ class ProductController extends GetxController {
 
   FetcDhataList_salary(/*{required  token}*/) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Product/Product_Order_Salary'),
-      // headers: {  'Authorization':'Bearer '+'${token}'
-      // }
+      Uri.parse('${MyApp.api}/api/Product/Product_Order_Salary'),
     );
-    print(
-        "********************hhhhhh*******************************************hhhhhhh*************");
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      print(response.body);
-      print(jsonResponse);
-
       return jsonResponse.map((data) => new products.fromJson(data)).toList();
     } else
       return ('Unexpected error occured!');
@@ -146,17 +115,11 @@ class ProductController extends GetxController {
 
   FetcDhataList_sales(/*{required  token}*/) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Product/Product_Order_sales'),
-      // headers: {  'Authorization':'Bearer '+'${token}'
-      // }
+      Uri.parse('${MyApp.api}/api/Product/Product_Order_sales'),
     );
-    // print("********************hhhhhh*******************************************hhhhhhh*************");
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      print(response.body);
-      print(jsonResponse);
-
       return jsonResponse.map((data) => new products.fromJson(data)).toList();
     } else
       return ('Unexpected error occured!');
@@ -164,16 +127,11 @@ class ProductController extends GetxController {
 
   FetcDhataList_favorite(/*{required  token}*/) async {
     final response = await http.get(
-      Uri.parse('${api}/api/Product/Product_Order_favorite'),
-      // headers: {  'Authorization':'Bearer '+'${token}'
-      // }
+      Uri.parse('${MyApp.api}/api/Product/Product_Order_favorite'),
     );
 
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      // print(response.body);
-      // print(jsonResponse);
-      //jsonResponse
       return jsonResponse.map((data) => new products.fromJson(data)).toList();
     } else
       return null;
@@ -181,7 +139,7 @@ class ProductController extends GetxController {
 
   @override
   void onInit() {
-    getData1();
+   // getData1();
     getData2();
     getData3();
     getData4();
@@ -198,10 +156,7 @@ class ProductController extends GetxController {
 
       var result = await FetcDhataList_discount(
           // token : await storage.read(key: "token"),
-          // name_user : await storage.read(key: "name"),
-          // name_pub:  await storage.read(key: "name_pub"),
-
-          );
+      );
 
       if (result != null) {
         listpoduct_discount.assignAll(result);
@@ -216,10 +171,8 @@ class ProductController extends GetxController {
   getData2() async {
     try {
       loading.value = true;
-
       var result2 = await FetcDhataList_favorite(
           // token : await storage.read(key: "token"),
-
           );
 
       if (result2 != null) {
@@ -238,9 +191,6 @@ class ProductController extends GetxController {
 
       var result3 = await FetcDhataList_salary(
           // token : await storage.read(key: "token"),
-          // name_user : await storage.read(key: "name"),
-          // name_pub:  await storage.read(key: "name_pub"),
-
           );
 
       if (result3 != null) {
@@ -277,9 +227,6 @@ class ProductController extends GetxController {
 
       var result4 = await FetcDhataList_classification(
           // token : await storage.read(key: "token"),
-          // name_user : await storage.read(key: "name"),
-          // name_pub:  await storage.read(key: "name_pub"),
-
           );
 
       if (result4 != null) {
@@ -298,16 +245,10 @@ class ProductController extends GetxController {
 
       var result4 = await FetcDhataList_f(
           // token : await storage.read(key: "token"),
-          // name_user : await storage.read(key: "name"),
-          // name_pub:  await storage.read(key: "name_pub"),
-
           );
 
       if (result4 != null) {
         listpoduct_f.assignAll(result4);
-        // print ("77777777777777777777777777777777777777777");
-        // print (listpoduct_f.length);
-        // print ("hjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
       } else
         print("null");
     } finally {

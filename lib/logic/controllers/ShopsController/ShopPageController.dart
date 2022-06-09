@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
+import 'package:new_shop/main.dart';
 import 'dart:convert';
 import '../../../models/Boshra/Store/ShopModel.dart';
 
 class ShopPageController extends GetxController {
-  String api = 'http://192.168.137.237:8000' ;
 
   RxString selectedsortvalue = "جميع المتاجر".obs ;
   var items = [
@@ -25,18 +25,16 @@ class ShopPageController extends GetxController {
   }
 
 
-
   Future<void>fetchALlStores()async{
-    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/stores')) ;
 
     if(response.statusCode == 200)
       {
 
-          isLoading.value = true;
-          ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
-          ShopList.assignAll(shopModel.data );
+        ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+        ShopList.assignAll(shopModel.data );
 
-          isLoading.value = false;
+        isLoading.value = false;
 
         for(int i = 0 ; i < ShopList.length ; i++)
           {
@@ -49,21 +47,18 @@ class ShopPageController extends GetxController {
 
           }
 
-        print('*****************') ;
-          print(ShopList.length);
-
       }else{
       print("errorrrrr") ;
     }
   }
 
   Future<void>StoresMoreSales()async{
-    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores/order/sales')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/stores/order/sales')) ;
     if(response.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
-     // ShopList = shopModel.data ;
       ShopList.assignAll(shopModel.data );
+
       for(int i = 0 ; i < ShopList.length ; i++)
       {
         for(int j = 0 ; j <  ShopList[i].all_review.length ; j++)
@@ -78,13 +73,12 @@ class ShopPageController extends GetxController {
       isLoading.value = false ;
 
     }else{
-
       print("errorrrrr") ;
     }
   }
 
   Future<void>StoresMoreReview()async{
-    final response = await http.get(Uri.parse('http://192.168.137.237:8000/api/stores/order/reviews')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/stores/order/reviews')) ;
     if(response.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
@@ -101,9 +95,7 @@ class ShopPageController extends GetxController {
       }
 
       isLoading.value = false ;
-
     }else{
-
       print("errorrrrr") ;
     }
   }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:new_shop/models/Boshra/products/ProductModel.dart';
+import '../../main.dart';
 import '../../models/Boshra/products/Option.dart';
 
 
@@ -15,7 +16,6 @@ class ProductDeatilController extends GetxController{
   var size_list = 0.obs ;
   var new_size = 0.obs ;
 
-  String api = 'http://192.168.137.237:8000' ;
   Map<String , List<String>> options = HashMap() ;
   List<String>selected_values = [];
 
@@ -69,8 +69,8 @@ class ProductDeatilController extends GetxController{
   }
 
   Future<void> fetchProductInfo(var id)async{
-    final response = await http.get(Uri.parse('${api}/api/products/$id')) ;
-    final response2= await http.get(Uri.parse('${api}/api/similar_products/$id')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/products/$id')) ;
+    final response2= await http.get(Uri.parse('${MyApp.api}/api/similar_products/$id')) ;
 
     if(response.statusCode == 200 && response2.statusCode == 200)
     {
@@ -86,16 +86,15 @@ class ProductDeatilController extends GetxController{
 
       new_size.value = product.all_review.length ;
 
-      print('***************');
-      print(product.image) ;
+
       if(product.all_review.length > 0) {
         size_list.value = ( new_size.value) % 10 ;
         new_size.value = product.all_review.length  - size_list.value ;
       }
 
-
       await get_options(id) ;
       isLoading.value = false ;
+
     }else{
       print("errorrrrr") ;
     }
@@ -104,7 +103,7 @@ class ProductDeatilController extends GetxController{
 
 
   Future<void> get_options(var id)async{
-    final response= await http.get(Uri.parse('${api}/api/option_for_product/$id')) ;
+    final response= await http.get(Uri.parse('${MyApp.api}/api/option_for_product/$id')) ;
     if(response.statusCode == 200) {
       OptionModel optionModel = OptionModel.fromJson(jsonDecode(response.body)) ;
 

@@ -184,7 +184,7 @@ class LoginView extends GetView {
                                   child: Center(
                                     child: RaisedButton(
                                       onPressed: () {
-                                        Get.toNamed('/regester');
+                                        Get.offNamed('/regester');
                                       },
                                       color: Colors.white,
                                       shape: RoundedRectangleBorder(

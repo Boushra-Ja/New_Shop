@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class Themes {
   static const color = Color(0xFFAF3A88);
   static const color2 = Color(0xFFF5EFF3);
+  static  Color color3 = Colors.grey.shade700;
+
   static const borderColor = Colors.black;
 
-  static const headline1 = TextStyle(
+  static  TextStyle headline1 = TextStyle(
       fontSize: 18,
-      color: Colors.black,
+      color: Colors.grey.shade800,
       fontWeight: FontWeight.w500,
       fontFamily: 'Roboto');
   static const headline2 = TextStyle(
@@ -16,15 +18,15 @@ class Themes {
   TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold);
 
 
-  static const headline3 = TextStyle(fontSize: 20, color: Colors.black);
+  static  TextStyle headline3 = TextStyle(fontSize: 20, color: Colors.grey.shade700 , fontWeight: FontWeight.bold);
   static const headline5 = TextStyle(
       fontSize: 22, decoration: TextDecoration.underline, color: color);
 
 
   static const subtitle1 =
       TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Roboto');
-  static const subtitle2 = TextStyle(fontSize: 14, color: Colors.grey);
-  static const subtitle3 = TextStyle(fontSize: 12, color: Colors.grey);
+  static  TextStyle subtitle2 = TextStyle(fontSize: 14,color: color3,);
+  static TextStyle subtitle3 = TextStyle(fontSize: 12, color: color3,);
 
   static const bodyText1 = TextStyle(fontSize: 16, color: Colors.black);
   static const bodyText2 = TextStyle(fontSize: 16, color: color);

@@ -114,7 +114,7 @@ class Favorite extends StatelessWidget {
                                             Center(
                                                 child: InkWell(
                                               onTap: () {
-                                                Get.to(ShopProfile());
+                                                Get.to(ShopProfile(1));
                                               },
                                               child: CircleAvatar(
                                                 backgroundImage: i == 0
@@ -138,7 +138,7 @@ class Favorite extends StatelessWidget {
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
-                                                      Get.to(ShopProfile());
+                                                      Get.to(ShopProfile(1));
                                                     },
                                                     child: Text('اسم المتجر ',
                                                         style:
@@ -214,7 +214,7 @@ class Favorite extends StatelessWidget {
                                           Expanded(
                                             child: InkWell(
                                               onTap: () {
-                                                Get.to(ProductDeatil());
+                                                Get.to(ProductDeatil(1));
                                               },
                                               child: Center(
                                                 child: i == 0
@@ -234,7 +234,7 @@ class Favorite extends StatelessWidget {
                                           Center(
                                             child: InkWell(
                                               onTap: () {
-                                                Get.to(ProductDeatil());
+                                                Get.to(ProductDeatil(1));
                                               },
                                               child: Text(
                                                 'حقيبة كروشيه',

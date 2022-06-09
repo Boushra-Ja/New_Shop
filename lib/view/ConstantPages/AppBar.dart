@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
+import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/Orderes.dart';
 
 class myAppBar extends StatelessWidget{
@@ -9,9 +10,11 @@ class myAppBar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 40.0),
       child: Row(
         children: [
+          SizedBox(width: 5,),
+
           GetBuilder<AppBarController>(init : AppBarController(),builder: (controller){
               //controller.hh();
             return IconButton(
@@ -20,21 +23,22 @@ class myAppBar extends StatelessWidget{
                    controller.getscaffoldKey().currentState!.openDrawer();
                    controller.getscaffoldKey2().currentState!.openDrawer();
                    controller..getscaffoldKey3().currentState!.openDrawer();
-
+                   controller..getscaffoldKey4().currentState!.openDrawer();
 
                 },
                 icon: Icon(
                   Icons.menu,
-                  size: 40,
+                  size: 35,
+                  color: Themes.color3,
                 ));
           }) ,
-          SizedBox(width: 20,),
+          SizedBox(width: 10,),
           Container(
             width: MediaQuery.of(context).size.width*0.65,
-            height: 45,
+            height: 42,
             decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.black,
+                color: Themes.color3,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(20),
@@ -47,7 +51,8 @@ class myAppBar extends StatelessWidget{
                 onPressed: () {
                   print("search");
                 },
-                icon: const Icon(Icons.search),
+                icon:  Icon(Icons.search ,  color: Themes.color3,
+                ),
               ),
               Text(" انقر هنا للبحث ..."),
             ]),
@@ -60,8 +65,8 @@ class myAppBar extends StatelessWidget{
               onPressed: () {Get.to(()=>Orderes());},
               icon: Icon(
                 Icons.shopping_cart_outlined,
-                size: 35,
-                color: Colors.black,
+                size: 30,
+                color: Themes.color3,
               )),
         ],
       ),

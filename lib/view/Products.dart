@@ -27,7 +27,7 @@ class Product extends GetView<ProductController> {
               height: 2,
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: myAppBar(),
             ),
             Expanded(
@@ -39,19 +39,21 @@ class Product extends GetView<ProductController> {
                       children: [
                         Row(children: <Widget>[
                           SizedBox(
-                            width: 22,
+                            width: 20,
                           ),
                           Container(
                             width: 130,
-                            height: 35,
+                            height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.grey.shade600,
-                                width: 2,
+                                color: Themes.color3,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButton(
+
+                              iconEnabledColor: Themes.color3 ,
                               items: [
                                 DropdownMenuItem(
                                   child: Text("First Item"),
@@ -65,25 +67,26 @@ class Product extends GetView<ProductController> {
                               onChanged: (value) {},
                               hint: Text(
                                 "خياطه",
-                                style: Themes.bodyText5,
+                                style: Themes.subtitle2,
                               ),
                               alignment: Alignment.center,
                             ),
                           ),
                           SizedBox(
-                            width: 30,
+                            width: 25,
                           ),
                           Container(
                             width: 130,
-                            height: 35,
+                            height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.grey.shade600,
-                                width: 2,
+                                color: Themes.color3,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButton(
+                              iconEnabledColor: Themes.color3 ,
                               items: [
                                 DropdownMenuItem(
                                   child: Text("First Item"),
@@ -97,25 +100,26 @@ class Product extends GetView<ProductController> {
                               onChanged: (value) {},
                               hint: Text(
                                 "مواد تجميل",
-                                style: Themes.bodyText5,
+                                style: Themes.subtitle2,
                               ),
                               alignment: Alignment.center,
                             ),
                           ),
                           SizedBox(
-                            width: 30,
+                            width: 25,
                           ),
                           Container(
                             width: 130,
-                            height: 35,
+                            height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.grey.shade600,
-                                width: 2,
+                                color: Themes.color3,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButton(
+                              iconEnabledColor: Themes.color3 ,
                               items: [
                                 DropdownMenuItem(
                                   child: Text("First Item"),
@@ -129,25 +133,26 @@ class Product extends GetView<ProductController> {
                               onChanged: (value) {},
                               hint: Text(
                                 "تطريز",
-                                style: Themes.bodyText5,
+                                style: Themes.subtitle2,
                               ),
                               alignment: Alignment.center,
                             ),
                           ),
                           SizedBox(
-                            width: 30,
+                            width: 25,
                           ),
                           Container(
                             width: 130,
-                            height: 35,
+                            height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.grey.shade600,
-                                width: 2,
+                                color: Themes.color3,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButton(
+                              iconEnabledColor: Themes.color3 ,
                               items: [
                                 DropdownMenuItem(
                                   child: Text("First Item"),
@@ -161,25 +166,26 @@ class Product extends GetView<ProductController> {
                               onChanged: (value) {},
                               hint: Text(
                                 "صوف",
-                                style: Themes.bodyText5,
+                                style: Themes.subtitle2,
                               ),
                               alignment: Alignment.center,
                             ),
                           ),
                           SizedBox(
-                            width: 30,
+                            width: 25,
                           ),
                           Container(
                             width: 130,
-                            height: 35,
+                            height: 30,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.grey.shade600,
-                                width: 2,
+                                color: Themes.color3,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButton(
+                              iconEnabledColor: Themes.color3 ,
                               items: [
                                 DropdownMenuItem(
                                   child: Text("First Item"),
@@ -193,7 +199,7 @@ class Product extends GetView<ProductController> {
                               onChanged: (value) {},
                               hint: Text(
                                 "ماغات",
-                                style: Themes.bodyText5,
+                                style: Themes.subtitle2,
                               ),
                               alignment: Alignment.center,
                             ),
@@ -205,7 +211,7 @@ class Product extends GetView<ProductController> {
                       ]),
                 )), // ListView
             Expanded(
-                flex: 5,
+                flex: 8,
                 child: ListView(children: [
                   Row(
                     children: [
@@ -233,7 +239,7 @@ class Product extends GetView<ProductController> {
                             },
                             icon: Icon(
                               Icons.arrow_forward,
-                              color: Colors.black,
+                              color: Themes.color3,
                               size: 25,
                             )),
                       )
@@ -417,7 +423,7 @@ class Product extends GetView<ProductController> {
                             },
                             icon: Icon(
                               Icons.arrow_forward,
-                              color: Colors.black,
+                              color: Themes.color3,
                               size: 25,
                             )),
                       )
@@ -603,7 +609,7 @@ class Product extends GetView<ProductController> {
                             },
                             icon: Icon(
                               Icons.arrow_forward,
-                              color: Colors.black,
+                              color: Themes.color3,
                               size: 25,
                             )),
                       )
@@ -789,7 +795,7 @@ class Product extends GetView<ProductController> {
                             },
                             icon: Icon(
                               Icons.arrow_forward,
-                              color: Colors.black,
+                              color: Themes.color3,
                               size: 25,
                             )),
                       )

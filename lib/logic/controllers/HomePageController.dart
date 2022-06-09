@@ -1,10 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class HomePageController extends GetxController {
-  var tabIndex = 3;
+class HomeController extends GetxController {
+  late PageController pageController;
+  var currentIndex = 3.obs;
+  GlobalKey bottomNavigationKey = GlobalKey();
+  @override
+  void onInit() {
+    super.onInit();
+    pageController = PageController();
+  }
 
-  void changeTabIndex(int index) {
-    tabIndex = index;
-    update();
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
   }
 }

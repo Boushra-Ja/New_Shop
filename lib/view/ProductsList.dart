@@ -14,7 +14,7 @@ class ProductsList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
             onTap: () {
-              Get.to(ProductDeatil());
+              Get.to(ProductDeatil(1));
             },
             child: Column(
               children: [

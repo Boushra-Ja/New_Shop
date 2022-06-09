@@ -245,7 +245,7 @@ class RegisterView extends GetView {
                                 child: Center(
                                   child: RaisedButton(
                                     onPressed: () {
-                                      Get.toNamed('/login');
+                                      Get.offNamed('/login');
                                     },
                                     color: Colors.white,
                                     shape: RoundedRectangleBorder(

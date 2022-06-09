@@ -168,7 +168,7 @@ class Orderes extends GetView<OrderController> {
                                         padding: const EdgeInsets.only(
                                             right: 30.0, top: 20),
                                         child: RichText(
-                                          text: const TextSpan(
+                                          text:  TextSpan(
                                             style:
                                                 TextStyle(color: Colors.black),
                                             children: <TextSpan>[
@@ -438,7 +438,7 @@ class Orderes extends GetView<OrderController> {
                                         padding: const EdgeInsets.only(
                                             right: 30.0, top: 20),
                                         child: RichText(
-                                          text: const TextSpan(
+                                          text:  TextSpan(
                                             style:
                                                 TextStyle(color: Colors.black),
                                             children: <TextSpan>[

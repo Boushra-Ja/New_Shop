@@ -34,10 +34,6 @@ class AppPages {
       page: () => ShopsPage(),
     ),
     GetPage(
-      name: Routes.ShopsProfile,
-      page: () => ShopProfile(),
-    ),
-    GetPage(
       name: Routes.Favorite,
       page: () => Favorite(),
       binding: FavoriteBinding(),

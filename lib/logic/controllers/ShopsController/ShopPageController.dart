@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
 import 'package:new_shop/main.dart';
+import 'package:new_shop/models/Boshra/products/ProductModel.dart';
 import 'dart:convert';
 import '../../../models/Boshra/Store/ShopModel.dart';
 
@@ -82,6 +83,7 @@ class ShopPageController extends GetxController {
     if(response.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+
       ShopList.assignAll(shopModel.data );
       for(int i = 0 ; i < ShopList.length ; i++)
       {

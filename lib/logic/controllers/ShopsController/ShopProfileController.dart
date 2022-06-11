@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
+import 'package:new_shop/models/Boshra/Store/MyFavourite.dart';
 import '../../../main.dart';
 import '../../../models/Boshra/Store/ShopModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ShopProfileController extends GetxController{
-  var check_tap = true.obs ;
+  var check_tap = true.obs  ;
   var size_list = 0.obs ;
   var new_size = 0.obs ;
   final shop_id;
-  var shop_info ;
+  late Shop shop_info ;
   String selectedSection = 'خياطة';
   var isLoading = true.obs  ;
   var items = [
@@ -43,13 +44,28 @@ class ShopProfileController extends GetxController{
   Future<void> fetchShopInfo()async{
 
     final response = await http.get(Uri.parse('${MyApp.api}/api/stores/$shop_id')) ;
+    final favourite = await http.get(Uri.parse('${MyApp.api}/api/myFavorite/4')) ;
 
-    if(response.statusCode == 200)
+    if(response.statusCode == 200 && favourite.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+      MyFavouriteModel favorite_storeModel = MyFavouriteModel.fromJson(jsonDecode(favourite.body));
+
       shop_info = Shop(id: shopModel.data[0].id, shop_name: shopModel.data[0].shop_name, discription: shopModel.data[0].discription,
       image: shopModel.data[0].image,mobile: shopModel.data[0].mobile, email: shopModel.data[0].email, facebook: shopModel.data[0].facebook,
       num_of_salling: shopModel.data[0].num_of_salling, all_review: shopModel.data[0].all_review , all_products : shopModel.data[0].all_products  ) ;
+
+      for(int i = 0 ; i < favorite_storeModel.data.length ; i++) {
+
+        if(shop_id == favorite_storeModel.data.elementAt(i).store_id)
+          {
+            shop_info.isFavourite = true ;
+            break ;
+          }
+        else
+          shop_info.isFavourite = false ;
+
+      }
 
       new_size.value = shop_info.all_review.length ;
 
@@ -65,11 +81,50 @@ class ShopProfileController extends GetxController{
         }
 
           isLoading.value = false ;
+
     }else{
       print("errorrrrr") ;
     }
 
   }
+
+
+  Future<void> addToFavouriteStore()async {
+    final response = await http.post(
+        Uri.parse('${MyApp.api}/api/FavoriteStore/Add_Favorite/$shop_id'),
+        headers: {'Content-Type': 'application/json', 'Authorization':'Bearer '+'3|oOaSMCUlb4vpXa1JbbtymRutVtXhefkBbLEnJrqT',},
+        body: jsonEncode(<String, int>{
+          "store_id": shop_id,
+
+        }));
+
+    if(response.statusCode == 200)
+    {
+      print(shop_info.isFavourite);
+      shop_info.isFavourite = true ;
+      print(shop_info.isFavourite);
+
+      print("Success") ;
+      update() ;
+    }
+
+  }
+
+  Future<void> deleteFromFavourite()async{
+    final response = await http.delete(
+        Uri.parse('${MyApp.api}/api/FavoriteStore/Delete_Favorite/$shop_id'),
+        headers: { 'Authorization':'Bearer '+'3|oOaSMCUlb4vpXa1JbbtymRutVtXhefkBbLEnJrqT',});
+
+    if(response.statusCode == 200)
+      {
+        print('success') ;
+        shop_info.isFavourite = false ;
+        update() ;
+
+
+      }
+  }
+
 
   @override
   void onInit() async{

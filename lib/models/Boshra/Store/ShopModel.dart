@@ -5,6 +5,7 @@ class Shop {
 
   var id , shop_name , discription  ,image  , mobile , email , facebook ,num_of_salling ,all_review , all_products;
   int review =  0;
+  bool isFavourite = false ;
 
 
   factory Shop.fromJson(Map<String , dynamic> json)

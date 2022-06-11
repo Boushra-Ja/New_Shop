@@ -5,6 +5,7 @@ import 'package:new_shop/logic/controllers/AppBarController.dart';
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ConstantPages/AppBar.dart';
 import '../../logic/controllers/ShopsController/ShopPageController.dart';
+import '../../main.dart';
 import '../ConstantPages/Drawer.dart';
 import 'ShopProfile.dart';
 import 'ShopReview.dart';
@@ -125,15 +126,15 @@ class ShopsPage extends StatelessWidget {
                                                     bottom: 20.0),
                                                 child: Row(
                                                   children: [
-                                                    const Padding(
+                                                     Padding(
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               vertical: 10,
                                                               horizontal: 10),
                                                       child: CircleAvatar(
                                                         radius: 50,
-                                                        backgroundImage: AssetImage(
-                                                            'images/shop2.jpg'),
+                                                        backgroundImage: NetworkImage('${MyApp.api}/uploads/stores/${_controller.ShopList.elementAt(index).image}'),
+
                                                       ),
                                                     ),
                                                     Column(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/ShopsController/ShopProfileController.dart';
+import 'package:new_shop/main.dart';
 import 'dart:ui' as ui;
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ProductDeatil.dart';
@@ -22,6 +23,7 @@ class ShopProfile extends StatelessWidget {
         child: DefaultTabController(
           length: 2,
           child: Scaffold(
+            backgroundColor: Colors.white,
             body: Obx(() {
               if (_controller.isLoading.value) {
                 return Center(
@@ -43,11 +45,11 @@ class ShopProfile extends StatelessWidget {
                             ),
                             painter: HeaderCurvedContainer(),
                           ),
-                          const Positioned(
+                           Positioned(
                               top: 80,
                               right: 20,
                               child: CircleAvatar(
-                                backgroundImage: AssetImage('images/shop.png'),
+                                backgroundImage: NetworkImage('${MyApp.api}/uploads/stores/${_controller.shop_info.image}'),
                                 radius: 70,
                               ))
                         ],
@@ -117,17 +119,25 @@ class ShopProfile extends StatelessWidget {
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 2 - 10,
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: CircleAvatar(
-                              radius: 20,
-                              child: const Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                              ),
-                              backgroundColor: Colors.grey.shade200,
-                            ),
-                          )
+                          GetBuilder<ShopProfileController>(
+                            init: ShopProfileController(shop_id),
+                            builder: (ShopProfileController controller) {
+                            return InkWell(
+                                onTap: () {
+                                  controller.shop_info.isFavourite == false ? controller.addToFavouriteStore() :  controller.deleteFromFavourite() ;
+                                },
+                                child:
+                                CircleAvatar(
+                                  radius: 20,
+                                  child:  Icon(
+                                    Icons.favorite,
+                                    color: controller.shop_info.isFavourite ? Colors.grey :  Colors.red,
+                                  ),
+                                  backgroundColor: Colors.grey.shade200,
+                                )
+
+                            );
+                          },)
                         ],
                       ),
                     ),
@@ -157,7 +167,7 @@ class ShopProfile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Column(
                         children: [
-                          Row(
+                          _controller.shop_info.mobile == null ? SizedBox.shrink() : Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Text(
@@ -178,7 +188,7 @@ class ShopProfile extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Row(
+                          _controller.shop_info.email == null ? SizedBox.shrink() :Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Flexible(
@@ -271,7 +281,7 @@ class ShopProfile extends StatelessWidget {
                                 ? Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
-                                    child: Card(
+                                    child: controller.size_list.value!=0 ?  Card(
                                       shape: BeveledRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
@@ -358,6 +368,7 @@ class ShopProfile extends StatelessWidget {
                                                                     10),
                                                           ),
                                                         ),
+
                                                       ],
                                                     ),
                                                   );
@@ -376,6 +387,20 @@ class ShopProfile extends StatelessWidget {
                                           SizedBox(
                                             height: 20,
                                           ),
+                                        ],
+                                      ),
+                                    ) : Center(
+                                      child:  Column(
+                                        children: [
+                                          Container(
+                                            height: MediaQuery.of(context).size.height * 0.25,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage('images/1.png'),
+                                                  fit: BoxFit.contain),
+                                            ),
+                                          ),
+                                          Text("لا يوجد تقييمات" , )
                                         ],
                                       ),
                                     ),
@@ -469,12 +494,12 @@ class ShopProfile extends StatelessWidget {
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
-                                                      0.25,
+                                                      0.6,
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            left: 8.0,
-                                                            right: 8.0,
+                                                            left: 10.0,
+                                                            right: 10.0,
                                                             bottom: 10.0),
                                                     child: Stack(
                                                       children: <Widget>[
@@ -487,12 +512,11 @@ class ShopProfile extends StatelessWidget {
                                                                       .circular(
                                                                           10),
                                                               image: DecorationImage(
-                                                                  image: AssetImage(
-                                                                      'images/2.jpg'),
-                                                                  fit: BoxFit
-                                                                      .fill),
+                                                                  image: NetworkImage('${MyApp.api}/uploads/product/${controller.shop_info.all_products[0]['image']}' ),
                                                             ),
                                                           ),
+
+                                                        ),
                                                           onTap: () {
                                                             Get.to(
                                                                 ProductDeatil(_controller.shop_info.id));

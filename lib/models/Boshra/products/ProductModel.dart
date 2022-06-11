@@ -3,6 +3,7 @@ class Product {
 
   var id , product_name , discription  ,image  , selling_price  ,num_cell ,all_review  , prepration_time , return_or_replace , store_id , store_name , salling_store , similar_product;
   int review =  0;
+  bool is_basket = false;
 
 
   factory Product.fromJson(Map<String , dynamic> json)

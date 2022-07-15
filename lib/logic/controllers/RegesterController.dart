@@ -57,7 +57,9 @@ class RegisterController extends GetxController {
 
         if (data != null) {
 
+
           await storage.write(key: "token", value: data.token);
+          await storage.write(key: "isDarkMode", value:"false");
           registerFormkey.currentState!.save();
 
           Get.toNamed('/HomePage');

@@ -1,27 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/view/DrawerPages/Notifications.dart';
 import 'package:new_shop/view/DrawerPages/ReportPage.dart';
 import 'package:new_shop/view/DrawerPages/SettingPage.dart';
 import 'package:new_shop/view/auth/LoginView.dart';
+import '../../main.dart';
 import '../../utls/Themes.dart';
 import '../DrawerPages/GiftRequest.dart';
 import '../Mazad.dart';
 import '../chatting/Chat.dart';
 
-class myDrawer extends StatelessWidget {
+class myDrawer extends GetView<SettingPageController> {
 
   @override
   Widget build(BuildContext context) {
     return
 
-      Drawer(
+      GetX<SettingPageController>(
+        builder: (c) =>  Drawer(
+          backgroundColor:  controller.col==1?
+          Colors.black
+              :Colors.white,
 
-      child: ListView(
+        //storage.read(key: "isDarkMode") != null ?
+       //  Colors.black,
+             //:Colors.white,
+      //ColorScheme.dark():ColorScheme.light(),
+
+     child: GetX<SettingPageController>(
+       builder: (c) =>  ListView(
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Themes.color,
+              color:
+              controller.col==1?Colors.grey:Themes.color,
+
+
+
             ),
             child: Column(
               children: [
@@ -29,21 +45,36 @@ class myDrawer extends StatelessWidget {
                   backgroundImage: AssetImage('images/shop.png'),
                   radius: 50,
                 ),
-                Text("اسم المستخدم", style: TextStyle(color: Colors.white),)
+                Text("اسم المستخدم", style: TextStyle(
+                   color:
+                controller.col==1?Colors.white:Colors.black,
+
+
+                  // color: Colors.white
+                ),)
               ],
             ),
           ),
           SizedBox(height: 25,),
           ListTile(
             leading: Icon(Icons.present_to_all),
-            title: const Text('طلب هدية', style: Themes.bodyText1,),
+            title:  Text('طلب هدية', style: TextStyle(  color:
+            controller.col==1?Colors.white:Colors.black,)
+
+           // Themes.bodyText1,
+            ),
             onTap: () {
               Get.to(GiftRequest()) ;
             },
           ),
           ListTile(
             leading: Icon(Icons.notifications_active),
-            title: const Text('الإشعارات', style: Themes.bodyText1,),
+            title:  Text('الإشعارات', style:
+                TextStyle(  color:
+                controller.col==1?Colors.white:Colors.black,)
+
+          //  Themes.bodyText1,
+            ),
             onTap: () {
               Get.to(NotificationPage()) ;
 
@@ -51,7 +82,10 @@ class myDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.chat),
-            title: const Text('المحادثات', style: Themes.bodyText1,),
+            title:  Text('المحادثات', style: TextStyle(  color:
+            controller.col==1?Colors.white:Colors.black,),
+           // Themes.bodyText1,
+            ),
             onTap: () {
               Get.to(Chat()) ;
 
@@ -59,7 +93,10 @@ class myDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: const Text('الإعدادات', style: Themes.bodyText1,),
+            title:  Text('الإعدادات', style:TextStyle(  color:
+            controller.col==1?Colors.white:Colors.black,),
+          //  Themes.bodyText1,
+            ),
             onTap: () {
               Get.to(SettingPage()) ;
 
@@ -67,7 +104,10 @@ class myDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.report),
-            title: const Text('إبلاغ', style: Themes.bodyText1,),
+            title:  Text('إبلاغ', style: TextStyle(  color:
+            controller.col==1?Colors.white:Colors.black,),
+            //Themes.bodyText1,
+            ),
             onTap: () {
               Get.to(ReportPage()) ;
 
@@ -75,7 +115,10 @@ class myDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.logout),
-            title: const Text('تسجيل الخروج', style: Themes.bodyText1,),
+            title:  Text('تسجيل الخروج', style:TextStyle(  color:
+            controller.col==1?Colors.white:Colors.black,),
+          //  Themes.bodyText1,
+            ),
             onTap: () {
              // Get.to(LoginView()) ;
 
@@ -83,7 +126,7 @@ class myDrawer extends StatelessWidget {
             },
           ),
         ],
-      ),
+      ),),),
 
     );
 

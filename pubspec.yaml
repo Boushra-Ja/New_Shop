@@ -33,16 +33,25 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  get:
   cupertino_icons:
-  material_design_icons_flutter:
-  get: ^4.6.1
-  curved_navigation_bar: ^1.0.3
-  bubble: ^1.2.1
-  gradient_widgets: ^0.6.0
-  http: ^0.13.4
+ # material_design_icons_flutter:
+  curved_navigation_bar:
+  bubble:
+  gradient_widgets:
+  http:
   get_storage:
   flutter_secure_storage:
   shared_preferences:
+  flutter_staggered_animations:
+  intro_slider:
+  carousel_slider:
+  custom_bottom_navigation:
+  slimy_card:
+  convex_bottom_bar:
+  awesome_dialog:
+  laravel_flutter_pusher:
+
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +64,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
 
+flutter_icons:
+  android: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -81,12 +92,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-     - family: Roboto
-       fonts:
-         - asset: Fonts/Robot/Roboto-MediumItalic.ttf
-         - asset: Fonts/Robot/Roboto-Thin.ttf
-           weight: 700
+  #fonts:
+  #    - family: Roboto
+  #    fonts:
+  #      - asset: Fonts/Robot/Roboto-MediumItalic.ttf
+  #      - asset: Fonts/Robot/Roboto-Thin.ttf
+  #        weight: 700
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

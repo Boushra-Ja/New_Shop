@@ -4,16 +4,21 @@ import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/ChatController.dart';
 import 'package:new_shop/utls/Themes.dart';
 
+import '../../logic/controllers/DrawerController/SettingPageController.dart';
+
 class ChatDetails extends GetView<ChatController> {
   final messageInsert = TextEditingController();
   List<Map> messsages = [];
+  final sampleController3 = Get.put(SettingPageController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor:sampleController3.col==0? Colors.white:
+          Colors.grey,
+
           body: Container(
             child: Column(
               children: <Widget>[

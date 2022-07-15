@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/utls/Themes.dart';
+import '../../logic/controllers/DrawerController/SettingPageController.dart';
 import '../ConstantPages/MyCustomCLipper.dart';
 
-class Chat extends StatelessWidget {
+class Chat extends GetView<SettingPageController> {
+
   Color? colorh = Themes.color;
   Color colorh8 = Colors.grey.shade300;
 
@@ -24,18 +26,19 @@ class Chat extends StatelessWidget {
     "متجر الالعاب",
   ];
   List<String> subtitle = ["سلام", "اي", "مع السلامه", "كيفك", "باي", "ماشي"];
+  final sampleController3 = Get.put(SettingPageController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          backgroundColor: Themes.color2,
+          backgroundColor:sampleController3.col==0? Themes.color2:Colors.black,
           body: Column(
             children: [
               ClipPath(
                 child: Container(
-                  color: Themes.color,
+                  color:sampleController3.col==0? Themes.color2:Colors.grey,
                   height: MediaQuery.of(context).size.height * 0.11,
                   width: MediaQuery.of(context).size.width,
                   child: Center(

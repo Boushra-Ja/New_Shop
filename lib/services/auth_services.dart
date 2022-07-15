@@ -44,7 +44,10 @@ class AuthServices {
 
 
   static doo({required product_id}) async {
-    var response = await http.post(Uri.parse('${MyApp.api}/api/FavoriteProduct/Add_Favorite/$product_id'),
+
+print("this dooo");
+
+    var response = await http.post(Uri.parse('${MyApp.api}/api/FavoriteProduct/store/$product_id'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(<String, int>{
           "product_id": product_id,
@@ -63,6 +66,40 @@ class AuthServices {
 
     else{
       return null;}
+  }
+
+  static changeAmount({required product_id,required order_id,required amount}) async {
+
+
+    var response = await http.post(Uri.parse('${MyApp.api}/api/ChangeAmount/$product_id/$order_id/$amount'),
+        headers: {'Content-Type': 'application/json'},);
+
+
+
+  //  if (response.statusCode == 200||response.statusCode == 201) {
+     /// print(response.statusCode);
+ //     print("********************* response in update ************************************");
+    //  print(response.body);
+   // }
+    // else {
+    //   return "null";}
+  }
+  static ChangeToCommit({required product_id,required order_id}) async {
+
+
+    var response = await http.post(Uri.parse('${MyApp.api}/api/ChangeToCommit/$order_id/$product_id'),
+        headers: {'Content-Type': 'application/json'},);
+
+
+
+    if (response.statusCode == 200||response.statusCode == 201) {
+      print(response.statusCode);
+      print("********************* response in update ************************************");
+      print(response.body);
+    }
+
+    else {
+      return "null";}
   }
 
 }

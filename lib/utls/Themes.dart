@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Themes {
+import '../main.dart';
+
+class Themes  {
   static const color = Color(0xFFAF3A88);
   static const color2 = Color(0xFFF5EFF3);
   static  Color color3 = Colors.grey.shade700;
@@ -23,10 +25,15 @@ class Themes {
       fontSize: 22, decoration: TextDecoration.underline, color: color);
 
 
-  static const subtitle1 =
-      TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Roboto');
+
+  static const subtitle1 = TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Roboto');
+  static const subtitle11 = TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Roboto');
   static  TextStyle subtitle2 = TextStyle(fontSize: 14,color: color3,);
-  static TextStyle subtitle3 = TextStyle(fontSize: 12, color: color3,);
+  static TextStyle subtitle3 = TextStyle(fontSize: 14,color:   Colors.black, fontWeight: FontWeight.bold);
+  static TextStyle subtitlebat = TextStyle(fontSize: 14,color: sampleController3.col==0?   Colors.black: Colors.white, fontWeight: FontWeight.bold);
+  static TextStyle subtitle44 = TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
+  sampleController3.col==1?Colors.white:Colors.black,);
+
 
   static const bodyText1 = TextStyle(fontSize: 16, color: Colors.black);
   static const bodyText2 = TextStyle(fontSize: 16, color: color);
@@ -34,7 +41,11 @@ class Themes {
       TextStyle(fontSize: 16, color: Colors.grey.shade600);
   static const bodyText4 = TextStyle(fontSize: 16, color: Colors.white);
   static TextStyle bodyText5 =
-      TextStyle(fontSize: 16, color: Colors.grey.shade600);
+      TextStyle(fontSize: 16, color: Colors.white);
+
+
+  static TextStyle bodyText6 =
+      TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold);
 
 //static ThemeData customDarkTheme = ThemeData.dark().copyWith();
 

@@ -1,15 +1,20 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ConstantPages/RoundedAppBar.dart';
 
-class NotificationPage extends StatelessWidget{
+class NotificationPage extends GetView<SettingPageController>{
+  final sampleController3 = Get.put(SettingPageController(), permanent: true);
+
   @override
   Widget build(BuildContext context) {
    return Directionality(textDirection: TextDirection.rtl, child: Scaffold(
 
      appBar: RoundedAppBar(),
-     backgroundColor: Themes.color2,
+
+     backgroundColor: sampleController3.col==0?Themes.color2: Colors.black,
      body:ListView.builder(
        itemCount: 6,
          itemBuilder:  (BuildContext context, int index){

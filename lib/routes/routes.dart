@@ -4,11 +4,14 @@ import 'package:new_shop/logic/binding/Favorite_Binding.dart';
 import 'package:new_shop/logic/binding/Regester_Binding.dart';
 import 'package:new_shop/logic/binding/login_Binding.dart';
 import 'package:new_shop/logic/controllers/SplashController.dart';
+import 'package:new_shop/view/My_Orders/Orders.dart';
+import 'package:new_shop/view/Carts.dart';
 import 'package:new_shop/view/auth/WelcomPage.dart';
 import 'package:new_shop/view/chatting/ChatDetails.dart';
 import 'package:new_shop/view/Favorite.dart';
 
 import '../logic/binding/Home_Binding.dart';
+import '../logic/binding/OrderBinding.dart';
 import '../logic/binding/SplashBinding.dart';
 import '../view/HomePage.dart';
 import '../view/ShopsPages/ShopProfile.dart';
@@ -52,6 +55,10 @@ class AppPages {
       name: Routes.Splash,
       page: () => RouteAuth(),
       binding: SplashBinding(),
+    ), GetPage(
+      name: Routes.Cart,
+      page: () => Carts(),
+      binding: CartBinding(),
     ),
     ///ChatDetails
     GetPage(
@@ -68,6 +75,7 @@ class Routes {
   static const Login = '/login';
   static const Favorite = '/favotite';
   static const ShopsPage = '/shops_page';
+  static const Cart = '/Cart';
   static const ChatDetails = '/ChatDetails';
   static const ShopsProfile = '/shops_profile';
   static const WelcomPage = '/welcom_page';

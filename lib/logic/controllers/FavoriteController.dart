@@ -3,13 +3,15 @@ import 'package:get/get.dart';
 import 'package:new_shop/models/batool/FavoriteProductModel.dart';
 import 'package:http/http.dart' as http;
 import '../../main.dart';
+import '../../models/Boshra/Store/ShopModel.dart';
+import '../../models/Boshra/products/ProductModel.dart';
 import '../../models/batool/FavoriteStore.dart';
 
 class FavoriteController extends GetxController {
   var Tabbar = 1.obs;
   var loading = true.obs;
-  var listfavoite = <Favorite_product>[].obs;
-  var listfavoitestore = <Favorite_Store>[].obs;
+  var listfavoite = <Product>[].obs;
+  var listfavoitestore = <Shop>[].obs;
   late List jsonResponse;
   String? selectedValue;
   var isLoading = true.obs;
@@ -20,68 +22,70 @@ class FavoriteController extends GetxController {
   }
 
   FetchData_favorite() async {
-    final response =
-        await http.get(Uri.parse('${MyApp.api}/api/FavoriteProduct/Show_Favorite'));
 
+    final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteProduct/f'));
+    ProductModel productModel = ProductModel.fromJson(jsonDecode(response.body)) ;
+    listfavoite.assignAll(productModel.data );
     if (response.statusCode == 200) {
-      jsonResponse = json.decode(response.body);
 
-      return jsonResponse
-          .map((data) => new Favorite_product.fromJson(data))
-          .toList();
-    } else
-      return null;
+      for(int i=0;i<listfavoite.length;i++)
+        {
+          for(int k=0;k<listfavoite[i].all_review.length;k++)
+            listfavoite[i].review += listfavoite[i].all_review.elementAt(k)['value'] as int;
+
+
+        }
+    }
+
+
   }
 
-  FetchData_favorite_s() async {
-    final response =
-        await http.get(Uri.parse('${MyApp.api}/api/FavoriteStore/Show_Favorite'));
+
+
+  FetchData_favorite_store() async {
+
+    final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteStore/f2'));
+    ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+    listfavoitestore.assignAll(shopModel.data );
+    print("===============================================================");
+
+    print(response.body);
+    print("===============================================================");
 
     if (response.statusCode == 200) {
-      jsonResponse = json.decode(response.body);
 
-      return jsonResponse
-          .map((data) => new Favorite_Store.fromJson(data))
-          .toList();
-    } else
-      return null;
+
+
+      for(int i=0;i<listfavoitestore.length;i++)
+      {
+        for(int k=0;k<listfavoitestore[i].all_review.length;k++)
+          listfavoitestore[i].review += listfavoitestore[i].all_review.elementAt(k)['value'] as int ;
+           int j=(listfavoitestore[i].review / 3) .toInt();  ;
+            listfavoitestore[i].review = j    ;
+
+
+
+
+      }
+    }
+
+
   }
+
+
 
   @override
   void onInit() {
-    getData();
+
+
+     FetchData_favorite();
+     FetchData_favorite_store();
     super.onInit();
   }
 
-  getData() async {
-    try {
-      loading.value = true;
 
-      var result = await FetchData_favorite();
-      if (result != null) {
-        listfavoite.assignAll(result);
-      } else
-        print("null");
-    } finally {
-      loading.value = false;
-    }
-    update();
-  }
 
-  getDataS() async {
-    try {
-      loading.value = true;
-      var result = await FetchData_favorite_s();
 
-      if (result != null) {
-        listfavoitestore.assignAll(result);
-      } else
-        print("null");
-    } finally {
-      loading.value = false;
-    }
-    update();
-  }
 
   void dispose() {
     super.dispose();

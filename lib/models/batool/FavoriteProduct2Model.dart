@@ -3,7 +3,7 @@
 
 import 'dart:convert';
 
-Favorite_product2Model fFromJson(String str) => Favorite_product2Model.fromJson(json.decode(str));
+//Favorite_product2Model fFromJson(String str) => Favorite_product2Model.fromJson(json.decode(str));
 
 class Favorite_product2Model{
 
@@ -23,6 +23,7 @@ class Favorite_product2Model{
 class Favorite_product2 {
    late int id;
    late int product_id;
+
 
 
 

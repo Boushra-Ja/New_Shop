@@ -1,20 +1,20 @@
 
-class productsModel{
+class SaleModel{
 
-  List<products>data ;
-  productsModel({required this.data}) ;
+  List<Sales>data ;
+  SaleModel({required this.data}) ;
 
-  factory productsModel.fromJson(Map<String , dynamic> json)
+  factory SaleModel.fromJson(Map<String , dynamic> json)
   {
-    return productsModel(
-        data:List<products>.from(json['data'].map((p)=>products.fromJson(p)))
+    return SaleModel(
+        data:List<Sales>.from(json['data'].map((p)=>Sales.fromJson(p)))
     ) ;
   }
 }
 
 
 
-class products {
+class Sales {
   late var id;
   late var image;
   late var discription;
@@ -22,7 +22,6 @@ class products {
   late var updated_at;
   late var created_at;
   late  var name;
-  late  var rating;
   late  var preprationTime;
   late  var party;
   late var age;
@@ -32,12 +31,10 @@ class products {
   late var returnOrReplace;
   late var collectionId;
   late var discountProductsId;
-  late var  product_id;
-  late var secondary_id;
-   bool isfavorite=false;
-   int count_0=0,count_1=0,count_2=0;
 
-  products(
+   bool isfavorite=false;
+
+  Sales(
       {
         required this.id,
         required this.created_at,
@@ -46,9 +43,7 @@ class products {
         required  this.discription,
         required  this.gift,
         required  this.name,
-        required  this.product_id,
-        required  this.rating,
-        required  this.secondary_id,
+
 
         required this.preprationTime,
         required this.party,
@@ -60,16 +55,13 @@ class products {
         required  this.collectionId,
         required this.discountProductsId});
 
-  products.fromJson(Map<String, dynamic> json) {
+  Sales.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     updated_at = json['updated_at'];
     created_at = json['created_at'];
-    //if(json['secondary_id']!=null)
-    secondary_id = json['secondary_id'];
-  //  if(json['product_id']!=null)
-    product_id = json['product_id'];
+
+
     image = json['image'];
-    rating = json['rating'];
     discription = json['discription'];
     gift = json['gift'];
     name = json['name'];
@@ -89,8 +81,7 @@ class products {
     data['id'] = this.id;
     data['created_at'] = this.created_at;
     data['updated_at'] = this.updated_at;
-    data['product_id'] = this.product_id;
-    data['secondary_id'] = this.secondary_id;
+
     data['image'] = this.image;
     data['discription'] = this.discription;
     data['gift'] = this.gift;

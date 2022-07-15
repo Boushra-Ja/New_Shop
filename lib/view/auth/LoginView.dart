@@ -179,7 +179,7 @@ class LoginView extends GetView<LoginController> {
                                     controller.isLoading.value == true ?
                                     const  Center(child:
                                     CircularProgressIndicator ()): const Text("")),
-                                    RaisedButton(
+                                    MaterialButton(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 20),
                                       onPressed: () {
@@ -216,7 +216,7 @@ class LoginView extends GetView<LoginController> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.5,
                                   child: Center(
-                                    child: RaisedButton(
+                                    child: MaterialButton(
                                       onPressed: () {
                                         Get.offNamed('/regester');
                                       },
@@ -235,7 +235,7 @@ class LoginView extends GetView<LoginController> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.5,
                                   child: Center(
-                                    child: RaisedButton(
+                                    child: MaterialButton(
                                       onPressed: () {},
                                       color: Colors.purple[50],
                                       shape: RoundedRectangleBorder(

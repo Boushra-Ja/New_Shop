@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/logic/controllers/FavoriteController.dart';
+import 'package:new_shop/models/batool/ProductModel.dart';
 import 'package:new_shop/view/ProductDeatil.dart';
 import 'package:new_shop/view/ShopsPages/ShopProfile.dart';
 import '../logic/controllers/AppBarController.dart';
@@ -11,7 +13,8 @@ import 'ConstantPages/Drawer.dart';
 class Favorite extends GetView<FavoriteController> {
   var check_tap;
   final sampleControllerr = Get.put(FavoriteController(), permanent: true);
-  String api = "http://192.168.137.237:8000" ;
+  final sampleController3 = Get.put(SettingPageController(), permanent: true);
+  String api = "http://192.168.1.104:8000" ;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppBarController>(
@@ -19,7 +22,12 @@ class Favorite extends GetView<FavoriteController> {
         builder: (controller2) {
           return Directionality(
               textDirection: TextDirection.rtl,
-              child: Scaffold(
+              child:
+              GetX<SettingPageController>(
+              builder: (c) => Scaffold(
+                backgroundColor:   sampleController3.col==0?Colors.white:
+                  Colors.black,
+
                   key: controller2.getscaffoldKey4(),
                   drawer: myDrawer(),
                   body: GetX<FavoriteController>(
@@ -32,194 +40,436 @@ class Favorite extends GetView<FavoriteController> {
                                       ? CircularProgressIndicator()
                                       : GetBuilder<FavoriteController>(
                                       builder: (controller) {
-                                        return  Padding(
-                                          padding: const EdgeInsets.only(top: 8.0),
-                                          child: GetBuilder<FavoriteController>(
-                                            init: FavoriteController(),
-                                            builder: (controller) {
-                                              return Column(children: <Widget>[
-                                                myAppBar(),
-                                                SizedBox(
-                                                  height: 30,
-                                                ),
-                                                Row(children: [
+                                        return
+                                          RefreshIndicator(
+                                            onRefresh: () {
+
+                                              return Future.delayed(
+                                                Duration(seconds: 1),
+                                                    () {
+
+                                                        controller.FetchData_favorite();
+                                                  //       controller2.getscaffoldKey4().currentState!.showSnackBar(
+                                                  //   SnackBar(
+                                                  //     content: const Text('Page Refreshed'),
+                                                  //   ),
+                                                  // );
+                                                },
+                                              );
+                                            },
+                                            child: Padding(
+                                            padding: const EdgeInsets.only(top: 8.0),
+                                            child: GetBuilder<FavoriteController>(
+                                              init: FavoriteController(),
+                                              builder: (controller) {
+                                                return Column(children: <Widget>[
+                                                  myAppBar(),
                                                   SizedBox(
-                                                      width: MediaQuery.of(context).size.width * 0.5,
-                                                      child: InkWell(
-                                                        child: Container(
-                                                            child: Center(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text("المنتجات",
-                                                                      style: controller.Tabbar.value == 2
-                                                                          ? Themes.bodyText5
-                                                                          : Themes.headline1,
-                                                                      textAlign: TextAlign.center),
-                                                                  Divider(
-                                                                    thickness:
-                                                                    controller.Tabbar.value == 1
-                                                                        ? 3
-                                                                        : 1,
-                                                                    color: controller.Tabbar.value == 1
-                                                                        ? Themes.color
-                                                                        : Colors.grey.shade200,
-                                                                    // indent: MediaQuery.of(context).size.width * 0.5
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            )),
-                                                        onTap: () {
-                                                          controller.Tabbar.value = 1;
-                                                          controller.changeTabbar(1);
-                                                          print(controller.Tabbar.value);
-                                                        },
-                                                      )),
-                                                  SizedBox(
-                                                      width: MediaQuery.of(context).size.width * 0.5,
-                                                      child: InkWell(
-                                                        child: Container(
-                                                            child: Center(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text("المتاجر",
-                                                                      style: controller.Tabbar.value == 2
-                                                                          ? Themes.headline1
-                                                                          : Themes.bodyText5,
-                                                                      textAlign: TextAlign.center),
-                                                                  Divider(
-                                                                    thickness:
-                                                                    controller.Tabbar.value == 2
-                                                                        ? 3
-                                                                        : 1,
-                                                                    color: controller.Tabbar.value == 2
-                                                                        ? Themes.color
-                                                                        : Colors.grey.shade200,
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            )),
-                                                        onTap: () {
-
-                                                          controller.Tabbar.value = 2;
-                                                          controller.changeTabbar(2);
-                                                          print(controller.Tabbar);
-                                                          print(c.listfavoitestore.length);
-                                                        },
-                                                      ))
-                                                ]),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-
-                                                /////////////////////////////
-                                                controller.Tabbar.value == 2
-                                                    ? Flexible(
-                                                  child:
-                                                  GridView.builder(
-                                                    padding: const EdgeInsets.symmetric(
-                                                        horizontal: 10),
-                                                    itemCount: c.listfavoitestore.length,
-                                                    itemBuilder: (ctx, i) {
-                                                      return
-
-                                                        Container(
-                                                          child: Column(
-                                                            children: [
-                                                              //   Text("OOOOOOOOOOOOOOOOOO"),
-
-                                                              InkWell(
-                                                                onTap: () {
-                                                                  Get.to(ShopProfile(controller.listfavoitestore.elementAt(i).id));
-                                                                },
-                                                                child: Center(
-                                                                  child:
-
-                                                                  CircleAvatar(
-                                                                    radius: 50,
-                                                                    backgroundImage:
-                                                                    NetworkImage(
-                                                                      "${api}/uploads/product/${c.listfavoitestore
-                                                                          .elementAt(
-                                                                          i)
-                                                                          .image}",
-
-                                                                    ),
-                                                                  ),
-
-                                                                ),
-                                                              ),
-
-                                                              Container(
-                                                                margin:
-                                                                EdgeInsets.only(right: 40),
-                                                                child: Row(
+                                                    height: 30,
+                                                  ),
+                                                  Row(children: [
+                                                    SizedBox(
+                                                        width: MediaQuery.of(context).size.width * 0.5,
+                                                        child: InkWell(
+                                                          child: Container(
+                                                              child: Center(
+                                                                child: Column(
                                                                   children: [
-                                                                    InkWell(
-                                                                      onTap: () {
-                                                                        Get.to(ShopProfile(controller.listfavoitestore.elementAt(i).id));
-                                                                      },
-                                                                      child: Text("  "+
-                                                                          c.listfavoitestore.elementAt(i).name,
-                                                                          style:
-                                                                          Themes.bodyText2),
-                                                                    ),
-                                                                    Icon(
-                                                                      Icons.star_outline_rounded,
-                                                                      color: Colors.blue,
-                                                                      size: 20,
-                                                                    ),
+                                                                    Text("المنتجات",
+                                                                        style: controller.Tabbar.value == 2 && sampleController3.col==0
+
+                                                                            ? TextStyle(color:Colors.grey,fontSize: 12)
+                                                                            :  controller.Tabbar.value == 1 && sampleController3.col==0?
+                                                                        TextStyle(color:Colors.black,fontSize: 12)
+
+                                                                            ////////////////////////////////////////////////////
+
+                                                                            :
+                                                                        controller.Tabbar.value == 2 && sampleController3.col==1
+
+                                                                            ? TextStyle(color:Colors.grey,fontSize: 12):
+                                                                           // :  controller.Tabbar.value == 1 && sampleController3.col==1
+                                                                        TextStyle(color:Colors.white,fontSize: 12),
+
+
+
+
+                                                                        textAlign: TextAlign.center),
+                                                                    Divider(
+                                                                      thickness:
+                                                                      controller.Tabbar.value == 1
+                                                                          ? 4
+                                                                          : 1,
+                                                                      color: controller.Tabbar.value == 1 &&  sampleController3.col==0
+                                                                          ? Themes.color
+                                                                          : controller.Tabbar.value == 0 &&  sampleController3.col==0?
+                                                                      Colors.grey.shade200:
+
+
+                                                                          ////////////////////////////////////
+
+                                                                      controller.Tabbar.value == 1 &&  sampleController3.col==1
+                                                                          ? Colors.white
+                                                                          :
+                                                                      //controller.Tabbar.value == 0 &&  sampleController3.col==0?
+
+                                                                      Colors.grey.shade200
+
+
+                                                                      // indent: MediaQuery.of(context).size.width * 0.5
+                                                                    )
                                                                   ],
                                                                 ),
-                                                              ),
-                                                              Container(
+                                                              )),
+                                                          onTap: () {
+                                                            controller.Tabbar.value = 1;
+                                                            controller.changeTabbar(1);
+                                                            print(controller.Tabbar.value);
+                                                          },
+                                                        )),
+                                                    SizedBox(
+                                                        width: MediaQuery.of(context).size.width * 0.5,
+                                                        child: InkWell(
+                                                          child: Container(
+                                                              child: Center(
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text("المتاجر",
+                                                                        style: controller.Tabbar.value == 2 && sampleController3.col==0
+                                                                            ? TextStyle(color:Colors.black,fontSize: 12):
+                                                                             controller.Tabbar.value == 1 && sampleController3.col==0?
+                                                                             TextStyle(color:Colors.grey,fontSize: 12):
+
+
+
+                                                                                 /////////////////////////////
+
+
+
+                                                                             controller.Tabbar.value == 2 && sampleController3.col==1
+                                                                                 ? TextStyle(color:Colors.white,fontSize: 12):
+                                                                             TextStyle(color:Colors.grey,fontSize: 12),
+
+                                                                             textAlign: TextAlign.center),
+                                                                    Divider(
+                                                                      thickness:
+                                                                      controller.Tabbar.value == 2
+                                                                          ? 3
+                                                                          : 1,
+                                                                      color: controller.Tabbar.value == 2 && sampleController3.col==0
+                                                                          ? Themes.color
+                                                                          :controller.Tabbar.value == 1 && sampleController3.col==0?
+                                                                           Colors.grey.shade200:
+
+
+                                                                      /////////////////////////////////////
+
+                                                                      controller.Tabbar.value == 2 && sampleController3.col==1
+                                                                          ? Colors.white
+                                                                          :
+                                                                      Colors.grey.shade200
+
+
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              )),
+                                                          onTap: () {
+
+                                                            controller.Tabbar.value = 2;
+                                                            controller.changeTabbar(2);
+                                                            print(controller.Tabbar);
+                                                            print(c.listfavoitestore.length);
+                                                          },
+                                                        ))
+                                                  ]),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+
+                                                  /////////////////////////////
+                                                  controller.Tabbar.value == 2
+                                                      ? Flexible(
+                                                    child:
+                                                    GridView.builder(
+
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                      itemCount: c.listfavoitestore.length,
+                                                      itemBuilder: (ctx, i) {
+                                                        return
+
+                                                          Container(
+
+                                                            child: Column(
+                                                              children: [
+                                                                //   Text("OOOOOOOOOOOOOOOOOO"),
+
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    Get.to(ShopProfile(controller.listfavoitestore.elementAt(i).id));
+                                                                  },
+                                                                  child: Center(
+                                                                    child:
+
+                                                                    CircleAvatar(
+                                                                      radius: 50,
+                                                                      backgroundImage:
+                                                                      NetworkImage(
+                                                                        "${api}/uploads/product/${c.listfavoitestore
+                                                                            .elementAt(
+                                                                            i)
+                                                                            .image}",
+
+                                                                      ),
+                                                                    ),
+
+                                                                  ),
+                                                                ),
+
+                                                                Container(
                                                                   margin:
                                                                   EdgeInsets.only(right: 40),
                                                                   child: Row(
-                                                                    children: const [
-                                                                      Icon(
-                                                                        Icons.star,
-                                                                        color: Colors.yellow,
-                                                                        size: 15,
+                                                                    children: [
+                                                                      InkWell(
+                                                                        onTap: () {
+                                                                          Get.to(ShopProfile(controller.listfavoitestore.elementAt(i).id));
+                                                                        },
+                                                                        child: Text("  "+
+                                                                            c.listfavoitestore.elementAt(i).shop_name,
+                                                                            style:
+                                                                                sampleController3.col==0?
+                                                                            Themes.subtitle2:
+                                                                                    TextStyle(color: Colors.white),
+                                                                        ),
                                                                       ),
                                                                       Icon(
-                                                                        Icons.star,
-                                                                        color: Colors.yellow,
-                                                                        size: 15,
+                                                                        Icons.star_outline_rounded,
+                                                                        color: Colors.blue,
+                                                                        size: 20,
                                                                       ),
-                                                                      Icon(
-                                                                        Icons.star,
-                                                                        color: Colors.yellow,
-                                                                        size: 15,
-                                                                      ),
-                                                                      Icon(
-                                                                        Icons.star,
-                                                                        color: Colors.yellow,
-                                                                        size: 15,
-                                                                      ),
-                                                                      Icon(
-                                                                        Icons.star,
-                                                                        color: Colors.pink,
-                                                                        size: 15,
-                                                                      )
                                                                     ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                          //   ],
-                                                          // ),
-                                                        );
+                                                                  ),
+                                                                ),
 
-                                                    },
-                                                    gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 2,
+                                                                c.listfavoitestore.elementAt(i).review==0?
+                                                                Container(
+                                                                    margin:
+                                                                    EdgeInsets.only(right: 40),
+                                                                    child: Row(
+                                                                      children: const [
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        )
+                                                                      ],
+                                                                    )) :
+                                                                c.listfavoitestore.elementAt(i).review==1 ?
+                                                                Container(
+                                                                    margin:
+                                                                    EdgeInsets.only(right: 40),
+                                                                    child: Row(
+                                                                      children: const [
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        )
+                                                                      ],
+                                                                    )) :
+                                                                c.listfavoitestore.elementAt(i).review==2 ?
+                                                                Container(
+                                                                    margin:
+                                                                    EdgeInsets.only(right: 40),
+                                                                    child: Row(
+                                                                      children: const [
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        )
+                                                                      ],
+                                                                    )) :
+                                                                c.listfavoitestore.elementAt(i).review==3 ?
+                                                                Container(
+                                                                    margin:
+                                                                    EdgeInsets.only(right: 40),
+                                                                    child: Row(
+                                                                      children: const [
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        )
+                                                                      ],
+                                                                    )):
+                                                                c.listfavoitestore.elementAt(i).review==4 ?
+                                                                Container(
+                                                                    margin:
+                                                                    EdgeInsets.only(right: 40),
+                                                                    child: Row(
+                                                                      children: const [
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        )
+                                                                      ],
+                                                                    )):
+                                                                Container(
+                                                                    margin:
+                                                                    EdgeInsets.only(right: 40),
+                                                                    child: Row(
+                                                                      children: const [
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.yellow,
+                                                                          size: 15,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons.star,
+                                                                          color: Colors.pink,
+                                                                          size: 15,
+                                                                        )
+                                                                      ],
+                                                                    ))
+
+
+                                                              ],
+                                                            ),
+                                                            //   ],
+                                                            // ),
+                                                          );
+
+                                                      },
+                                                      gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 2,
+                                                      ),
                                                     ),
-                                                  ),
-                                                )
+                                                  )
 
 
-                                                    : Flexible(
+                                                      : Flexible(
                                                     child:
+
                                                     GridView.builder(
                                                       padding: const EdgeInsets.symmetric(
                                                           horizontal: 10),
@@ -238,7 +488,7 @@ class Favorite extends GetView<FavoriteController> {
                                                               Expanded(
                                                                 child: InkWell(
                                                                   onTap: () {
-                                                                    Get.to(ProductDeatil(controller.listfavoite.elementAt(index).product_id));
+                                                                    Get.to(ProductDeatil(controller.listfavoite.elementAt(index).id));
                                                                   },
                                                                   child: Center(
                                                                     child:  Image  .network(
@@ -256,30 +506,40 @@ class Favorite extends GetView<FavoriteController> {
                                                               Center(
                                                                 child: InkWell(
                                                                   onTap: () {
-                                                                    Get.to(ProductDeatil(controller.listfavoite.elementAt(index).product_id));
+                                                                    Get.to(ProductDeatil(controller.listfavoite.elementAt(index).id));
                                                                   },
                                                                   child: Text(
-                                                                    "${c.listfavoite.elementAt(index).name}",
-                                                                    style: Themes.headline5,
-                                                                  ),
+                                                                    "${c.listfavoite.elementAt(index).product_name}",
+                                                                    style:
+                                                                    sampleController3.col==0?
+                                                                    Themes.subtitle2:
+                                                                    TextStyle(color: Colors.white),),
+
+
+
                                                                 ),
                                                               ),
                                                               Container(
                                                                   child: Row(
                                                                     children: [
-                                                                      Icon(
-                                                                        Icons.tag_faces_outlined,
-                                                                        color: Colors.orange,
-                                                                        size: 20,
+
+                                                                      Text(
+                                                                        "${c.listfavoite.elementAt(index).review}" + " تقييم",
+
+                                                                         style:
+                                                                      sampleController3.col==0?
+                                                                      Themes.subtitle2:
+                                                                      TextStyle(color: Colors.white),
                                                                       ),
                                                                       SizedBox(
                                                                         width: 4,
                                                                       ),
-                                                                      Text(
-                                                                        "${c.listfavoite.elementAt(index).value}" + " تقييم",
-
-                                                                        style: Themes.bodyText1,
+                                                                      Icon(
+                                                                        Icons.tag_faces_outlined,
+                                                                        color: Colors.orange,
+                                                                        size: 12,
                                                                       ),
+
                                                                     ],
                                                                     mainAxisAlignment:
                                                                     MainAxisAlignment.center,
@@ -294,13 +554,10 @@ class Favorite extends GetView<FavoriteController> {
                                                         mainAxisSpacing: 50,
                                                         mainAxisExtent: 200,
                                                       ),
-                                                    )
+                                                    ),
 
 
-                                                ),
-
-
-
+                                                  ),
 
 
 
@@ -315,15 +572,19 @@ class Favorite extends GetView<FavoriteController> {
 
 
 
-                                              ]);
-                                            },
-                                          ),
-                                        );
+
+
+
+                                                ]);
+                                              },
+                                            ),
+                                        ),
+                                          );
                                       })))))
 
 
 
-              ));
+              )));
         });
   }
 }

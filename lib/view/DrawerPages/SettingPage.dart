@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/view/ConstantPages/RoundedAppBar.dart';
 
+import '../../main.dart';
 import '../../utls/Themes.dart';
 import '../ConstantPages/MyCustomCLipper.dart';
+final box =  GetStorage();
 
-class SettingPage extends StatelessWidget {
+
+class SettingPage extends GetView<SettingPageController> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
+
+          // backgroundColor:
+          // controller.boolean==1?
+          // Colors.black:Colors.white,
           // appBar: RoundedAppBar(),
-          body: ListView(
+          body:
+        GetX<SettingPageController>(
+        builder: (c) =>  ListView(
             children: [
+
               ClipPath(
                 child: Container(
-                  color: Themes.color,
+
+                  color:
+                  controller.col==1?Colors.black:Themes.color,
                   height: MediaQuery.of(context).size.height * 0.12,
                   width: MediaQuery.of(context).size.width,
                   child: Center(
@@ -49,12 +62,13 @@ class SettingPage extends StatelessWidget {
               SizedBox(
                 height: 25,
               ),
-              Container(
+      GetX<SettingPageController>(
+        builder: (c) =>  Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
+                  color: controller.col==1?Colors.black:Colors.white,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -73,7 +87,10 @@ class SettingPage extends StatelessWidget {
                     ListTile(
                       title: Text(
                         "تعديل المعلومات الشخصية",
-                        style: Themes.bodyText1,
+
+                        style: TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                        )
+                        //Themes.bodyText1,
                       ),
                       trailing: Icon(Icons.edit),
                     ),
@@ -82,7 +99,8 @@ class SettingPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Divider(),
+                      child: Divider(color: controller.col==1?Colors.white:Colors.black,
+                      ),
                     ),
                     SizedBox(
                       height: 15,
@@ -90,7 +108,9 @@ class SettingPage extends StatelessWidget {
                     ListTile(
                       title: Text(
                         "معلومات عن التطبيق",
-                        style: Themes.bodyText1,
+                        style: TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                      )
+                        //Themes.bodyText1,
                       ),
                       trailing: Icon(Icons.details),
                     ),
@@ -106,128 +126,158 @@ class SettingPage extends StatelessWidget {
                     ),
                     ListTile(
                         title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "لغة التطبيق",
-                          style: Themes.bodyText1,
-                        ),
-                        SizedBox(
-                          width: 35,
-                        ),
-                        GetBuilder<SettingPageController>(
-                          init: SettingPageController(),
-                          builder: (controller) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: 35,
-                              child: DropdownButtonFormField(
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      contentPadding: EdgeInsets.fromLTRB(
-                                          10, 0.001, 12, 0.001),
-                                      filled: true,
-                                      fillColor: Colors.white),
-                                  hint: Text(
-                                    "العربية",
-                                    style: Themes.subtitle2,
-                                  ),
-                                  value: controller.selectedLanguage,
-                                  alignment: Alignment.center,
-                                  style: Themes.subtitle2,
-                                  onChanged: (newValue) {
-                                    controller.setselectedLanguage(
-                                        newValue.toString());
-                                  },
-                                  items: [
-                                    for (var data in controller.langList)
-                                      DropdownMenuItem(
-                                        child: Text(
-                                          "${data}",
-                                          textDirection: TextDirection.rtl,
-                                          textAlign: TextAlign.start,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        value: "${data}",
-                                      )
-                                  ]),
-                            );
-                          },
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "لغة التطبيق",
+                              style:TextStyle( color: controller.col==1?Colors.white:Colors.black,
                         )
-                      ],
-                    )),
+                              //Themes.bodyText1,
+                            ),
+                            SizedBox(
+                              width: 35,
+                            ),
+                            GetBuilder<SettingPageController>(
+                              init: SettingPageController(),
+                              builder: (controller) {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  height: 35,
+                                  child: DropdownButtonFormField(
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(30)),
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              10, 0.001, 12, 0.001),
+                                          filled: true,
+                                          fillColor: Colors.white),
+                                      hint: Text(
+                                        "العربية",
+                                        style:  TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                                      )
+                                        //Themes.subtitle2,
+                                      ),
+                                      value: controller.selectedLanguage,
+                                      alignment: Alignment.center,
+                                      style: Themes.subtitle2,
+                                      onChanged: (newValue) {
+                                        controller.setselectedLanguage(
+                                            newValue.toString());
+                                      },
+                                      items: [
+                                        for (var data in controller.langList)
+                                          DropdownMenuItem(
+                                            child: Text(
+                                              "${data}",
+                                              textDirection: TextDirection.rtl,
+                                              textAlign: TextAlign.start,
+                                              style:  TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                   color:
+                                                   Colors.black,
+
+                                              ),
+                                            ),
+                                            value: "${data}",
+                                          )
+                                      ]),
+                                );
+                              },
+                            )
+                          ],
+                        )),
                     SizedBox(
                       height: 10,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Divider(),
+                      child: Divider( color: controller.col==1?Colors.white:Colors.black,
+                      ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
                     ListTile(
                         title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "ألوان التطبيق",
-                          style: Themes.bodyText1,
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Row(
-                              children: [
-                                GetBuilder<SettingPageController>(
-                                  init: SettingPageController(),
-                                  builder: (controller) {
-                                    return Checkbox(
-                                      value: controller.chexboxlight,
-                                      activeColor: Themes.color,
-                                      onChanged: (value) {
-                                        controller
-                                            .setselectedcheckboxlight(value);
-                                        controller
-                                            .setselectedcheckboxdark(false);
-                                      },
-                                    );
-                                  },
-                                ),
-                                Text("نهاري")
-                              ],
+                            Text(
+                              "ألوان التطبيق",
+                              style: TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                        )
+                              //Themes.bodyText1,
                             ),
-                            Row(
+                            SizedBox(
+                              width: 25,
+                            ),
+                            Column(
                               children: [
-                                GetBuilder<SettingPageController>(
-                                  init: SettingPageController(),
-                                  builder: (controller) {
-                                    return Checkbox(
-                                      activeColor: Themes.color,
-                                      value: controller.chexboxdark,
-                                      onChanged: (value) {
-                                        controller
-                                            .setselectedcheckboxdark(value);
-                                        controller
-                                            .setselectedcheckboxlight(false);
+                                Row(
+                                  children: [
+                                    GetBuilder<SettingPageController>(
+                                      init: SettingPageController(),
+                                      builder: (controller) {
+                                        return Checkbox(
+                                          value: controller.chexboxlight,
+
+                                          activeColor:
+                                          controller.col==1?Colors.white:Colors.black,
+
+                                          //Themes.color,
+                                          onChanged: (value) async{
+                                            controller.setTheme(0);
+                                          //   Get.changeThemeMode(ThemeMode.light);
+                                          //
+                                          await  box.write("isDarkMode", false);
+                                             await  storage.write(key:"isDarkMode", value: 'false');
+                                          //
+                                             //  controller.setThemeMode(ThemeMode.light);
+
+                                            controller
+                                                .setselectedcheckboxlight(value);
+                                            controller
+                                                .setselectedcheckboxdark(false);
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
+                                    ),
+                                    Text("نهاري",style: TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                                    ))
+                                  ],
                                 ),
-                                Text("ليلي")
+                                Row(
+                                  children: [
+                                    GetBuilder<SettingPageController>(
+                                      init: SettingPageController(),
+                                      builder: (controller) {
+                                        return Checkbox(
+                                          activeColor: Themes.color,
+                                          value: controller.chexboxdark,
+                                          onChanged: (value) async {
+                                            //
+                                             await  box.write("isDarkMode", true);
+                                             await  storage.write(key:"isDarkMode", value: 'true');
+                                            controller.setTheme(1);
+
+                                          //  controller.setThemeMode(ThemeMode.dark);
+                                          //   Get.changeThemeMode(ThemeMode.dark);
+                                            controller
+                                                .setselectedcheckboxdark(value);
+                                            controller
+                                                .setselectedcheckboxlight(false);
+                                          },
+                                        );
+                                      },
+                                    ),
+                                    Text("ليلي",style: TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                                    ))
+                                  ],
+                                )
                               ],
                             )
                           ],
-                        )
-                      ],
-                    )),
+                        )),
                     SizedBox(
                       height: 25,
                     ),
@@ -244,21 +294,23 @@ class SettingPage extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
+              ),),
               SizedBox(
                 height: 10,
               ),
               Center(
                 child: Text(
                   "الإصدار 1.0.0.0",
-                  style: Themes.subtitle2,
+                  style:TextStyle( color: controller.col==1?Colors.white:Colors.black,
+                )
+                  //Themes.subtitle2,
                 ),
               ),
               SizedBox(
                 height: 50,
               ),
             ],
-          ),
+          ),),
         ));
   }
 }

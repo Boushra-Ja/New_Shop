@@ -9,12 +9,30 @@ class AppBarController extends GetxController{
   final GlobalKey<ScaffoldState> _scaffoldKey3 = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldKey4 = GlobalKey<ScaffoldState>();
 
-  var tabIndex = 3;
-
-  void changeTabIndex(int index) {
-    tabIndex = index;
-    update();
+  late PageController pageController;
+  var currentIndex = 3.obs;
+  GlobalKey bottomNavigationKey = GlobalKey();
+  @override
+  void onInit() {
+    super.onInit();
+    pageController = PageController();
   }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+  }
+  // var tabIndex = 3;
+
+  // void changeTabIndex(int index) {
+  //   tabIndex = index;
+  //   update();
+  // }
   GlobalKey<ScaffoldState> getscaffoldKey2 (){
     return _scaffoldKey2 ;
   }

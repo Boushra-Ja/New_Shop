@@ -43,6 +43,9 @@ dependencies:
   get_storage:
   flutter_secure_storage:
   shared_preferences:
+  fancy_bottom_navigation: ^0.3.3
+  image_picker: ^0.8.5+3
+
 
 dev_dependencies:
   flutter_test:

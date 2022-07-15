@@ -50,6 +50,11 @@ class LoginController extends GetxController {
 
         if (data != null) {
           await storage.write(key: "token", value: data.token);
+          await storage.write(key: "id", value: '${data.user.id}');
+          await storage.write(key: "name", value:'${ data.user.name}');
+          await storage.write(key: "email", value: '${data.user.email}');
+          await storage.write(key: "image", value: '${data.user.image}');
+
           loginFormkey.currentState!.save();
           Get.toNamed('/HomePage');
         } else {

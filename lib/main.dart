@@ -12,12 +12,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
-  static String api = "http://192.168.1.107:8000" ;
+  static String api = "http://192.168.1.101:8000" ;
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => FavoriteController(), fenix: true);
-    Get.lazyPut(() => OrderController(), fenix: true);
+    // Get.lazyPut(() => FavoriteController(), fenix: true);
+    // Get.lazyPut(() => OrderController(), fenix: true);
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

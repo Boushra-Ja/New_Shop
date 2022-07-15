@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/ProductDeatilController.dart';
+import 'package:new_shop/logic/controllers/RatingProductController.dart';
 import 'package:new_shop/main.dart';
 import 'package:new_shop/models/Boshra/products/Option.dart';
 import 'package:new_shop/utls/Themes.dart';
-import 'package:new_shop/view/chatting/Chat.dart';
-
 import 'EvaluationDialoge.dart';
 import 'Seggestions.dart';
 import 'ShopsPages/ShopProfile.dart';
-import 'SuggestionPage.dart';
-import 'chatting/ChatDetails.dart';
 
 class ProductDeatil extends GetView<ProductDeatilController> {
   var id;
-
   ProductDeatil(this.id);
 
   @override
@@ -26,6 +22,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Obx(() {
+
             if (controller.isLoading.value) {
               return Center(
                 child: CircularProgressIndicator(),
@@ -62,106 +59,62 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                             backgroundColor: Themes.color2,
                           ),
                         )),
-                    Positioned(
-                        right: 70,
-                        child: InkWell(
-                          onTap: () {
-                            Get.defaultDialog(
-                              title: "الإبلاغ عن المنتج",
-                              titlePadding: EdgeInsets.only(top: 20),
-                              backgroundColor: Colors.white,
-                              titleStyle: Themes.headline1,
-                              radius: 15,
-                              content: Builder(
-                                builder: (context) {
-                                  return Column(
-                                    children: [
-                                      Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0, vertical: 8),
-                                          child: GetBuilder<
-                                              ProductDeatilController>(
-                                            init: ProductDeatilController(id),
-                                            builder: (controller) {
-                                              return TextField(
-                                                onChanged: (newValue) {
-                                                  controller
-                                                      .set_reportofproduct(
-                                                          newValue);
-                                                },
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                maxLines: 4,
-                                                decoration: InputDecoration(
-                                                    label: Padding(
-                                                      padding:
-                                                          EdgeInsets.all(8),
-                                                      child: Center(
-                                                        child: Text(
-                                                          'سبب الشكوى',
-                                                          style:
-                                                              Themes.subtitle1,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    border: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Themes.color,
-                                                            width: 4.0))),
-                                              );
-                                            },
-                                          )),
-                                      SizedBox(
-                                        height: 30.0,
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'إرسال',
-                                          style: TextStyle(
-                                              color: Themes.color2,
-                                              fontSize: 16.0),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Themes.color,
-                                          onPrimary: Themes.color,
-                                          shape: BeveledRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                        GetBuilder<RatingProductController>(
+                          init: RatingProductController(id),
+                          builder: (RatingProductController controller_){
+                          return Positioned(
+                            right: 70,
+                            child: InkWell(
+                              onTap: () {
+                                if(!controller.product.isRating)
+                                {
+                                  Get.defaultDialog(
+                                      radius: 20 ,
+                                      title: "ما هو تقييمك لهذا المنتج؟؟",
+                                      titlePadding: EdgeInsets.only(top: 20),
+                                      backgroundColor: Colors.white,
+                                      titleStyle: Themes.headline1,
+                                      content : EvaluationDialoge(id),
+                                      barrierDismissible: false,
+
                                   );
-                                },
+                                  if(controller_.isRate)
+                                    controller.product.isRating = true ;
+
+                                }
+                              },
+                              child: CircleAvatar(
+                                radius: 20,
+                                child: Icon(
+                                  Icons.star_rate,
+                                  color: Themes.color,
+                                ),
+                                backgroundColor: Themes.color2,
                               ),
-                            );
-                          },
-                          child: CircleAvatar(
-                            radius: 20,
-                            child: Icon(
-                              Icons.report,
-                              color: Themes.color,
                             ),
-                            backgroundColor: Themes.color2,
-                          ),
-                        ))
+                          ) ;
+                        },)
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "${controller.product.selling_price}",
-                          style: Themes.subtitle2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+
+                    children: [
+                      Align(
+                        child: Row(
+                          children: [
+                            Text(
+                              "${controller.product.selling_price}",
+                              style: Themes.subtitle2,
+                            ),
+                            Text(" ل.س")
+                          ],
                         ),
-                        Text(" ل.س")
-                      ],
-                    ),
-                    alignment: AlignmentDirectional.topEnd,
+                        alignment: AlignmentDirectional.topEnd,
+                      ),
+                    ],
                   ),
                 ),
                 Row(
@@ -205,23 +158,23 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                     ),
-                    InkWell(
-                      // customBorder: CircleBorder(
-                      //   side: BorderSide(
-                      //    style: BorderStyle.none
-                      //   )
-                      // ),
-                      onTap: () {},
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Themes.color2,
-                        child: Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                          size: 20,
+                    GetBuilder<ProductDeatilController>(builder:  (ProductDeatilController controller2){
+                      return  InkWell(
+
+                        onTap: () {
+                          controller2.addToFavouriteProduct(id , -1) ;
+                        },
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor:  Themes.color2,
+                          child: Icon(
+                            Icons.favorite,
+                            color: controller2.product.isFavourite ? Colors.red : Colors.grey,
+                            size: 20,
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                     SizedBox(
                       width: 7,
                     ),
@@ -229,21 +182,34 @@ class ProductDeatil extends GetView<ProductDeatilController> {
 
                   ],
                 ),
+                SizedBox(height: 30,) ,
                 Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "${controller.product.discription}",
-                    style: Themes.bodyText1,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("${controller.product.product_name}" ,style :  Themes.headline5,),
+                      SizedBox(height: 10,) ,
+                      Row(
+                        children: [
+                          Text("لمحة عن المنتج : "),
+                          Flexible(
+                            child: Text(
+                              "${controller.product.discription}",
+                              style: Themes.bodyText1,
+                            ),
+                          ),
+                        ],
+                      ) ,
+                    ],
                   ),
                 ),
+                SizedBox(height: 50,) ,
                 Divider(),
-                SizedBox(
-                  height: 10,
-                ),
                 controller.product.is_basket ? SizedBox.shrink() : ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: controller.options.length,
+                    itemCount: controller.product.options.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.only(
@@ -254,7 +220,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  "${controller.options.keys.elementAt(index)}",
+                                  "${controller.product.options.keys.elementAt(index)}",
                                   style: Themes.bodyText1,
                                 )),
                             Expanded(
@@ -287,8 +253,8 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                                           return controller
                                               .validate_value(val.toString());
                                         },
-                                        items: controller.options[
-                                                '${controller.options.keys.elementAt(index)}']
+                                        items: controller.product.options[
+                                                '${controller.product.options.keys.elementAt(index)}']
                                             ?.map((item) {
                                           return DropdownMenuItem(
                                             child: Text(
@@ -334,6 +300,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                             height: 40,
                             child: RaisedButton(
                               onPressed: () {
+                                print(controller2.product.is_basket) ;
                                 if(controller2.product.is_basket)
                                   {
                                     controller2.delete_from_basket() ;
@@ -450,33 +417,32 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                                   width: 10,
                                 ), //SizedBox
                                 Obx(
-                                  () => controller.chexkboxValue.value == null
-                                      ? CircularProgressIndicator()
-                                      : Radio(
-                                          value: 'yes',
-                                          groupValue: controller.chexkboxValue,
-                                          onChanged: (val) {
-                                            controller.setchexkboxValue(
-                                                val.toString());
-                                          }),
+                                  () => Radio(
+                                    activeColor: Themes.color,
+                                    onChanged: (value) {
+                                      controller.setchexkboxValue(
+                                                     value.toString());
+                                      print(controller.chexkboxValue) ;
+
+                                    }, groupValue: controller.chexkboxValue.value, value: "yes",
+                                  ),
                                 ),
                                 SizedBox(width: 5),
                                 Text(
                                   'نعم',
                                   style: Themes.subtitle2,
                                 ),
-
                                 SizedBox(width: 10), //SizedBox
-
                                 Obx(
-                                  () => controller.chexkboxValue.value == null
-                                      ? CircularProgressIndicator()
-                                      : Radio(
-                                          value: 'no',
-                                          groupValue: controller.chexkboxValue,
+                                  () =>
+                                       Radio(
+                                          value: "no",
+                                          activeColor: Themes.color,
+                                          groupValue: controller.chexkboxValue.value,
                                           onChanged: (val) {
                                             controller.setchexkboxValue(
                                                 val.toString());
+                                            print(controller.chexkboxValue) ;
                                           }),
                                 ),
                                 SizedBox(width: 5),
@@ -499,7 +465,8 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                         child: Center(
                             child: InkWell(
                           onTap: () {
-                            Get.to(Seggestions(title: "منتجات مشابهة"));
+                            Get.to(Seggestions(
+                                title: "منتجات مشابهة" , products: controller.product.similar_product,));
                           },
                           child: Text(
                             "منتجات مشابهة",
@@ -510,13 +477,13 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                     : SizedBox.shrink(),
                 controller.product.similar_product.length != 0
                     ? Container(
-                        height: MediaQuery.of(context).size.height * 0.3,
+                        height: MediaQuery.of(context).size.height * 0.35,
                         width: double.infinity,
                         child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemCount:
-                                controller.product.similar_product.length,
+                                controller.product.similar_product.length > 5 ? 5 : controller.product.similar_product.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
                                 padding: EdgeInsets.only(right: 10.0),
@@ -534,33 +501,37 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                                             '${MyApp.api}/uploads/product/${controller.product.similar_product.elementAt(index).image}'),
                                       ),
                                       onTap: () async {
+                                        Get.to(ProductDeatil(controller.product
+                                            .similar_product[index].id)) ;
                                         controller.isLoading.value = true;
-                                        await controller.fetchProductInfo(
-                                            controller.product
-                                                .similar_product[index].id);
+                                        controller.fetchProductInfo(controller.product
+                                            .similar_product[index].id);
                                       },
                                     ),
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8.0),
-                                        child: InkWell(
-                                          onTap: () {
-                                            /////Action
-                                          },
-                                          child: CircleAvatar(
-                                            child: Icon(
-                                              Icons.favorite,
-                                              color: Colors.red,
-                                              size: 22,
+                                    GetBuilder<ProductDeatilController>(builder: (ProductDeatilController controller2){
+                                      return Align(
+                                        alignment: Alignment.topRight,
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.only(right: 8.0 , top: 10),
+                                          child: InkWell(
+                                            onTap: () {
+                                              /////Action
+                                              controller2.addToFavouriteProduct(controller2.product.similar_product[index].id , index) ;
+                                            },
+                                            child: CircleAvatar(
+                                              child: Icon(
+                                                Icons.favorite,
+                                                color: controller2.product.similar_product.elementAt(index).isFavourite? Colors.red :  Colors.grey,
+                                                size: 16,
+                                              ),
+                                              backgroundColor: Colors.grey.shade300,
+                                              radius: 14,
                                             ),
-                                            backgroundColor: Themes.color2,
-                                            radius: 17,
                                           ),
                                         ),
-                                      ),
-                                    )
+                                      );
+                                    })
                                   ],
                                 ),
                               );
@@ -610,89 +581,88 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Column(
-                            children: [
-                              Obx(
-                                () => ListView.builder(
-                                    itemCount: controller.size_list.value,
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            ListTile(
-                                              title: Column(
-                                                crossAxisAlignment:
+                                  children: [
+                                    ListView.builder(
+                                        itemCount: controller.product.all_review.length >= 4 ? controller.size_list.value : controller.product.all_review.length,
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                ListTile(
+                                                  title: Column(
+                                                    crossAxisAlignment:
                                                     CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                      "${controller.product.all_review[index]['customer_name']}"),
-                                                  Text(
-                                                    "${controller.product.all_review[index]['created_at']}",
-                                                    style: Themes.subtitle2,
+                                                    children: [
+                                                      Text(
+                                                          "${controller.product.all_review[index]['customer_name']}"),
+                                                      Text(
+                                                        "${controller.product.all_review[index]['created_at']}",
+                                                        style: Themes.subtitle2,
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                              leading: CircleAvatar(
-                                                radius: 50,
-                                                backgroundImage: AssetImage(
-                                                    'images/shop2.jpg'),
-                                                backgroundColor: Colors.grey,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
+                                                  leading: CircleAvatar(
+                                                    radius: 50,
+                                                    backgroundImage: AssetImage(
+                                                        'images/shop2.jpg'),
+                                                    backgroundColor: Colors.grey,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context)
                                                       .size
                                                       .width -
-                                                  50,
-                                              child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
+                                                      50,
+                                                  child: Card(
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius:
                                                       BorderRadius.circular(
                                                           20.0),
-                                                  side: BorderSide(
-                                                    color: Colors.grey,
-                                                    width: 1.0,
+                                                      side: BorderSide(
+                                                        color: Colors.grey,
+                                                        width: 1.0,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(
+                                                          20.0),
+                                                      child: controller.product.all_review[index] != null ? Text(
+                                                          "${controller.product.all_review[index]['notes']}") : Text("لا يوجد تعليق"),
+                                                    ),
+                                                    margin: EdgeInsets.all(10),
                                                   ),
                                                 ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      20.0),
-                                                  child: Text(
-                                                      "${controller.product.all_review[index]['notes']}"),
-                                                ),
-                                                margin: EdgeInsets.all(10),
-                                              ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Center(
-                                child: InkWell(
-                                    onTap: () {
-                                      controller.increment_size();
-                                    },
-                                    child: Text("عرض المزيد")),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          ),
+                                          );
+                                        }),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    controller.product.all_review.length < 4 || controller.size_list == controller.product.all_review.length  ?  SizedBox.shrink() : Center(
+                                      child: InkWell(
+                                          onTap: () {
+                                            controller.increment_size();
+                                          },
+                                          child: Text("عرض المزيد")),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
+                                )
+
                         ),
                 ),
                 SizedBox(
@@ -790,3 +760,91 @@ class ProductDeatil extends GetView<ProductDeatilController> {
 //   ),
 //   barrierDismissible: false,
 // );
+
+/*
+                    Positioned(
+                        right: 70,
+                        child: InkWell(
+                          onTap: () {
+                            Get.defaultDialog(
+                              title: "الإبلاغ عن المنتج",
+                              titlePadding: EdgeInsets.only(top: 20),
+                              backgroundColor: Colors.white,
+                              titleStyle: Themes.headline1,
+                              radius: 15,
+                              content: Builder(
+                                builder: (context) {
+                                  return Column(
+                                    children: [
+                                      Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 8),
+                                          child: GetBuilder<
+                                              ProductDeatilController>(
+                                            init: ProductDeatilController(id),
+                                            builder: (controller) {
+                                              return TextField(
+                                                onChanged: (newValue) {
+                                                  controller
+                                                      .set_reportofproduct(
+                                                          newValue);
+                                                },
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                maxLines: 4,
+                                                decoration: InputDecoration(
+                                                    label: Padding(
+                                                      padding:
+                                                          EdgeInsets.all(8),
+                                                      child: Center(
+                                                        child: Text(
+                                                          'سبب الشكوى',
+                                                          style:
+                                                              Themes.subtitle1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    border: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Themes.color,
+                                                            width: 4.0))),
+                                              );
+                                            },
+                                          )),
+                                      SizedBox(
+                                        height: 30.0,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'إرسال',
+                                          style: TextStyle(
+                                              color: Themes.color2,
+                                              fontSize: 16.0),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Themes.color,
+                                          onPrimary: Themes.color,
+                                          shape: BeveledRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: CircleAvatar(
+                            radius: 20,
+                            child: Icon(
+                              Icons.report,
+                              color: Themes.color,
+                            ),
+                            backgroundColor: Themes.color2,
+                          ),
+                        ))
+
+ */

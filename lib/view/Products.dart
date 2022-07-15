@@ -252,7 +252,7 @@ class Product extends GetView<ProductController> {
                                                                     onTap: () {
                                                                       Get.to(
                                                                           Seggestions(
-                                                                            title: "عروض وحسومات",
+                                                                            title: "عروض وحسومات",products: [],
                                                                           ));
                                                                     },
                                                                   ),
@@ -266,7 +266,7 @@ class Product extends GetView<ProductController> {
                                                                           Get
                                                                               .to(
                                                                               Seggestions(
-                                                                                title: "عروض وحسومات",
+                                                                                title: "عروض وحسومات",products: [],
                                                                               ));
                                                                         },
                                                                         icon: Icon(
@@ -451,7 +451,7 @@ class Product extends GetView<ProductController> {
                                                             onPressed: () {
                                                               Get.to(
                                                                   Seggestions(
-                                                                      title: "عروض وحسومات"));
+                                                                      title: "عروض وحسومات",products: [],));
                                                             },
                                                           ))
                                                     ]),
@@ -494,7 +494,7 @@ class Product extends GetView<ProductController> {
                                                                       Get.to(
                                                                           Seggestions(
                                                                             title:
-                                                                            "اقتراحات قد تعجبك",
+                                                                            "اقتراحات قد تعجبك",products: [],
                                                                           ));
                                                                     },
                                                                   ),
@@ -510,7 +510,7 @@ class Product extends GetView<ProductController> {
                                                                               .to(
                                                                               Seggestions(
                                                                                 title:
-                                                                                "اقتراحات قد تعجبك ",
+                                                                                "اقتراحات قد تعجبك ",products: [],
                                                                               ));
                                                                         },
                                                                         icon: Icon(
@@ -704,7 +704,7 @@ class Product extends GetView<ProductController> {
                                                             onPressed: () {
                                                               Get.to(
                                                                   Seggestions(
-                                                                    title: "اقتراحات قد تعجبك",
+                                                                    title: "اقتراحات قد تعجبك",products: [],
                                                                   ));
                                                             },
                                                           ))
@@ -747,7 +747,7 @@ class Product extends GetView<ProductController> {
                                                                     onTap: () {
                                                                       Get.to(
                                                                           Seggestions(
-                                                                            title: "الأكثر شيوعاً",
+                                                                            title: "الأكثر شيوعاً",products: [],
                                                                           ));
                                                                     },
                                                                   ),
@@ -762,6 +762,7 @@ class Product extends GetView<ProductController> {
                                                                               .to(
                                                                               Seggestions(
                                                                                 title: "الأكثر شيوعاً",
+                                                                                products: [],
                                                                               ));
                                                                         },
                                                                         icon: Icon(
@@ -975,7 +976,7 @@ class Product extends GetView<ProductController> {
                                                             onPressed: () {
                                                               Get.to(
                                                                   Seggestions(
-                                                                    title: "الأكثر شيوعاً",
+                                                                    title: "الأكثر شيوعاً",products: [],
                                                                   ));
                                                             },
                                                           ))
@@ -1019,7 +1020,7 @@ class Product extends GetView<ProductController> {
                                                                       Get.to(
                                                                           Seggestions(
                                                                             title:
-                                                                            "الأقل سعراً",
+                                                                            "الأقل سعراً",products: [],
                                                                           ));
                                                                     },
                                                                   ),
@@ -1035,7 +1036,7 @@ class Product extends GetView<ProductController> {
                                                                               .to(
                                                                               Seggestions(
                                                                                 title:
-                                                                                "الأقل سعراً",
+                                                                                "الأقل سعراً",products: [],
                                                                               ));
                                                                         },
                                                                         icon: Icon(
@@ -1232,6 +1233,7 @@ class Product extends GetView<ProductController> {
                                                                   Seggestions(
                                                                     title:
                                                                     "الأقل سعراً",
+                                                                    products: [],
                                                                   ));
                                                             },
                                                           ))

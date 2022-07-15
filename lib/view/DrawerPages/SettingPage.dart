@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/view/ConstantPages/RoundedAppBar.dart';
+import 'package:new_shop/view/DrawerPages/EditProfile.dart';
+import 'package:new_shop/view/DrawerPages/Info_App.dart';
 
 import '../../utls/Themes.dart';
 import '../ConstantPages/MyCustomCLipper.dart';
@@ -75,7 +77,9 @@ class SettingPage extends StatelessWidget {
                         "تعديل المعلومات الشخصية",
                         style: Themes.bodyText1,
                       ),
-                      trailing: Icon(Icons.edit),
+                      trailing: IconButton(icon: Icon(Icons.edit),onPressed: (){
+                        Get.to(EditProfile()) ;
+                      },),
                     ),
                     SizedBox(
                       height: 10,
@@ -92,7 +96,9 @@ class SettingPage extends StatelessWidget {
                         "معلومات عن التطبيق",
                         style: Themes.bodyText1,
                       ),
-                      trailing: Icon(Icons.details),
+                      trailing: IconButton(icon: Icon(Icons.details),onPressed: (){
+                        Get.to(InfoApp());
+                       },),
                     ),
                     SizedBox(
                       height: 10,

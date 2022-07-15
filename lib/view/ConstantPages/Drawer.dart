@@ -38,7 +38,7 @@ class myDrawer extends StatelessWidget {
             leading: Icon(Icons.present_to_all),
             title: const Text('طلب هدية', style: Themes.bodyText1,),
             onTap: () {
-              Get.to(GiftRequest()) ;
+              Get.to(()=>GiftRequest()) ;
             },
           ),
           ListTile(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
+import 'package:new_shop/logic/controllers/ShopsController/ShopPageController.dart';
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/Orderes.dart';
 
@@ -19,10 +20,14 @@ class myAppBar extends StatelessWidget{
             return IconButton(
                 onPressed: () {
 
-                   controller.getscaffoldKey().currentState!.openDrawer();
-                   controller.getscaffoldKey2().currentState!.openDrawer();
-                   controller..getscaffoldKey3().currentState!.openDrawer();
-                   controller..getscaffoldKey4().currentState!.openDrawer();
+                  if(controller.getscaffoldKey()!=null)
+                     controller.getscaffoldKey().currentState!.openDrawer();
+                  if(controller.getscaffoldKey2()!=null)
+                      controller.getscaffoldKey2().currentState!.openDrawer();
+                  if(controller.getscaffoldKey3()!=null)
+                    controller..getscaffoldKey3().currentState!.openDrawer();
+                  if(controller.getscaffoldKey4()!=null)
+                    controller..getscaffoldKey4().currentState!.openDrawer();
 
                 },
                 icon: Icon(
@@ -48,16 +53,14 @@ class myAppBar extends StatelessWidget{
             Row(children: [
               IconButton(
                 onPressed: () {
-                  print("search");
+
                 },
                 icon:  Icon(Icons.search ,  color: Themes.color3,
                 ),
               ),
-              Text(" انقر هنا للبحث ..."),
+              Text("انقر هنا للبحث...")
             ]),
           ),
-
-
 
           SizedBox(width: 8,),
           IconButton(

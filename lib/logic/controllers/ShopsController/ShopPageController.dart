@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +8,8 @@ import '../../../models/Boshra/Store/ShopModel.dart';
 
 class ShopPageController extends GetxController {
 
+  GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  var search_name = " " ;
   RxString selectedsortvalue = "جميع المتاجر".obs ;
   var items = [
     "جميع المتاجر" ,
@@ -82,6 +85,7 @@ class ShopPageController extends GetxController {
     if(response.statusCode == 200)
     {
       ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+
       ShopList.assignAll(shopModel.data );
       for(int i = 0 ; i < ShopList.length ; i++)
       {
@@ -110,5 +114,32 @@ class ShopPageController extends GetxController {
       return ' مطلوب';
     }
     return null;
+  }
+
+  Future<void>search_stores()async{
+    final response = await http.get(Uri.parse('${MyApp.api}/api/search/store/${search_name}')) ;
+
+    if(response.statusCode == 200)
+    {
+
+      ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+      ShopList.assignAll(shopModel.data );
+
+      isLoading.value = false;
+
+      for(int i = 0 ; i < ShopList.length ; i++)
+      {
+        for(int j = 0 ; j <  ShopList[i].all_review.length ; j++)
+        {
+          ShopList[i].review += ShopList[i].all_review[j]['value'] as int ;
+        }
+        if(ShopList[i].all_review.length > 0)
+          ShopList[i].review = (ShopList[i].review /ShopList[i].all_review.length).toInt()  ;
+
+      }
+
+    }else{
+      print("errorrrrr") ;
+    }
   }
 }

@@ -64,7 +64,7 @@ class myDrawer extends GetView<SettingPageController> {
            // Themes.bodyText1,
             ),
             onTap: () {
-              Get.to(GiftRequest()) ;
+              Get.to(()=>GiftRequest()) ;
             },
           ),
           ListTile(

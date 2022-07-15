@@ -6,7 +6,7 @@ class Themes  {
   static const color = Color(0xFFAF3A88);
   static const color2 = Color(0xFFF5EFF3);
   static  Color color3 = Colors.grey.shade700;
-
+  static Color grey_color =  Colors.grey.shade50;
   static const borderColor = Colors.black;
 
   static  TextStyle headline1 = TextStyle(

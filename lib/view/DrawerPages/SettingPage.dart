@@ -4,6 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:new_shop/logic/controllers/DrawerController/SettingPageController.dart';
 import 'package:new_shop/view/ConstantPages/RoundedAppBar.dart';
+import 'package:new_shop/view/DrawerPages/EditProfile.dart';
+import 'package:new_shop/view/DrawerPages/Info_App.dart';
 
 import '../../main.dart';
 import '../../utls/Themes.dart';
@@ -92,7 +94,9 @@ class SettingPage extends GetView<SettingPageController> {
                         )
                         //Themes.bodyText1,
                       ),
-                      trailing: Icon(Icons.edit),
+                      trailing: IconButton(icon: Icon(Icons.edit),onPressed: (){
+                        Get.to(EditProfile()) ;
+                      },),
                     ),
                     SizedBox(
                       height: 10,
@@ -112,7 +116,9 @@ class SettingPage extends GetView<SettingPageController> {
                       )
                         //Themes.bodyText1,
                       ),
-                      trailing: Icon(Icons.details),
+                      trailing: IconButton(icon: Icon(Icons.details),onPressed: (){
+                        Get.to(InfoApp());
+                       },),
                     ),
                     SizedBox(
                       height: 10,

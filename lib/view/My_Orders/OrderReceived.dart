@@ -2,17 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
+import '../../logic/controllers/orders/OrdersController.dart';
+import '../../main.dart';
+import '../../models/Boshra/orders/OrderProduct.dart';
 import '../../utls/Themes.dart';
 import 'BillPage.dart';
 import 'OrderDeatil.dart';
 
 class OrderReceived extends StatelessWidget {
+  final OrdersController controller = Get.find<OrdersController>();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: ListView.builder(
-            itemCount: 10,
+            itemCount: controller.recieved_orders.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 margin: EdgeInsets.only(right: 10, left: 10, bottom: 15),
@@ -23,7 +27,7 @@ class OrderReceived extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
                     onTap: () {
-                      Get.to(OrderDeatil());
+                      Get.to(OrderDeatil( order_id: controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.order_id, index: index, status_id: controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.status_id,));
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -37,7 +41,7 @@ class OrderReceived extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.2,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('images/shop2.jpg'),
+                              image: NetworkImage('${MyApp.api}/uploads/stores/${controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.store_image}'),
                               fit: BoxFit.contain),
                         ),
                       ),
@@ -46,22 +50,22 @@ class OrderReceived extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "الطلب 1",
+                            "الطلب ${index + 1}",
                             style: Themes.headline1,
                           ),
                           Text(
-                            "اسم المتجر ",
+                            "${ controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.store_name}",
                             style: Themes.subtitle1,
                           )
                         ],
                       ),
                       subtitle: Text(
-                        "تم التسليم ب 2/3/2022",
+                        "تم التسليم ${controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.delivery_time}",
                         style: Themes.subtitle3,
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          Get.to(BillPage());
+                          Get.to(BillPage(controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.order_id  , index+1) );
                         },
                         icon: Icon(
                           Icons.payment,

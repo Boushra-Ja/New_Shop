@@ -298,7 +298,17 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                           return  Container(
                             margin: EdgeInsets.only(left: 5),
                             height: 40,
-                            child: RaisedButton(
+                            child: ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+                            primary:  Colors.grey.shade50,
+                                shape:
+                                RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.grey.shade200),
+                                    borderRadius: BorderRadius.circular(10)),
+
+
+                            ),
                               onPressed: () {
                                 print(controller2.product.is_basket) ;
                                 if(controller2.product.is_basket)
@@ -316,10 +326,8 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                                 }
 
                               },
-                              shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.grey.shade200),
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Colors.grey.shade50,
+
+
                               child: controller2.product.is_basket ? Text(
                                 'حذف من السلة',
                               ) : Text('إضافة إلى السلة'),
@@ -333,7 +341,15 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                         child: Container(
                           height: 40,
                           margin: EdgeInsets.only(left: 5),
-                          child: RaisedButton(
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary:   Colors.grey.shade50,
+                                shape:
+                                RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.grey.shade200),
+                                    borderRadius: BorderRadius.circular(10)),
+
+                              ),
                               onPressed: () {
                                 if (controller.count >=
                                     controller.selected_values.length)
@@ -341,22 +357,27 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                                 else
                                   Get.snackbar("***", "لرجاء ادخال المواصفات المطلوبة");
                               },
-                              shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.grey.shade200),
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Colors.grey.shade50,
+
+
                               child: Icon(Icons.shopping_cart_outlined)),
                         )),
                     Expanded(
                         flex: 2,
                         child: Container(
                           height: 40,
-                          child: RaisedButton(
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary:   Colors.grey.shade50,
+                                shape:
+                                RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.grey.shade200),
+                                    borderRadius: BorderRadius.circular(10)),
+
+
+                              ),
                               onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.grey.shade200),
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Colors.grey.shade50,
+
+
                               child: Icon(Icons.send)),
                         )),
                     Expanded(

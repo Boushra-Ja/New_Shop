@@ -14,8 +14,9 @@ class Product {
   {
 
     return Product(id : json['product_id'] ,product_name: json['product_name'],discription: json['discription'],image: json['image']
-        ,selling_price: json['selling_price'] ,num_cell: json['num_cell'] , prepration_time: json['prepration_time'] , return_or_replace: json['return_or_replace'] , store_id : json['store_id'] ,
-        store_name : json['store_name'], salling_store:json['num_salling_store'] , all_review:json['review']
+        ,selling_price: json['selling_price'] ,num_cell: json['num_cell'] , all_review:json['review'],
+        prepration_time: json['prepration_time'] , return_or_replace: json['return_or_replace'] , store_id : json['store_id'] ,
+        store_name : json['store_name'], salling_store:json['num_salling_store']
         );
   }
 

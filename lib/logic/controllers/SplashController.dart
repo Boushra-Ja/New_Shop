@@ -1,7 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'dart:async';
+
 import '../../routes/routes.dart';
+
 
 class SplashController extends GetxController {
 
@@ -15,7 +17,6 @@ class SplashController extends GetxController {
     try {
       token.value=(await storage.read(key: 'token'))!;
       print(token);
-
       result.value = 'OK';
     } catch (e) {
       result.value = 'NOOK';

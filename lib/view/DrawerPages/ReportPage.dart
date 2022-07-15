@@ -37,13 +37,13 @@ class ReportPage extends GetView<ReportPageController> {
                         Expanded(
                             flex: 3,
                             child: Obx(
-                              () => Form(
+                                  () => Form(
                                 key: controller.formstate2,
                                 child: DropdownButtonFormField(
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(30)),
+                                            BorderRadius.circular(30)),
                                         contentPadding: EdgeInsets.fromLTRB(
                                             10, 0.001, 12, 0.001),
                                         filled: true,
@@ -110,7 +110,7 @@ class ReportPage extends GetView<ReportPageController> {
                                 hintText: 'ادخل هنا....',
                                 hintStyle: Themes.subtitle2,
                                 contentPadding:
-                                    EdgeInsets.fromLTRB(10.0, 40, 20.0, 40),
+                                EdgeInsets.fromLTRB(10.0, 40, 20.0, 40),
                                 filled: true,
                                 fillColor: Colors.white),
                           ),

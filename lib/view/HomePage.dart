@@ -16,19 +16,21 @@ class HomePage extends GetView<AppBarController> {
         builder: (_controller) {
           return Scaffold(
             body: SizedBox.expand(
+
               child: PageView(
                 physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
                 children: [
-                  Favorite(),
+                  Product(),
                   Orders(),
                   ShopsPage(),
-                  Product(),
+                   Favorite(),
                 ],
                 controller: controller.pageController,
               ),
             ),
             bottomNavigationBar: Obx(
                   () => FancyBottomNavigation(
+
                 tabs: [
                   TabData(
                     iconData: Icons.favorite,
@@ -47,6 +49,7 @@ class HomePage extends GetView<AppBarController> {
                     title: 'Product',
                   ),
                 ],
+
 
                 onTabChangedListener: (position) {
                   controller.currentIndex.value = position;

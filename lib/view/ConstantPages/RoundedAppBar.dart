@@ -1,11 +1,15 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import '../../logic/controllers/DrawerController/SettingPageController.dart';
 import '../../utls/Themes.dart';
 
-class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
+class RoundedAppBar extends GetView<SettingPageController> implements PreferredSizeWidget {
+
+  final sampleController3 = Get.put(SettingPageController(), permanent: true);
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -26,7 +30,8 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
                         bottom: width / 2 - preferredSize.height / 2),
                     child: new DecoratedBox(
                       decoration: new BoxDecoration(
-                        color: Themes.color,
+                        color: sampleController3.col==0?
+                      Themes.color:Colors.grey,
                         shape: BoxShape.circle,
                         boxShadow: [
                           new BoxShadow(color: Colors.black54, blurRadius: 10.0)
@@ -50,7 +55,8 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
                   radius: 20,
                   child: Icon(
                     Icons.arrow_back_rounded,
-                    color: Themes.color,
+                    color:
+                    Themes.color,
                   ),
                   backgroundColor: Colors.grey.shade200,
                 ),

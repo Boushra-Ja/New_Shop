@@ -71,21 +71,21 @@ class WelcomPage extends StatelessWidget{
                       SizedBox(
                         height: 25,
                       ),
-                      Container(
-                        height: 40,
-                        width: 250,
-                        child: RaisedButton(
-                            color: Themes.color2,
-                            child: Text(
-                              "انشاء حساب",
-                              textAlign: TextAlign.center,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(30.0)),
-                            onPressed: () {
-                              Get.toNamed('/regester') ;
-                            }),
-                      ),
+                      // Container(
+                      //   height: 40,
+                      //   width: 250,
+                      //   child: RaisedButton(
+                      //       color: Themes.color2,
+                      //       child: Text(
+                      //         "انشاء حساب",
+                      //         textAlign: TextAlign.center,
+                      //       ),
+                      //       shape: RoundedRectangleBorder(
+                      //           borderRadius: new BorderRadius.circular(30.0)),
+                      //       onPressed: () {
+                      //         Get.toNamed('/regester') ;
+                      //       }),
+                      // ),
                       SizedBox(
                         height: 100,
                       ),

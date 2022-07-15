@@ -27,9 +27,8 @@ class Themes  {
 
 
   static const subtitle1 = TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Roboto');
-  static const subtitle11 = TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Roboto');
   static  TextStyle subtitle2 = TextStyle(fontSize: 14,color: color3,);
-  static TextStyle subtitle3 = TextStyle(fontSize: 14,color:   Colors.black, fontWeight: FontWeight.bold);
+  static TextStyle subtitle3 = TextStyle(fontSize: 12,color:  color3, fontWeight: FontWeight.bold);
   static TextStyle subtitlebat = TextStyle(fontSize: 14,color: sampleController3.col==0?   Colors.black: Colors.white, fontWeight: FontWeight.bold);
   static TextStyle subtitle44 = TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
   sampleController3.col==1?Colors.white:Colors.black,);
@@ -40,8 +39,7 @@ class Themes  {
   static TextStyle bodyText3 =
       TextStyle(fontSize: 16, color: Colors.grey.shade600);
   static const bodyText4 = TextStyle(fontSize: 16, color: Colors.white);
-  static TextStyle bodyText5 =
-      TextStyle(fontSize: 16, color: Colors.white);
+  static TextStyle bodyText5 = TextStyle(fontSize: 16, color: Colors.grey.shade600);
 
 
   static TextStyle bodyText6 =

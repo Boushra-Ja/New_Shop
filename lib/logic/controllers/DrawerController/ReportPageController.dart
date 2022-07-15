@@ -45,7 +45,7 @@ class ReportPageController extends GetxController{
   String? validate_shopname(var val)
   {
     if(selectedshopname.value=='' )
-        return "الرجاء اختيار اسم المتجر أولا";
+      return "الرجاء اختيار اسم المتجر أولا";
 
     return null ;
   }
@@ -68,7 +68,7 @@ class ReportPageController extends GetxController{
 
       ShopNameModel shopNameModel = ShopNameModel.fromJson(jsonDecode(response.body)) ;
       for(int i = 0 ; i < shopNameModel.data.length ; i++)
-          shopsList.add(shopNameModel.data.elementAt(i)) ;
+        shopsList.add(shopNameModel.data.elementAt(i)) ;
 
     }else
       print("error") ;

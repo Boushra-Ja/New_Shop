@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
 import 'package:new_shop/utls/Themes.dart';
-import 'package:new_shop/view/Orderes.dart';
 
 class myAppBar extends StatelessWidget{
 
@@ -61,7 +60,8 @@ class myAppBar extends StatelessWidget{
 
           SizedBox(width: 8,),
           IconButton(
-              onPressed: () {Get.to(()=>Orderes());},
+              onPressed: () {
+                Get.toNamed('/Cart');},
               icon: Icon(
                 Icons.shopping_cart_outlined,
                 size: 30,

@@ -154,8 +154,11 @@ class RatingStore extends StatelessWidget{
                     flex: 1,
                     child: SizedBox.shrink(),
                   ) ,
-                  Expanded(child:RaisedButton(
-                      color: Themes.color,
+                  Expanded(child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Themes.color,),
+
+
                       onPressed: () {
                         Get.back();
                       },
@@ -167,8 +170,9 @@ class RatingStore extends StatelessWidget{
                   ) ,
                   Expanded(
                     flex: 2,
-                    child: RaisedButton(
-                        color: Themes.color,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Themes.color,),
 
                         onPressed: () {
                           controller.rating_store() ;

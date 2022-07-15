@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/orders/OrdersController.dart';
@@ -8,7 +7,7 @@ import 'package:new_shop/view/My_Orders/PendingOrders.dart';
 import '../../logic/controllers/AppBarController.dart';
 import '../../utls/Themes.dart';
 import '../ConstantPages/Drawer.dart';
-import '../Orderes.dart';
+
 
 class Orders extends StatelessWidget {
   final OrdersController controller_ = Get.find<OrdersController>();
@@ -121,7 +120,7 @@ class Orders extends StatelessWidget {
                                   ),
                                   SizedBox(width: 8,),
                                   IconButton(
-                                      onPressed: () {Get.to(()=>Orderes());},
+                                      onPressed: () {Get.toNamed('/Cart');},
                                       icon: Icon(
                                         Icons.shopping_cart_outlined,
                                         size: 30,

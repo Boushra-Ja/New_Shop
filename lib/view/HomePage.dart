@@ -19,11 +19,12 @@ class HomePage extends GetView<AppBarController> {
 
               child: PageView(
                 physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+
                 children: [
-                  Product(),
+                  Favorite(),
                   Orders(),
                   ShopsPage(),
-                   Favorite(),
+                  Product(),
                 ],
                 controller: controller.pageController,
               ),

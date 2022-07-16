@@ -15,7 +15,7 @@ class EditProfileController extends GetxController{
   late TextEditingController phone_controller ;
 
   var isLoading = true.obs , isEdit = true.obs  ;
-  var user_name  , email  , image , user_id , password = "password" , new_pass;
+  var user_name  , email  , image , user_id , password , new_pass;
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
   GlobalKey<FormState> formstate2 = new GlobalKey<FormState>();
   GlobalKey<FormState> formstate3 = new GlobalKey<FormState>();
@@ -46,6 +46,8 @@ class EditProfileController extends GetxController{
     user_name = await storage.read(key: 'name') ;
     email = await storage.read(key: 'email') ;
     image =  await storage.read(key: 'image') ;
+    password =  await storage.read(key: 'password') ;
+    print(password) ;
     isLoading.value = false ;
     update() ;
 
@@ -140,6 +142,12 @@ class EditProfileController extends GetxController{
         await storage.write(key: "name", value:'${user_name}');
         await storage.write(key: "email", value: '${email}');
         await storage.write(key: "image", value: '${image}');
+
+        if(check_pass.value ==false)
+          {
+            await storage.write(key: "password", value: new_pass) ;
+            await changePassword();
+          }
         Get.back() ;
       }
 
@@ -166,6 +174,21 @@ class EditProfileController extends GetxController{
       print(photo) ;
 
     }
+  }
+
+  Future<void> changePassword()async{
+
+    final response = await http.post(
+        Uri.parse('${MyApp.api}/api/Customer/changepassword'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(<String, dynamic>{
+          "old_password": password,
+          "password": new_pass,
+        }));
+    if(response.statusCode == 200)
+      {
+        print('change password') ;
+      }
   }
 
 }

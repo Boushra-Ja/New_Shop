@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:new_shop/models/Boshra/orders/OrderProduct.dart';
@@ -7,9 +8,11 @@ import '../../../main.dart';
 class OrdersController extends GetxController{
 
   var index = 0.obs ;
+  var user_id ;
   Map<int , OrderProduct>acceptence_orders = <int ,OrderProduct>{}.obs;
   Map<int , OrderProduct> wating_orders = <int , OrderProduct>{}.obs;
   Map<int , OrderProduct >recieved_orders = <int ,OrderProduct>{}.obs;
+  final storage=const FlutterSecureStorage();
 
   var isLoading = true.obs ;
 
@@ -19,7 +22,7 @@ class OrdersController extends GetxController{
 
   Future<void> Fetch_AcceptOrders()async{
     //////////customer_id
-    final response = await http.get(Uri.parse('${MyApp.api}/api/accept_orders/1')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/accept_orders/${user_id}')) ;
 
     if(response.statusCode == 200 ) {
       OrderProductModel orderModel = OrderProductModel.fromJson(jsonDecode(response.body));
@@ -38,7 +41,7 @@ class OrdersController extends GetxController{
 
   Future<void> Fetch_WaitingOrders()async{
     //////////customer_id
-    final response = await http.get(Uri.parse('${MyApp.api}/api/waiting_orders/1')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/waiting_orders/${user_id}')) ;
 
     if(response.statusCode == 200 ) {
       OrderProductModel orderModel = OrderProductModel.fromJson(jsonDecode(response.body));
@@ -57,7 +60,7 @@ class OrdersController extends GetxController{
 
   Future<void> Fetch_RecievedOrders()async{
     //////////customer_id
-    final response = await http.get(Uri.parse('${MyApp.api}/api/received_orders/1')) ;
+    final response = await http.get(Uri.parse('${MyApp.api}/api/received_orders/${user_id}')) ;
 
     if(response.statusCode == 200 ) {
       OrderProductModel orderModel = OrderProductModel.fromJson(jsonDecode(response.body));
@@ -78,6 +81,7 @@ class OrdersController extends GetxController{
   @override
   void onInit() async{
     super.onInit();
+    user_id  = await storage.read(key: 'id') ;
     await Fetch_WaitingOrders() ;
     await Fetch_AcceptOrders() ;
     await Fetch_RecievedOrders() ;

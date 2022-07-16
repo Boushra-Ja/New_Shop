@@ -73,7 +73,7 @@ class ProductDeatilController extends GetxController{
     final response = await http.get(Uri.parse('${MyApp.api}/api/products/$id')) ;
     final response2= await http.get(Uri.parse('${MyApp.api}/api/similar_products/$id')) ;
     ///customer_id
-    final favourite = await http.get(Uri.parse('${MyApp.api}/api/isFavourite/product/$id/1')) ;
+    final favourite = await http.get(Uri.parse('${MyApp.api}/api/isFavourite/product/$id/${user_id}')) ;
 
     if(response.statusCode == 200 && response2.statusCode == 200 && favourite.statusCode == 200)
     {
@@ -140,9 +140,9 @@ class ProductDeatilController extends GetxController{
     final response = await http.post(
         Uri.parse('${MyApp.api}/api/orders'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(<String, int>{
+        body: jsonEncode(<String, dynamic>{
           "store_id": product.store_id,
-          "customer_id": 1,
+          "customer_id": user_id,
         }));
 
     if(response.statusCode == 200)
@@ -151,7 +151,7 @@ class ProductDeatilController extends GetxController{
         OrderModel orderModel = OrderModel.fromJson(jsonDecode(response.body)) ;
         Order order = Order(store_id: orderModel.data[0].store_id, customer_id: orderModel.data[0].customer_id, order_id: orderModel.data[0].order_id);
 
-         final response2 = await http.post(
+        final response2 = await http.post(
              Uri.parse('${MyApp.api}/api/order_product'),
              headers: {'Content-Type': 'application/json',},
              body: jsonEncode(<String, int>{
@@ -192,7 +192,7 @@ class ProductDeatilController extends GetxController{
 
   Future<void> check_is_bascket()async{
     final response = await http.get(
-        Uri.parse('${MyApp.api}/api/orders/check/1/${product.store_id}'));
+        Uri.parse('${MyApp.api}/api/orders/check/${user_id}/${product.store_id}'));
 
     if(response.statusCode == 200) {
 
@@ -202,7 +202,6 @@ class ProductDeatilController extends GetxController{
           product.is_basket = false;
         }
       else {
-        print(response.body);
         final response2 = await http.get(
             Uri.parse('${MyApp.api}/api/product_orders/check/${product_id}/${response.body}'));
 
@@ -222,7 +221,6 @@ class ProductDeatilController extends GetxController{
 
   Future<void> delete_from_basket()async{
 
-    print(product_id) ;
     final response = await http.delete(
         Uri.parse('${MyApp.api}/api/order_product/$product_id'),);
 
@@ -240,11 +238,10 @@ class ProductDeatilController extends GetxController{
     final response = await http.post(
         Uri.parse('${MyApp.api}/api/FavoriteProduct/Add_Favorite/${product_id}'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(<String, int>{
-          "customer_id": 1,
+        body: jsonEncode(<String, dynamic>{
+          "customer_id": user_id,
         }));
 
-    print(response.body) ;
     if(response.body=="add_to_favorite")
     {
       if(ind == -1)
@@ -268,7 +265,6 @@ class ProductDeatilController extends GetxController{
   }
 
   Future<void> isRating()async{
-    user_id  = await storage.read(key: 'id') ;
     final response = await http.get(
         Uri.parse('${MyApp.api}/api/isRating/product/${product_id}/${user_id}'));
     if(response.statusCode == 200)
@@ -285,6 +281,7 @@ class ProductDeatilController extends GetxController{
   @override
   void onInit() async{
     super.onInit();
+    user_id  = await storage.read(key: 'id') ;
     await fetchProductInfo(product_id) ;
   }
 }

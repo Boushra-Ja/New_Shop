@@ -33,16 +33,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  get:
-  cupertino_icons:
-  # material_design_icons_flutter:
-  curved_navigation_bar:
-  bubble:
-  gradient_widgets:
-  http:
-  get_storage:
-  flutter_secure_storage:
-  shared_preferences:
+
   flutter_staggered_animations:
   intro_slider:
   carousel_slider:
@@ -50,9 +41,18 @@ dependencies:
   slimy_card:
   convex_bottom_bar:
   awesome_dialog:
-  image_picker:
-  fancy_bottom_navigation:
-  laravel_flutter_pusher:
+  cupertino_icons:
+  material_design_icons_flutter:
+  get: ^4.6.1
+  curved_navigation_bar: ^1.0.3
+  bubble: ^1.2.1
+  gradient_widgets: ^0.6.0
+  http: ^0.13.4
+  get_storage:
+  flutter_secure_storage:
+  shared_preferences:
+  fancy_bottom_navigation: ^0.3.3
+  image_picker: ^0.8.5+3
 
 
 dev_dependencies:

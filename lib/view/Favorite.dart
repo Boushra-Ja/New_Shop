@@ -7,14 +7,13 @@ import 'package:new_shop/view/ProductDeatil.dart';
 import 'package:new_shop/view/ShopsPages/ShopProfile.dart';
 import '../logic/controllers/AppBarController.dart';
 import '../utls/Themes.dart';
-import 'ConstantPages/AppBar.dart';
+import '../../../main.dart';
 import 'ConstantPages/Drawer.dart';
 
 class Favorite extends GetView<FavoriteController> {
   var check_tap;
   final sampleControllerr = Get.put(FavoriteController(), permanent: true);
   final sampleController3 = Get.put(SettingPageController(), permanent: true);
-  String api = "http://192.168.1.104:8000" ;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppBarController>(
@@ -63,7 +62,64 @@ class Favorite extends GetView<FavoriteController> {
                                               init: FavoriteController(),
                                               builder: (controller) {
                                                 return Column(children: <Widget>[
-                                                  myAppBar(),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(top: 40.0),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(width: 5,),
+
+                                                        GetBuilder<AppBarController>(init : AppBarController(),builder: (controller){
+                                                          //controller.hh();
+                                                          return IconButton(
+                                                              onPressed: () {
+                                                                controller..getscaffoldKey4().currentState!.openDrawer();
+
+                                                              },
+                                                              icon: Icon(
+                                                                Icons.menu,
+                                                                size: 35,
+                                                                color: Themes.color3,
+                                                              ));
+                                                        }) ,
+                                                        SizedBox(width: 10,),
+                                                        Container(
+                                                          width: MediaQuery.of(context).size.width*0.65,
+                                                          height: 42,
+                                                          decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                              color: Themes.color3,
+                                                              width: 2,
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(20),
+                                                          ),
+                                                          child:
+
+                                                          Row(children: [
+                                                            IconButton(
+                                                              onPressed: () {
+                                                                print("search");
+                                                              },
+                                                              icon:  Icon(Icons.search ,  color: Themes.color3,
+                                                              ),
+                                                            ),
+                                                            Text(" انقر هنا للبحث ..."),
+                                                          ]),
+                                                        ),
+
+
+
+                                                        SizedBox(width: 8,),
+                                                        IconButton(
+                                                            onPressed: () {
+                                                              Get.toNamed('/Cart');},
+                                                            icon: Icon(
+                                                              Icons.shopping_cart_outlined,
+                                                              size: 30,
+                                                              color: Themes.color3,
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  ) ,
                                                   SizedBox(
                                                     height: 30,
                                                   ),
@@ -216,7 +272,7 @@ class Favorite extends GetView<FavoriteController> {
                                                                       radius: 50,
                                                                       backgroundImage:
                                                                       NetworkImage(
-                                                                        "${api}/uploads/product/${c.listfavoitestore
+                                                                        "${MyApp.api}/uploads/stores/${c.listfavoitestore
                                                                             .elementAt(
                                                                             i)
                                                                             .image}",
@@ -492,7 +548,7 @@ class Favorite extends GetView<FavoriteController> {
                                                                   },
                                                                   child: Center(
                                                                     child:  Image  .network(
-                                                                      "${api}/uploads/product/${c.listfavoite
+                                                                      "${MyApp.api}/uploads/product/${c.listfavoite
                                                                           .elementAt(
                                                                           index)
                                                                           .image}",

@@ -329,8 +329,8 @@ class ProductDeatil extends GetView<ProductDeatilController> {
 
 
                               child: controller2.product.is_basket ? Text(
-                                'حذف من السلة',
-                              ) : Text('إضافة إلى السلة'),
+                                'حذف من السلة', style: Themes.subtitle1,
+                              ) : Text('إضافة إلى السلة' , style: Themes.subtitle1,),
                             ),
                           );
                         },)
@@ -338,29 +338,41 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                     ),
                     Expanded(
                         flex: 2,
-                        child: Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: 5),
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary:   Colors.grey.shade50,
-                                shape:
-                                RoundedRectangleBorder(
-                                    side: BorderSide(color: Colors.grey.shade200),
-                                    borderRadius: BorderRadius.circular(10)),
+                        child: GetBuilder<ProductDeatilController>(builder: (ProductDeatilController controller2){
+                          return Container(
+                            height: 40,
+                            margin: EdgeInsets.only(left: 5),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary:   Colors.grey.shade50,
+                                  shape:
+                                  RoundedRectangleBorder(
+                                      side: BorderSide(color: Colors.grey.shade200),
+                                      borderRadius: BorderRadius.circular(10)),
 
-                              ),
-                              onPressed: () {
-                                if (controller.count >=
-                                    controller.selected_values.length)
-                                  controller.addToBasket();
-                                else
-                                  Get.snackbar("***", "لرجاء ادخال المواصفات المطلوبة");
-                              },
+                                ),
+                                onPressed: () {
+                                  print(controller2.product.is_basket) ;
+                                  if(controller2.product.is_basket)
+                                  {
+                                    controller2.delete_from_basket() ;
+                                  }
+                                  else{
+                                    if (controller2.count >=
+                                        controller2.selected_values.length)
+                                    {
+                                      controller2.addToBasket();
+                                    }
+                                    else
+                                      Get.snackbar("***", "لرجاء ادخال المواصفات المطلوبة");
+                                  }
+
+                                },
 
 
-                              child: Icon(Icons.shopping_cart_outlined)),
-                        )),
+                                child: Icon(Icons.shopping_cart_outlined , color: Themes.borderColor,)),
+                          );
+                        },)),
                     Expanded(
                         flex: 2,
                         child: Container(
@@ -378,7 +390,7 @@ class ProductDeatil extends GetView<ProductDeatilController> {
                               onPressed: () {},
 
 
-                              child: Icon(Icons.send)),
+                              child: Icon(Icons.send , color: Themes.borderColor,)),
                         )),
                     Expanded(
                       child: SizedBox.shrink(),

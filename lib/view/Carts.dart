@@ -25,7 +25,7 @@ class Carts extends GetView<CartController> {
       return Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
-              backgroundColor:sampleController3.col==0? Themes.color2:
+              backgroundColor:sampleController3.col==0? Themes.grey_color:
               Colors.black,
 
               body: GetX<CartController>(
@@ -152,7 +152,7 @@ class Carts extends GetView<CartController> {
                                                                            //
                                                                            width: MediaQuery.of(context).size.width/1.2,
 
-                                                                           color : sampleController3.col==0? Colors.purpleAccent.withOpacity(0.2):
+                                                                           color : sampleController3.col==0? Themes.color2:
                                                                            Colors.black12,
 
                                                                            //Themes.color2,
@@ -163,8 +163,8 @@ class Carts extends GetView<CartController> {
                                                                            borderRadius: 30,
                                                                            slimeEnabled: true,
                                                                            topCardWidget: topCardWidget(index,context,(snapshot.data)
-                                                                                     ?"http://192.168.43.117:8000/uploads/product/${controller.ListCArt.elementAt(index).myProducts.elementAt(0).image}"
-                                                                                      : "http://192.168.43.117:8000/uploads/product/${controller.ListCArt.elementAt(index).myProducts.elementAt(0).image}"),
+                                                                                     ?"${MyApp.api}/uploads/product/${controller.ListCArt.elementAt(index).myProducts.elementAt(0).image}"
+                                                                                      : "${MyApp.api}/uploads/product/${controller.ListCArt.elementAt(index).myProducts.elementAt(0).image}"),
                                                                            bottomCardWidget: bottomCardWidget(index, context),
                                                                          ),
                                                                        ),

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_shop/models/Boshra/Store/Product_ClassModel.dart';
 import 'package:new_shop/utls/Themes.dart';
 import 'package:new_shop/view/ProductDeatil.dart';
-
+import '../logic/controllers/SuggestionController.dart';
 import '../main.dart';
 
 class Seggestions extends StatelessWidget
 {
-  var check_tap;
   final title;
   List<dynamic>products;
 
@@ -16,6 +14,7 @@ class Seggestions extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
@@ -67,88 +66,93 @@ class Seggestions extends StatelessWidget
                       children: [
                         Container(
                             child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: InkWell(
-                            onTap:(){
-                              Get.to(ProductDeatil(products.elementAt(index).id)) ;
-                            },
-                            child: Card(
-                              shape: BeveledRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 20),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.width * 0.3,
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.3,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage('${MyApp.api}/uploads/product/${products.elementAt(index).image}'),
-                                              fit: BoxFit.fill),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Column(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: InkWell(
+                                onTap:(){
+                                  Get.to(ProductDeatil(products.elementAt(index).id)) ;
+                                },
+                                child: Card(
+                                  shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 20),
+                                    child: Row(
                                       children: [
-                                        Row(
+                                        Container(
+                                          height:
+                                          MediaQuery.of(context).size.width * 0.3,
+                                          width:
+                                          MediaQuery.of(context).size.width * 0.3,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage('${MyApp.api}/uploads/product/${products.elementAt(index).image}'),
+                                                  fit: BoxFit.fill),
+                                              borderRadius:
+                                              BorderRadius.circular(10)),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Column(
                                           children: [
-                                            Text("${products.elementAt(index).product_name}",
-                                                  style: Themes.headline1),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
+                                            Row(
+                                              children: [
+                                                Text("${products.elementAt(index).product_name}",
+                                                    style: Themes.headline1),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.2,
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    /////Action
-                                                  },
-                                                  child: CircleAvatar(
-                                                    child: Icon(
-                                                      Icons.favorite,
-                                                      color: products.elementAt(index).isFavourite ? Colors.red : Colors.grey,
-                                                      size: 20,
-                                                    ),
-                                                    backgroundColor:
-                                                        Themes.color2,
-                                                    radius: 16,
-                                                  ),
+                                                      0.2,
                                                 ),
-                                              ),
-                                            )
+                                                GetBuilder<SuggestionController>(
+                                                    init: SuggestionController(products),
+                                                    builder:(SuggestionController controller){
+                                                  return Align(
+                                                    alignment: Alignment.topLeft,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          right: 8.0),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          /////Action
+                                                          controller.addToFavouriteProduct(controller.products.elementAt(index).id, index);
+                                                        },
+                                                        child: CircleAvatar(
+                                                          child: Icon(
+                                                            Icons.favorite,
+                                                            color: controller.products.elementAt(index).isFavourite ? Colors.red : Colors.grey,
+                                                            size: 20,
+                                                          ),
+                                                          backgroundColor:
+                                                          Themes.color2,
+                                                          radius: 16,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ) ;
+                                                })
+                                              ],
+                                            ),
+                                            Text(
+                                              "${products.elementAt(index).selling_price} ل.س ",
+                                              style: TextStyle(
+                                                  color: Colors.red, fontSize: 12),
+                                            ),
+                                            Text(""),
+                                            Text("")
                                           ],
-                                        ),
-                                        Text(
-                                          "${products.elementAt(index).selling_price} ل.س ",
-                                          style: TextStyle(
-                                              color: Colors.red, fontSize: 12),
-                                        ),
-                                        Text(""),
-                                        Text("")
-                                      ],
-                                      crossAxisAlignment:
+                                          crossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        )),
+                            )),
                         SizedBox(
                           height: 15,
                         )

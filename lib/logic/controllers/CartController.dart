@@ -41,6 +41,8 @@ class CartController extends GetxController {
       CartsModel cartModel = CartsModel.fromJson(jsonDecode(response.body)) ;
       ListCArt.assignAll(cartModel.data );
 
+      print(ListCArt.length) ;
+      print(response.statusCode) ;
     if (response.statusCode == 200) {
 
 

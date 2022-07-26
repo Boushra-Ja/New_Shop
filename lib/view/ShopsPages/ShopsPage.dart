@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_shop/logic/controllers/AppBarController.dart';
 import 'package:new_shop/utls/Themes.dart';
+import 'package:new_shop/view/My_Orders/MyDiscounts.dart';
 import '../../logic/controllers/ShopsController/ShopPageController.dart';
 import '../../main.dart';
 import '../ConstantPages/Drawer.dart';
@@ -134,7 +135,8 @@ class ShopsPage extends StatelessWidget {
                                 ),
                                 IconButton(
                                     onPressed: () {
-                                            Get.toNamed('/Cart');
+                                            //Get.toNamed('/Cart');
+                                      Get.to(MyDiscounts()) ;
                                     },
                                     icon: Icon(
                                       Icons.shopping_cart_outlined,

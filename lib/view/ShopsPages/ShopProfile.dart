@@ -138,7 +138,7 @@ class ShopProfile extends StatelessWidget {
                                       radius: 20,
                                       child:  Icon(
                                         Icons.favorite,
-                                        color: controller.shop_info.isFavourite ? Colors.grey :  Colors.red,
+                                        color: controller.shop_info.isFavourite ? Colors.red :  Colors.grey,
                                       ),
                                       backgroundColor: Colors.grey.shade200,
                                     )
@@ -511,15 +511,17 @@ class ShopProfile extends StatelessWidget {
                                   itemCount: _controller.products_classification.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
+                                    print(_controller.products_classification.length) ;
+                                    print(index) ;
                                     return Center(
                                       child: Column(
                                         children: [
                                           InkWell(
-                                            child: Text("${_controller.products_classification[_controller.products_classification.keys.elementAt(index)]!.elementAt(index).classifications_title}",
+                                            child: Text("${_controller.products_classification[_controller.products_classification.keys.elementAt(index)]!.elementAt(0).classifications_title}",
                                                 style: Themes.headline3),
                                             onTap: () {
                                               Get.to(Seggestions(
-                                                  title: "${_controller.products_classification[_controller.products_classification.keys.elementAt(index)]!.elementAt(index).classifications_title}" , products: controller.products_classification[controller.products_classification.keys.elementAt(index)]!));
+                                                  title: "${_controller.products_classification[_controller.products_classification.keys.elementAt(index)]!.elementAt(0).classifications_title}" , products: controller.products_classification[controller.products_classification.keys.elementAt(index)]!));
 
                                             },
                                           ),

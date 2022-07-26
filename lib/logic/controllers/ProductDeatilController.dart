@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:new_shop/models/Boshra/orders/OrderModel.dart';
+import 'package:new_shop/logic/controllers/orders/ShoppingBasket.dart';
 import 'package:new_shop/models/Boshra/orders/OrderProduct.dart';
 import 'dart:convert';
 import 'package:new_shop/models/Boshra/products/ProductModel.dart';
@@ -85,7 +85,7 @@ class ProductDeatilController extends GetxController{
           selling_price: productModel.data[0].selling_price, num_cell: productModel.data[0].num_cell,
           prepration_time: productModel.data[0].prepration_time, return_or_replace: productModel.data[0].return_or_replace ,
           store_id:productModel.data[0].store_id ,store_name:productModel.data[0].store_name ,
-          salling_store:productModel.data[0].salling_store , all_review: productModel.data[0].all_review , similar_product: productModel2.data )   ;
+          salling_store:productModel.data[0].salling_store , all_review: productModel.data[0].all_review , similar_product: productModel2.data , discount_id: productModel.data[0].discount_id , discount_value: productModel.data[0].discount_value)   ;
 
       for(int i = 0 ;  i < product.similar_product.length ; i++)
         {
@@ -97,8 +97,8 @@ class ProductDeatilController extends GetxController{
             product.similar_product[i].isFavourite = false ;
         }
 
+      isBasket() ;
       await get_options(id) ;
-      await check_is_bascket() ;
 
       if(favourite.body=="1")
         product.isFavourite = true ;
@@ -133,102 +133,6 @@ class ProductDeatilController extends GetxController{
       }
       print(product.options) ;
 
-    }
-  }
-
-  Future<void> addToBasket()async{
-    final response = await http.post(
-        Uri.parse('${MyApp.api}/api/orders'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(<String, dynamic>{
-          "store_id": product.store_id,
-          "customer_id": user_id,
-        }));
-
-    if(response.statusCode == 200)
-      {
-
-        OrderModel orderModel = OrderModel.fromJson(jsonDecode(response.body)) ;
-        Order order = Order(store_id: orderModel.data[0].store_id, customer_id: orderModel.data[0].customer_id, order_id: orderModel.data[0].order_id);
-
-        final response2 = await http.post(
-             Uri.parse('${MyApp.api}/api/order_product'),
-             headers: {'Content-Type': 'application/json',},
-             body: jsonEncode(<String, int>{
-               "product_id": product_id,
-               "order_id": order.order_id,
-             }));
-
-         if(response2.statusCode == 200)
-         {
-           product.is_basket = true ;
-
-           OrderProductModel orderProductModel = OrderProductModel.fromJson(jsonDecode(response2.body)) ;
-           OrderProduct orderProduct = OrderProduct(product_id: orderProductModel.data[0].product_id, status_id:  orderProductModel.data[0].status_id, order_id:  orderProductModel.data[0].order_id, order_product_id:  orderProductModel.data[0].order_product_id , store_id: product.store_id , store_name: product.store_name , store_image:product.image , delivery_time: '' , order_time: '' ,product_name: product.product_name , product_image:  product.image);
-
-           order_product_id = orderProduct.order_product_id ;
-           for(int i = 0 ; i < selected_values.length ; i++)
-             {
-               final response3 = await http.post(
-                   Uri.parse('${MyApp.api}/api/option_product'),
-                   headers: {'Content-Type': 'application/json',},
-                   body: jsonEncode(<String, int>{
-                     "order_product_id": orderProduct.order_product_id,
-                     "option_values_id": selected_values[i],
-                   }));
-
-               if(response3.statusCode == 200)
-                 {
-                   print('successs') ;
-                 }
-
-             }
-           update() ;
-         }
-
-      }
-
-  }
-
-  Future<void> check_is_bascket()async{
-    final response = await http.get(
-        Uri.parse('${MyApp.api}/api/orders/check/${user_id}/${product.store_id}'));
-
-    if(response.statusCode == 200) {
-
-      //////found
-      if(response.body == '0')
-        {
-          product.is_basket = false;
-        }
-      else {
-        final response2 = await http.get(
-            Uri.parse('${MyApp.api}/api/product_orders/check/${product_id}/${response.body}'));
-
-        if(response2.statusCode == 200)
-          {
-            /////found
-            if(response2.body == '1')
-               product.is_basket = true;
-            else
-              product.is_basket = false;
-
-          }
-      }
-    }
-    print('basket   ${ product.is_basket}' ) ;
-  }
-
-  Future<void> delete_from_basket()async{
-
-    final response = await http.delete(
-        Uri.parse('${MyApp.api}/api/order_product/$product_id'),);
-
-    if(response.statusCode == 200)
-    {
-      print('success') ;
-      product.is_basket = false ;
-      update() ;
     }
   }
 
@@ -276,6 +180,72 @@ class ProductDeatilController extends GetxController{
         print(product.isRating) ;
         update() ;
       }
+  }
+
+  void deleteFromBasket()async{
+
+    String? stringofitems = await storage.read(key: 'basket');
+    List<dynamic> listofitems = jsonDecode(stringofitems!);
+
+    List<dynamic> temp = [] ;
+    for(int i = 0; i <listofitems.length ; i++)
+      {
+        OrderProduct model = OrderProduct.fromJson(jsonDecode(listofitems.elementAt(i)));
+
+        if(model.store_id == product.store_id && model.product_id == product.id)
+          continue ;
+        else
+          temp.add(listofitems.elementAt(i)) ;
+
+      }
+    print(temp) ;
+    await storage.write(key: 'basket', value: jsonEncode(temp));
+    product.is_basket = false ;
+    update() ;
+  }
+
+  void addTo_Basket()async{
+
+    ShoppingBasket orderProduct =  ShoppingBasket(product_id: product_id, store_id: product.store_id, store_name: product.store_name,
+        store_image: product.image, delivery_time: "", order_time: "", product_name: product.product_name, product_image: product.image, gift_order: 'no', amount: 1 , selling_price: product.selling_price , discount_id: product.discount_id , discount_value: product.discount_value);
+
+    var l = ShoppingBasket.serialize(orderProduct) ;
+
+    String? stringofitems = await storage.read(key: 'basket');
+    List<dynamic> listofitems = [];
+    if(stringofitems != null)
+      {
+        listofitems = jsonDecode(stringofitems);
+        listofitems.add(l) ;
+      }
+    else
+      {
+        listofitems.add(l) ;
+      }
+
+    await storage.write(key: 'basket', value: jsonEncode(listofitems));
+
+    print(listofitems) ;
+    product.is_basket = true;
+    update() ;
+
+  }
+
+  void isBasket()async{
+
+    String? stringofitems = await storage.read(key: 'basket');
+    List<dynamic> listofitems = jsonDecode(stringofitems!);
+
+    for(int i = 0; i <listofitems.length ; i++)
+    {
+      OrderProduct model = OrderProduct.fromJson(jsonDecode(listofitems.elementAt(i)));
+
+      if(model.store_id == product.store_id && model.product_id == product.id)
+        {
+          product.is_basket = true ;
+          break ;
+        }
+    }
   }
 
   @override

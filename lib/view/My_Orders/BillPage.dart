@@ -30,7 +30,7 @@ class BillPage extends StatelessWidget {
             );
           }
 
-          return ListView(
+          return controller.products_bill.isNotEmpty ? ListView(
             shrinkWrap: true,
             children: [
               SizedBox(
@@ -189,7 +189,7 @@ class BillPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "1",
+                                        "${controller.products_bill.elementAt(index).amount}",
                                         style: Themes.subtitle2,
                                       ),
                                       flex: 4,
@@ -396,7 +396,7 @@ class BillPage extends StatelessWidget {
                 height: 30,
               )
             ],
-          );
+          ) : SizedBox.shrink();
         }))));
   }
 }

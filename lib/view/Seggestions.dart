@@ -80,7 +80,7 @@ class Seggestions extends StatelessWidget
                                         horizontal: 10.0, vertical: 20),
                                     child: Row(
                                       children: [
-                                        Container(
+                                        Expanded(child: Container(
                                           height:
                                           MediaQuery.of(context).size.width * 0.3,
                                           width:
@@ -91,62 +91,59 @@ class Seggestions extends StatelessWidget
                                                   fit: BoxFit.fill),
                                               borderRadius:
                                               BorderRadius.circular(10)),
-                                        ),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text("${products.elementAt(index).product_name}",
-                                                    style: Themes.headline1),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      0.2,
-                                                ),
-                                                GetBuilder<SuggestionController>(
-                                                    init: SuggestionController(products),
-                                                    builder:(SuggestionController controller){
-                                                  return Align(
-                                                    alignment: Alignment.topLeft,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          right: 8.0),
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          /////Action
-                                                          controller.addToFavouriteProduct(controller.products.elementAt(index).id, index);
-                                                        },
-                                                        child: CircleAvatar(
-                                                          child: Icon(
-                                                            Icons.favorite,
-                                                            color: controller.products.elementAt(index).isFavourite ? Colors.red : Colors.grey,
-                                                            size: 20,
+                                        ), flex: 2,) ,
+                                        Expanded(child:  Padding(
+                                          padding: const EdgeInsets.only(right : 10.0),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Expanded(child: Text("${products.elementAt(index).product_name}",
+                                                      style: Themes.bodyText1) , flex: 3,) ,
+                                                  Expanded(child:  GetBuilder<SuggestionController>(
+                                                      init: SuggestionController(products),
+                                                      builder:(SuggestionController controller){
+                                                        return Align(
+                                                          alignment: Alignment.topLeft,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(
+                                                                right: 0),
+                                                            child: InkWell(
+                                                              onTap: () {
+                                                                /////Action
+                                                                controller.addToFavouriteProduct(controller.products.elementAt(index).id, index);
+                                                              },
+                                                              child: CircleAvatar(
+                                                                child: Icon(
+                                                                  Icons.favorite,
+                                                                  color: controller.products.elementAt(index).isFavourite ? Colors.red : Colors.grey,
+                                                                  size: 20,
+                                                                ),
+                                                                backgroundColor:
+                                                                Themes.color2,
+                                                                radius: 16,
+                                                              ),
+                                                            ),
                                                           ),
-                                                          backgroundColor:
-                                                          Themes.color2,
-                                                          radius: 16,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ) ;
-                                                })
-                                              ],
-                                            ),
-                                            Text(
-                                              "${products.elementAt(index).selling_price} ل.س ",
-                                              style: TextStyle(
-                                                  color: Colors.red, fontSize: 12),
-                                            ),
-                                            Text(""),
-                                            Text("")
-                                          ],
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                        ),
+                                                        ) ;
+                                                      }) , flex: 1,)
+
+                                                ],
+                                              ),
+                                              Text(
+                                                "${products.elementAt(index).selling_price} ل.س ",
+                                                style: TextStyle(
+                                                    color: Colors.red, fontSize: 12),
+                                              ),
+                                              Text(""),
+                                              Text("")
+                                            ],
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                          ),
+                                        ), flex: 4,)
+
+
                                       ],
                                     ),
                                   ),

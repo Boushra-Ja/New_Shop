@@ -37,7 +37,7 @@ class OrderDetailController extends GetxController {
   Future<void> fetch_order_products()async{
 
     final response = await http.get(Uri.parse(
-        '${MyApp.api}/api/all_orderproduct/${order_id}/${status_id}'));
+        '${MyApp.api}/api/all_orderproduct/${order_id}'));
     if (response.statusCode == 200) {
       OrderProductModel orderProductModel = OrderProductModel.fromJson(jsonDecode(response.body));
       order_products.assignAll(orderProductModel.data) ;
@@ -49,6 +49,9 @@ class OrderDetailController extends GetxController {
     }
     else
       print("error");
+
+    print(order_products) ;
+    print(selected_options) ;
 
     isLoading.value = false;
 

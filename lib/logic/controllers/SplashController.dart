@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:new_shop/models/Boshra/orders/OrderProduct.dart';
 import 'dart:async';
 
 import '../../routes/routes.dart';
@@ -42,10 +43,13 @@ class SplashController extends GetxController {
   void onInit() {
   //   clerestorage();
     splash();
+
     super.onInit();
   }
 
   splash() async {
+    await storage.write(key: 'basket', value: null);
+
     try {
       loading.value = true;
       await isAuth();

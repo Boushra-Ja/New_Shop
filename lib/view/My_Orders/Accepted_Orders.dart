@@ -25,10 +25,8 @@ class Accepted_Orders extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
                     onTap: () {
-                      // print(((controller.acceptence_orders[controller.acceptence_orders.keys.elementAt(index)]) as List<OrderProduct>).elementAt(0) ) ;
-                      // print((controller.acceptence_orders[controller.acceptence_orders.keys.elementAt(index)]).runtimeType ) ;
 
-                     Get.to(OrderDeatil( order_id: controller.acceptence_orders[controller.acceptence_orders.keys.elementAt(index)]!.order_id, index: index,status_id: controller.acceptence_orders[controller.acceptence_orders.keys.elementAt(index)]!.status_id,));
+                     Get.to(()=>OrderDeatil( order_id: controller.acceptence_orders[controller.acceptence_orders.keys.elementAt(index)]!.order_id, index: index,status_id: controller.acceptence_orders[controller.acceptence_orders.keys.elementAt(index)]!.status_id,));
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(

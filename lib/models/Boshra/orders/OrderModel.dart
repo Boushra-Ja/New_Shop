@@ -2,15 +2,18 @@
 
 class Order{
 
-  int store_id , customer_id ,order_id ;
+  int store_id  ,order_id ,discount_codes_id , status_id;
+  String  customer_name , created_at ,store_name , store_image   , delivery_time;
 
 
   factory Order.fromJson(Map<String , dynamic> json)
   {
-    return Order(store_id : json['store_id'] , customer_id : json['customer_id'] , order_id : json['order_id'] );
+    return Order(store_id : json['store_id'] , customer_name : json['customer_name'] ,
+        order_id : json['order_id'] ,created_at : json['created_at'] , store_name : json['store_name']
+        ,store_image : json['store_image'] , discount_codes_id : json['discount_codes_id'] , status_id:json['status_id'] , delivery_time:json['delivery_time']);
   }
 
-  Order({required this.store_id , required this.customer_id , required this.order_id });
+  Order({required this.store_id , required this.customer_name , required this.order_id , required this.created_at , required this.store_name , required this.store_image , required this.discount_codes_id , required this.status_id , required this.delivery_time});
 
 }
 

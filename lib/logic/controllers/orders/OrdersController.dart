@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:new_shop/models/Boshra/orders/OrderModel.dart';
 import 'package:new_shop/models/Boshra/orders/OrderProduct.dart';
 import 'dart:convert';
 import '../../../main.dart';
@@ -9,9 +10,9 @@ class OrdersController extends GetxController{
 
   var index = 0.obs ;
   var user_id ;
-  Map<int , OrderProduct>acceptence_orders = <int ,OrderProduct>{}.obs;
-  Map<int , OrderProduct> wating_orders = <int , OrderProduct>{}.obs;
-  Map<int , OrderProduct >recieved_orders = <int ,OrderProduct>{}.obs;
+  Map<int , Order>acceptence_orders = <int ,Order>{}.obs;
+  Map<int , Order> wating_orders = <int , Order>{}.obs;
+  Map<int , Order >recieved_orders = <int ,Order>{}.obs;
   final storage=const FlutterSecureStorage();
 
   var isLoading = true.obs ;
@@ -25,7 +26,7 @@ class OrdersController extends GetxController{
     final response = await http.get(Uri.parse('${MyApp.api}/api/accept_orders/${user_id}')) ;
 
     if(response.statusCode == 200 ) {
-      OrderProductModel orderModel = OrderProductModel.fromJson(jsonDecode(response.body));
+      OrderModel orderModel = OrderModel.fromJson(jsonDecode(response.body));
 
       for(int i = 0 ; i < orderModel.data.length ; i++)
         {
@@ -44,7 +45,7 @@ class OrdersController extends GetxController{
     final response = await http.get(Uri.parse('${MyApp.api}/api/waiting_orders/${user_id}')) ;
 
     if(response.statusCode == 200 ) {
-      OrderProductModel orderModel = OrderProductModel.fromJson(jsonDecode(response.body));
+      OrderModel orderModel = OrderModel.fromJson(jsonDecode(response.body));
 
       for(int i = 0 ; i < orderModel.data.length ; i++)
       {
@@ -63,7 +64,7 @@ class OrdersController extends GetxController{
     final response = await http.get(Uri.parse('${MyApp.api}/api/received_orders/${user_id}')) ;
 
     if(response.statusCode == 200 ) {
-      OrderProductModel orderModel = OrderProductModel.fromJson(jsonDecode(response.body));
+      OrderModel orderModel = OrderModel.fromJson(jsonDecode(response.body));
 
       for(int i = 0 ; i < orderModel.data.length ; i++)
       {

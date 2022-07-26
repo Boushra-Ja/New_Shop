@@ -8,9 +8,9 @@ import '../../../main.dart';
 import '../../../view/Seggestions.dart';
 
 class GiftReqController extends GetxController {
-  var selectedFromAge = 0  , selectedToAge = 0;
+  var selectedAge = " "  ;
   var selectedMaterial =  "";
-  var Gift_party = "" ;
+  var Gift_party = " " ;
   int fromprice = 0 , toprice = 1000;
   var isLoading = true.obs , isLoad = false.obs ;
   List<Product>products = <Product>[].obs ;
@@ -22,24 +22,17 @@ class GiftReqController extends GetxController {
   GlobalKey<FormState> formstate6 = new GlobalKey<FormState>();
 
   var AgeFromlist = [
-   3 , 5 , 10 , 18, 25 , 40
+    "اطفال" , "شبابي" , "الكبار" ,"كل الاعمار"
   ];
 
-  var AgeTolist =[
-    5 , 10 , 18 , 25, 40 , 50
-
-  ];
 
   Map<String , ShopName>Materiallist = <String , ShopName>{}.obs ;
 
-  void setSelectedFromAge(int value) {
-    selectedFromAge = value;
+  void setSelectedAge(var value) {
+    selectedAge = value;
     update() ;
   }
-  void setSelectedToAge(int value) {
-    selectedToAge = value;
-    update() ;
-  }
+
 
   void setSelectedMaterial(String value) {
     selectedMaterial = value;
@@ -71,12 +64,7 @@ class GiftReqController extends GetxController {
     return null;
   }
 
-  String? validate_to_age() {
-    if (selectedFromAge > selectedToAge) {
-      return "غير صالح";
-    }
-    return null;
-  }
+
 
   @override
   void onInit() {
@@ -117,23 +105,16 @@ class GiftReqController extends GetxController {
     formdata3!.save();
     formdata4!.save() ;
     formdata5!.save();
-    formdata6!.save();
+
     isLoad.value = true ;
-    if( formdata5.validate())
+    final response = await http.get(Uri.parse('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedAge}/${selectedMaterial}/${fromprice}/${toprice}')) ;
+    if(response.statusCode == 200)
     {
-      if(formdata6.validate()) {
-        final response = await http.get(Uri.parse('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedFromAge}/${selectedToAge}/${selectedMaterial}/${fromprice}/${toprice}')) ;
-        print('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedFromAge}/${selectedToAge}/${selectedMaterial}/${fromprice}/${toprice}') ;
-        if(response.statusCode == 200)
-        {
-          ProductModel pr = ProductModel.fromJson(jsonDecode(response.body)) ;
-          products.assignAll(pr.data) ;
-          Get.to(Seggestions(
-              title: "الاقتراحات", products: products));
+      ProductModel pr = ProductModel.fromJson(jsonDecode(response.body)) ;
+      products.assignAll(pr.data) ;
+      Get.to(Seggestions(
+          title: "الاقتراحات", products: products));
 
-        }
-
-      }
     }
     isLoad.value = false;
   }

@@ -26,7 +26,8 @@ class OrderReceived extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
                     onTap: () {
-                      Get.to(OrderDeatil( order_id: controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.order_id, index: index, status_id: controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.status_id,));
+                      Get.to(()=>
+                          OrderDeatil( order_id: controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.order_id, index: index, status_id: controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.status_id,));
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -64,7 +65,7 @@ class OrderReceived extends StatelessWidget {
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          Get.to(BillPage(controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.order_id  , index+1) );
+                          Get.to(()=>BillPage(controller.recieved_orders[controller.recieved_orders.keys.elementAt(index)]!.order_id  , index+1) );
                         },
                         icon: Icon(
                           Icons.payment,

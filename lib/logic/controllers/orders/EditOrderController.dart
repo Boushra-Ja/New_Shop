@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../main.dart';
 import '../../../models/Boshra/orders/OrderProduct.dart';
@@ -14,7 +15,16 @@ class EditOrderController extends GetxController{
   Map<int, Map<String, List<Option>>> options = HashMap();
   Map<int  , List<Option>> selected_options = <int  , List<Option>>{}.obs;
   List<OrderProduct> order_products = <OrderProduct>[].obs ;
+  List<GlobalKey<FormState>> formstate = <GlobalKey<FormState>>[];
 
+  void set_quantity(val , ind){
+    order_products.elementAt(ind).amount = val ;
+    update();
+  }
+  void setchexkboxValue(String val , ind){
+    order_products.elementAt(ind).gift_order = val ;
+    update();
+  }
   Future<void> fetch_order_products()async{
 
     final response = await http.get(Uri.parse(
@@ -26,11 +36,14 @@ class EditOrderController extends GetxController{
       for(int i = 0 ; i < order_products.length ; i++)
         {
           await get_all_options(order_products.elementAt(i).product_id) ;
-          await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
+         // await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
         }
     }
     else
       print("error");
+
+    for(int i =0 ; i < order_products.length ; i++)
+        formstate.insert(i, new GlobalKey()) ;
 
     isLoading.value = false ;
 
@@ -104,26 +117,49 @@ class EditOrderController extends GetxController{
 
         if (response.statusCode == 200) {
           print('success') ;
-          Get.snackbar("تم التعديل", "نجحت عملية تعديل خيارات المنتج") ;
-          Get.back() ;
         }
       }
     }
   }
 
-  Future<void> delete_product(int order_product_id)async{
+  Future<void> delete_product(int order_prod_id)async{
 
     final response = await http.delete(
-      Uri.parse('${MyApp.api}/api/order_product/$order_product_id'),);
+      Uri.parse('${MyApp.api}/api/delete/wating_order/$order_prod_id'),);
+
 
     if(response.statusCode == 200)
     {
       print('success') ;
-      Get.snackbar("تم التعديل", "نجحت عملية حذف خيارات المنتج") ;
-      Get.back() ;
+      Get.snackbar("تم حذف الطلب", "قم بتحديث الصفحة..") ;
     }
   }
 
+  Future<void> edit_order_product(int ind)async{
+
+    var formdate = formstate.elementAt(ind).currentState ;
+    if(formdate!.validate())
+      formdate.save() ;
+
+    final response = await http.post(
+        Uri.parse('${MyApp.api}/api/edit/order_product'),
+        headers: {'Content-Type': 'application/json' ,
+          'Accept' : 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'product_id' : order_products.elementAt(ind).product_id,
+        //  'order_id' :order_products.elementAt(ind).order_id ,
+          'amount' :  order_products.elementAt(ind).amount ,
+          'gift_order' :  order_products.elementAt(ind).gift_order
+        }));
+
+    if(response.statusCode == 200)
+      {
+        print('success') ;
+        Get.snackbar("تم تعديل الطلب", "قم بتحديث الصفحة..") ;
+      }
+
+  }
   @override
   void onInit() async{
     super.onInit();

@@ -4,6 +4,7 @@ import 'package:new_shop/logic/controllers/DrawerController/SettingPageControlle
 import 'package:new_shop/view/DrawerPages/Notifications.dart';
 import 'package:new_shop/view/DrawerPages/ReportPage.dart';
 import 'package:new_shop/view/DrawerPages/SettingPage.dart';
+import 'package:new_shop/view/DrawerPages/ShowDiscounts.dart';
 import 'package:new_shop/view/auth/LoginView.dart';
 import '../../main.dart';
 import '../../utls/Themes.dart';
@@ -88,6 +89,17 @@ class myDrawer extends GetView<SettingPageController> {
             ),
             onTap: () {
               Get.to(Chat()) ;
+
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.chat),
+            title:  Text('خصوماتي', style: TextStyle(  color:
+            controller.col==1?Colors.white:Colors.black,),
+              // Themes.bodyText1,
+            ),
+            onTap: () {
+              Get.to(ShowDiscounts()) ;
 
             },
           ),

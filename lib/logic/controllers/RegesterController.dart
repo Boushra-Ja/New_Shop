@@ -60,6 +60,11 @@ class RegisterController extends GetxController {
 
           await storage.write(key: "token", value: data.token);
           await storage.write(key: "isDarkMode", value:"false");
+          await storage.write(key: "id", value: '${data.user.id}');
+          await storage.write(key: "name", value:'${ data.user.name}');
+          await storage.write(key: "email", value: '${data.user.email}');
+          await storage.write(key: "image", value: '${data.user.image}');
+          await storage.write(key: "password", value: passwordController.text);
           registerFormkey.currentState!.save();
 
           Get.toNamed('/HomePage');

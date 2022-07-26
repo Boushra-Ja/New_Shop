@@ -140,6 +140,7 @@ class ShopProfileController extends GetxController{
 
           }
       }
+    print(products_classification) ;
   }
 
   Future<void> addToFavouriteStore()async {

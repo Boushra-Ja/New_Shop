@@ -203,24 +203,10 @@ class GiftRequest extends GetView<GiftReqController> {
                                         "العمر المحدد",
                                         style: Themes.bodyText1,
                                       )),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                              child: Row(
-
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(child: Text("من" ,  style: Themes.bodyText1,
-                                  ) , flex: 1,) ,
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                    //    height: 40,
+                                      //    height: 40,
                                         child: GetBuilder<GiftReqController>(builder: (GiftReqController controller){
                                           return Form(
                                             key: controller.formstate2,
@@ -238,7 +224,7 @@ class GiftRequest extends GetView<GiftReqController> {
                                                   filled: true,
                                                   fillColor: Colors.white),
                                               onSaved: (val){
-                                                val == null ? controller.setSelectedFromAge(0) : controller.setSelectedFromAge(int.parse(val.toString())) ;
+                                                val == null ? controller.setSelectedAge("") : controller.setSelectedAge(int.parse(val.toString())) ;
 
                                               },
                                               validator: (val) {
@@ -257,63 +243,17 @@ class GiftRequest extends GetView<GiftReqController> {
                                                   ),
                                                   value: item,
                                                 );
-                                              }).toList(), onChanged: (int? value) {  },
+                                              }).toList(), onChanged: (String? value) {  },
                                             ),
                                           );
                                         })
                                     ),),
-                                  Expanded(child: Text("  إلى" ,style: Themes.bodyText1,) , flex: 1,) ,
-                                  Expanded(
-                                    flex: 3,
-                                    child:  Container(
-                                      //  height: 50,
-                                        child: GetBuilder<GiftReqController>(builder: (GiftReqController controller){
-                                          return Form(
-                                            key: controller.formstate6,
-                                            child: DropdownButtonFormField(
-                                              isDense: true,
-                                              autovalidateMode:
-                                              AutovalidateMode.onUserInteraction,
-                                              hint: Text("اختر" , style: Themes.subtitle3,),
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(30)),
-                                                  contentPadding: EdgeInsets.fromLTRB(
-                                                      10, 0.00001, 12, 0.00001),
-                                                  filled: true,
-                                                  fillColor: Colors.white),
-                                              onSaved: (val){
-                                                val == null ? controller.setSelectedToAge(0) : controller.setSelectedToAge(int.parse(val.toString())) ;
-
-                                              },
-                                              validator: (val) {
-
-                                                return controller.validate_to_age() ;
-                                              },
-                                              items: controller.AgeTolist.map((item) {
-                                                return DropdownMenuItem(
-                                                  child: Text(
-                                                    "$item",
-                                                    textDirection: TextDirection.rtl,
-                                                    textAlign: TextAlign.start,
-                                                    style: const TextStyle(
-                                                      fontWeight: FontWeight.w300,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                  value: item,
-                                                );
-                                              }).toList(), onChanged: (int? value) {  },
-                                            ),
-                                          );
-                                        })
-                                    ),
-                                  ),
-                                  //Expanded(child: SizedBox.shrink(), flex: 1,) ,
 
                                 ],
                               ),
+                            ),
+                            SizedBox(
+                              height: 25,
                             ),
                             SizedBox(
                               height: 25,

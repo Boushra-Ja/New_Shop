@@ -42,10 +42,10 @@ class OrderDetailController extends GetxController {
       OrderProductModel orderProductModel = OrderProductModel.fromJson(jsonDecode(response.body));
       order_products.assignAll(orderProductModel.data) ;
 
-      for(int i = 0 ; i < order_products.length ; i++)
-      {
-        await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
-      }
+      // for(int i = 0 ; i < order_products.length ; i++)
+      // {
+      //   await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
+      // }
     }
     else
       print("error");

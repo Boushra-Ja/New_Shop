@@ -8,7 +8,7 @@ import '../../../main.dart';
 import '../../../view/Seggestions.dart';
 
 class GiftReqController extends GetxController {
-  var selectedFromAge = 0  , selectedToAge = 0;
+  var selectedAge = 0  ;
   var selectedMaterial =  "";
   var Gift_party = "" ;
   int fromprice = 0 , toprice = 1000;
@@ -22,24 +22,17 @@ class GiftReqController extends GetxController {
   GlobalKey<FormState> formstate6 = new GlobalKey<FormState>();
 
   var AgeFromlist = [
-   3 , 5 , 10 , 18, 25 , 40
+    "اطفال" , "شبابي" , "الكبار"
   ];
 
-  var AgeTolist =[
-    5 , 10 , 18 , 25, 40 , 50
-
-  ];
 
   Map<String , ShopName>Materiallist = <String , ShopName>{}.obs ;
 
-  void setSelectedFromAge(int value) {
-    selectedFromAge = value;
+  void setSelectedAge(var value) {
+    selectedAge = value;
     update() ;
   }
-  void setSelectedToAge(int value) {
-    selectedToAge = value;
-    update() ;
-  }
+
 
   void setSelectedMaterial(String value) {
     selectedMaterial = value;
@@ -71,12 +64,7 @@ class GiftReqController extends GetxController {
     return null;
   }
 
-  String? validate_to_age() {
-    if (selectedFromAge > selectedToAge) {
-      return "غير صالح";
-    }
-    return null;
-  }
+
 
   @override
   void onInit() {
@@ -122,8 +110,8 @@ class GiftReqController extends GetxController {
     if( formdata5.validate())
     {
       if(formdata6.validate()) {
-        final response = await http.get(Uri.parse('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedFromAge}/${selectedToAge}/${selectedMaterial}/${fromprice}/${toprice}')) ;
-        print('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedFromAge}/${selectedToAge}/${selectedMaterial}/${fromprice}/${toprice}') ;
+
+        final response = await http.get(Uri.parse('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedAge}/${selectedMaterial}/${fromprice}/${toprice}')) ;
         if(response.statusCode == 200)
         {
           ProductModel pr = ProductModel.fromJson(jsonDecode(response.body)) ;

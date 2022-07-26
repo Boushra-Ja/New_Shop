@@ -39,10 +39,6 @@ class AuthServices {
     }else
       return null;
   }
-
-
-
-
   static doo({required product_id}) async {
 
 print("this dooo");
@@ -67,22 +63,18 @@ print("this dooo");
     else{
       return null;}
   }
-
   static changeAmount({required product_id,required order_id,required amount}) async {
 
 
     var response = await http.post(Uri.parse('${MyApp.api}/api/ChangeAmount/$product_id/$order_id/$amount'),
         headers: {'Content-Type': 'application/json'},);
+    print(response.body);
+  }
+  static Deleverytime({required order_id,required date}) async {
 
 
-
-  //  if (response.statusCode == 200||response.statusCode == 201) {
-     /// print(response.statusCode);
- //     print("********************* response in update ************************************");
-    //  print(response.body);
-   // }
-    // else {
-    //   return "null";}
+    var response = await http.post(Uri.parse('${MyApp.api}/api/DeleveryTime/$order_id/$date'),
+        headers: {'Content-Type': 'application/json'},);
   }
   static ChangeToCommit({required product_id,required order_id}) async {
 

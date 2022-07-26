@@ -9,6 +9,8 @@ import '../utls/Themes.dart';
 import 'Products.dart';
 
 class HomePage extends GetView<AppBarController> {
+  final sampleController1 = Get.put(AppBarController(), permanent: true);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppBarController>(
@@ -18,9 +20,11 @@ class HomePage extends GetView<AppBarController> {
             body: SizedBox.expand(
 
               child: PageView(
-                physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                physics:const ScrollPhysics(parent:
+                NeverScrollableScrollPhysics()),
 
-                children: [
+                children:  [
+
                   Favorite(),
                   Orders(),
                   ShopsPage(),
@@ -29,7 +33,9 @@ class HomePage extends GetView<AppBarController> {
                 controller: controller.pageController,
               ),
             ),
-            bottomNavigationBar: Obx(
+            bottomNavigationBar:
+            SizedBox(height: 95, child:
+            Obx(
                   () => FancyBottomNavigation(
 
                 tabs: [
@@ -55,14 +61,14 @@ class HomePage extends GetView<AppBarController> {
                 onTabChangedListener: (position) {
                   controller.currentIndex.value = position;
                   print(position) ;
-                  controller.pageController.jumpToPage(position);
+                 controller.pageController.jumpToPage(position);
                 },
                 initialSelection: controller.currentIndex.value,
                 key: controller.bottomNavigationKey,
                 inactiveIconColor: Colors.grey,
                 circleColor: Themes.color,
               ),
-            ),
+            ),),
           );
         });
   }

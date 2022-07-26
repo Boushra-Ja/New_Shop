@@ -10,6 +10,7 @@ import '../../models/batool/FavoriteStore.dart';
 class FavoriteController extends GetxController {
   var Tabbar = 1.obs;
   var loading = true.obs;
+  var check=''.obs;
   var listfavoite = <Product>[].obs;
   var listfavoitestore = <Shop>[].obs;
   late List jsonResponse;
@@ -23,10 +24,31 @@ class FavoriteController extends GetxController {
 
   FetchData_favorite() async {
 
-    final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteProduct/f'));
-    ProductModel productModel = ProductModel.fromJson(jsonDecode(response.body)) ;
+
+    final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteProduct/index'));
+    ProductModel productModel = ProductModel.fromJson(jsonDecode(response.body));
     listfavoite.assignAll(productModel.data );
-    if (response.statusCode == 200) {
+
+    if(response.statusCode==200 && listfavoite.isEmpty) {
+      check.value='NODATA';
+      print("99999");
+      print( check.value);
+      print( listfavoite.length);
+
+      update();
+
+    }
+
+
+
+    if (response.statusCode == 200 && listfavoite.isNotEmpty) {
+      check.value='DATA';
+      print("11111");
+      print( check.value);
+      print( listfavoite.length);
+
+
+      update();
 
       for(int i=0;i<listfavoite.length;i++)
         {
@@ -44,7 +66,7 @@ class FavoriteController extends GetxController {
 
   FetchData_favorite_store() async {
 
-    final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteStore/f2'));
+    final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteStore/Show_Favorite'));
     ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
     listfavoitestore.assignAll(shopModel.data );
     print("===============================================================");
@@ -62,9 +84,6 @@ class FavoriteController extends GetxController {
           listfavoitestore[i].review += listfavoitestore[i].all_review.elementAt(k)['value'] as int ;
            int j=(listfavoitestore[i].review / 3) .toInt();  ;
             listfavoitestore[i].review = j    ;
-
-
-
 
       }
     }

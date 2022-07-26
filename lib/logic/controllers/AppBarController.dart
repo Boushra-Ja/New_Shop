@@ -15,7 +15,7 @@ class AppBarController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController();
+  pageController = PageController();
   }
 
   @override

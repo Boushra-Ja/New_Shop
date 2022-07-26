@@ -8,7 +8,8 @@ class CartsModel{
   {
     return CartsModel(
         data:List<Carts>.from(
-            json['data'].map((p) =>Carts.fromJson(p)))
+            json['data'].map((p) =>
+                Carts.fromJson(p)))
             .toList()
     ) ;
   }
@@ -22,9 +23,12 @@ class Carts {
   int myamount=0;
 
 
+
  Carts({
-   required this.order_id , required this.amount
-   ,required this.myProducts,required this.created_at
+   required this.order_id ,
+   required this.amount
+   ,required this.myProducts,
+   required this.created_at
  });
 
 
@@ -63,6 +67,7 @@ class Carts {
 
 class MyProducts {
  late int productId;
+ int isradio=0;
  late String productName;
  late String image;
  late  int sellingPrice;

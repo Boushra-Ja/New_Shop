@@ -8,21 +8,20 @@ import '../logic/controllers/CartController.dart';
 import '../models/batool/FavoriteProduct2Model.dart';
 import '../services/auth_services.dart';
 import '../utls/Themes.dart';
-import 'ConstantPages/AppBar.dart';
 import 'ConstantPages/Drawer.dart';
 import 'Seggestions.dart';
 
 class Product extends GetView<ProductController> {
-  final sampleController1 = Get.put(AppBarController(), permanent: true);
+  final sampleController1 = Get.put(AppBarController());
   final sampleController2 = Get.put(ProductController(),permanent: true);
   final sampleController3 = Get.put(SettingPageController(),permanent: true);
   final sampleController4= Get.put(CartController(),permanent: true);
 
-  String api = "http://192.168.1.104:8000/" ;
+  String api = "http://192.168.1.105:8000/";
   @override
   Widget build(BuildContext context) {
     Get.put(ProductController( ));
-    controller.onInit();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Directionality(
@@ -40,7 +39,7 @@ class Product extends GetView<ProductController> {
               GetX<ProductController>(
                   builder: (c) =>  Center(
                       child:
-                      c.listpoduct_classification.isEmpty && c.listpoduct_sales.isEmpty && c.listpoduct_salary.isEmpty
+                        c.listpoduct_classification.isEmpty && c.listpoduct_sales.isEmpty && c.listpoduct_salary.isEmpty
                           ? Center(child: CircularProgressIndicator())
                           : GetX<ProductController>(
                           builder: (c) =>
@@ -48,42 +47,48 @@ class Product extends GetView<ProductController> {
                                   child:  c.listpoduct_classification.isEmpty && c.listpoduct_sales.isEmpty && c.listpoduct_salary.isEmpty
                                       ? CircularProgressIndicator()
                                       : GetBuilder<ProductController>(
-                                      builder: (controller) {
-                                        return
-                                          Column(children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 40.0),
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(width: 5,),
+                                        builder: (controller) {
+                                        return Column(children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 40.0),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(width: 5,),
 
-                                                  GetBuilder<AppBarController>(init : AppBarController(),builder: (controller){
-                                                    //controller.hh();
-                                                    return IconButton(
-                                                        onPressed: () {
-                                                          controller.getscaffoldKey2().currentState!.openDrawer();
-                                                        },
-                                                        icon: Icon(
-                                                          Icons.menu,
-                                                          size: 35,
-                                                          color: Themes.color3,
-                                                        ));
-                                                  }) ,
-                                                  SizedBox(width: 10,),
-                                                  Container(
-                                                    width: MediaQuery.of(context).size.width*0.65,
-                                                    height: 42,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
+                                                GetBuilder<AppBarController>(init : AppBarController(),builder: (controller){
+//controller.hh();
+                                                  return IconButton(
+                                                      onPressed: () {
+                                                        controller.getscaffoldKey2().currentState!.openDrawer();
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.menu,
+                                                        size: 35,
                                                         color: Themes.color3,
-                                                        width: 2,
+                                                      ));
+                                                }) ,
+                                                SizedBox(width: 10,),
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width*0.65,
+                                                  height: 42,
+                                                  child:  DecoratedBox(
+                                                    decoration: BoxDecoration(
+                                                      color:Colors.white, //background color of dropdown button
+                                                      border: Border.all(
+                                                        color: sampleController3.col==0?
+                                                        Themes.color:
+                                                        Colors.white,
+                                                        width: 1,
                                                       ),
-                                                      borderRadius: BorderRadius.circular(20),
+                                                      borderRadius: BorderRadius.circular(20), //border raiuds of dropdown button
+                                                      boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                        BoxShadow(
+                                                            color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
+                                                            blurRadius: 5) //blur radius of shadow
+                                                      ],
+
                                                     ),
-                                                    child:
-
-
-                                                    Row(children: [
+                                                    child:  Row(children: [
                                                       IconButton(
                                                         onPressed: () {
                                                           print("search");
@@ -94,158 +99,392 @@ class Product extends GetView<ProductController> {
                                                       Text(" انقر هنا للبحث ..."),
                                                     ]),
                                                   ),
+                                                ),
 
-                                                  SizedBox(width: 8,),
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        Get.toNamed('/Cart');},
-                                                      icon: Icon(
-                                                        Icons.shopping_cart_outlined,
-                                                        size: 30,
-                                                        color: Themes.color3,
-                                                      )),
-                                                ],
-                                              ),
-                                            ) ,                                            SizedBox(height: 20,),
-                                            Expanded(
-                                              flex: 1,
-                                              child:
-                                              ListView.builder(
-                                                  scrollDirection:
-                                                  Axis.horizontal,
-                                                  itemCount: controller.listpoduct_classification.length,
-                                                  itemBuilder: (context, index) {
-                                                    return
-                                                      Container(
-                                                          padding: EdgeInsets.only(right:10,left: 20,bottom: 1),
-                                                          margin: EdgeInsets.only(top:10,bottom: 50,left: 10,right: 5),
-                                                          child:  DecoratedBox(
-                                                              decoration: BoxDecoration(
-                                                                  color:Colors.white, //background color of dropdown button
-                                                                  border: Border.all(
-                                                                    color: sampleController3.col==0?
-                                                                    Themes.color:
-                                                                    Colors.white,
-                                                                    width: 1,
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(20), //border raiuds of dropdown button
-                                                                  boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                                    BoxShadow(
-                                                                        color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
-                                                                        blurRadius: 5) //blur radius of shadow
-                                                                  ]),
-
-                                                              child:Padding(
-                                                                  padding: EdgeInsets.only(left:30, right:30),
-                                                                  child:
-
-                                                                  DropdownButton<String>(
-
-                                                                      borderRadius:BorderRadius.circular(20),
-                                                                      isExpanded: false,
-
-                                                                      style: Themes.subtitle1,
-                                                                      alignment: Alignment.center,
-                                                                      dropdownColor: sampleController3.col==0?
-                                                                      Colors.grey:
-                                                                      Colors.white,
-                                                                      hint: Text(
-
-                                                                        "${controller.listpoduct_classification.elementAt(index).title}",
-                                                                        style: TextStyle(color: sampleController3.col==0?Colors.black:Colors.black,fontWeight: FontWeight.bold),),
-                                                                      value:
-                                                                      controller.listpoduct_classification.elementAt(index).id == 1 ? controller.selectedValue1 : controller.listpoduct_classification.elementAt(index).id == 2 ?
-                                                                      controller.selectedValue2 : controller.listpoduct_classification.elementAt(index).id == 3 ?
-                                                                      controller.selectedValue3 : controller.listpoduct_classification.elementAt(index).id == 4 ?
-                                                                      controller.selectedValue4 : controller.listpoduct_classification.elementAt(index).id == 5 ?
-                                                                      controller.selectedValue5 : controller.listpoduct_classification.elementAt(index).id == 6 ?
-                                                                      controller.selectedValue6 : controller.listpoduct_classification.elementAt(index).id == 7 ?
-                                                                      controller.selectedValue7 : controller.listpoduct_classification.elementAt(index).id == 8 ?
-                                                                      controller.selectedValue8 : controller.listpoduct_classification.elementAt(index).id == 9 ?
-                                                                      controller.selectedValue9 : controller.selectedValue10,
-                                                                      onChanged: (newValue) {
-                                                                        print(newValue);
-                                                                        controller.call_drops(1, newValue);
-                                                                        controller.call_drops(2, newValue);
-                                                                        controller.call_drop(3, newValue);
-                                                                        controller.call_drop(4, newValue);
-
-                                                                        if (controller.listpoduct_classification.elementAt(index).id == 1)
-                                                                          controller.onSelected(newValue!, 1);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 2)
-                                                                          controller.onSelected(newValue!, 2);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 3)
-                                                                          controller.onSelected(newValue!, 3);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 4)
-                                                                          controller.onSelected(newValue!, 4);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 5)
-                                                                          controller.onSelected(newValue!, 5);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 6)
-                                                                          controller.onSelected(newValue!, 6);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 7)
-                                                                          controller.onSelected(newValue!, 7);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 8)
-                                                                          controller.onSelected(newValue!, 8);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 9)
-                                                                          controller.onSelected(newValue!, 9);
-                                                                        else if (controller.listpoduct_classification.elementAt(index).id == 10)
-                                                                          controller.onSelected(newValue!, 10);
-                                                                      },
-                                                                      elevation: 10,
-                                                                      items: [
-
-
-                                                                        for (var data in
-                                                                        controller.listpoduct_classification.elementAt(index).id == 1 ?
-                                                                        controller.list1_Secondary.value :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 2 ?
-                                                                        controller.list2_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 3 ?
-                                                                        controller.list3_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 4 ?
-                                                                        controller.list4_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 5 ?
-                                                                        controller.list5_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 6 ?
-                                                                        controller.list6_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 7 ?
-                                                                        controller.list7_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 8 ?
-                                                                        controller.list8_Secondary :
-                                                                        controller.listpoduct_classification.elementAt(index).id == 9 ?
-                                                                        controller.list9_Secondary :
-                                                                        controller.list10_Secondary
-
-
-                                                                        )
-                                                                          DropdownMenuItem(
-                                                                            child: Text("${data.title}",),
-                                                                            value: "${data.title}",)
-                                                                      ]
-                                                                  )))
-                                                      );
-
-                                                  }
-                                              ),
+                                                SizedBox(width: 8,),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      Get.toNamed('/Cart');},
+                                                    icon: Icon(
+                                                      Icons.shopping_cart_outlined,
+                                                      size: 30,
+                                                      color: Themes.color3,
+                                                    )),
+                                              ],
                                             ),
-                                            Expanded(
-                                                flex: 5,
-                                                child:
-                                                ListView(children: [
+                                          ),
+                                          SizedBox(height: 20,),
+
+                                          Expanded(
+                                            flex: 1,
+                                            child:
+                                            ListView.builder(
+                                                scrollDirection:
+                                                Axis.horizontal,
+                                                itemCount: controller.listpoduct_classification.length,
+                                                itemBuilder: (context, index) {
+                                                  var i=0;
+                                                  i++;
+                                                  return
+                                                    Container(
+                                                        padding: EdgeInsets.only(right:10,left: 20),
+                                                        margin: EdgeInsets.only(top:10,bottom: 50,left: 10,right: 5),
+                                                        child:  DecoratedBox(
+                                                            decoration: BoxDecoration(
+                                                                color:Colors.white, //background color of dropdown button
+                                                                border: Border.all(
+                                                                  color: sampleController3.col==0?
+                                                                  Themes.color:
+                                                                  Colors.white,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(20), //border raiuds of dropdown button
+                                                                boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                                  BoxShadow(
+                                                                      color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
+                                                                      blurRadius: 5) //blur radius of shadow
+                                                                ]
+                                                            ),
+
+                                                            child:Padding(
+                                                                padding: EdgeInsets.only(left:30, right:30),
+                                                                child:
+
+                                                  Obx( () => DropdownButton<String>(
+
+                                                                    borderRadius:BorderRadius.circular(20),
+                                                                    isExpanded: false,
+
+                                                                    style: Themes.subtitle1,
+                                                                    alignment: Alignment.center,
+                                                                    dropdownColor: sampleController3.col==0?
+                                                                    Colors.white:
+                                                                    Colors.white,
+                                                                    hint: Text(
+
+                                                                      "${controller.listpoduct_classification.elementAt(index).title}",
+                                                                      style: TextStyle(color: sampleController3.col==0?Colors.black:Colors.black,fontWeight: FontWeight.bold),),
+
+
+                                                                    value:
+                                                                    controller.selectedValue.elementAt(index+i),
+
+
+
+
+                                                                    onChanged: (newValue) {
+
+                                                                        print(newValue);
+                                                                      controller.onSelected(newValue!, controller.listpoduct_classification.elementAt(index).id);
+                                                                     print(controller.selectedValue.elementAt(index)) ;
+                                                                        controller.DropDown(1,newValue);
+                                                                        controller.DropDown(2,newValue);
+                                                                        controller.DropDown(4,newValue);
+                                                                    },
+                                                                    elevation: 10,
+                                                                    items: [
+
+
+                                                                      for (var data in
+                                                                      controller.listpoduct_classification.elementAt(index).mySecondary
+
+
+
+                                                                      )
+                                                                        DropdownMenuItem(
+                                                                          child: Text("${data.title}",),
+                                                                          value: "${data.title}",)
+                                                                    ]
+                                                                )),
+                                                            )
+                                                        )
+                                                    );
+
+                                                }
+                                            ),
+                                          ),
+
+                                          Expanded(
+                                              flex: 5,
+                                              child:
+                                              SingleChildScrollView(
+
+                                                  child:Column(children: [
 //////////////////////////////////listpoduct_discount
-                                                  c.listpoduct_discount.isEmpty   ? Text('') :
-                                                  Column(
+                                                    c.listpoduct_discount.isEmpty   ? Text('') :
+                                                    Column(
 
-                                                    children: [
+                                                      children: [
 
+                                                        Container(
+
+                                                            height: 298, child:
+                                                        ListView.builder(
+                                                            scrollDirection: Axis.horizontal,
+                                                            itemCount: controller.listpoduct_discount.length,
+                                                            itemBuilder: (context, index) {
+                                                              var item = controller.listpoduct_discount;
+                                                              return
+
+                                                                Column(
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+
+                                                                      index == 0 ?
+                                                                      Row(
+                                                                        children: [
+                                                                          InkWell(
+                                                                            child: Container(
+                                                                              margin: EdgeInsets
+                                                                                  .only(
+                                                                                  right: 28,
+                                                                                  bottom: 10),
+                                                                              child: Text(
+                                                                                  "عروض وحسومات",
+                                                                                  style:
+                                                                                  TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
+                                                                                  sampleController3.col==1?Colors.white:Colors.black,)
+                                                                              ),
+                                                                            ),
+                                                                            onTap: () {
+                                                                              Get.to(
+                                                                                  Seggestions(
+                                                                                    title: "عروض وحسومات",products: [],
+                                                                                  ));
+                                                                            },
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: const EdgeInsets.only(right: 8, bottom: 8),
+                                                                            child: IconButton(
+                                                                                onPressed: () {Get.to(
+                                                                                    Seggestions(title: "عروض وحسومات",products: [],));
+                                                                                },
+                                                                                icon: Icon(
+                                                                                  Icons.arrow_forward,
+                                                                                  color: sampleController3.col==1?Colors.white:
+                                                                                  Colors.black,
+                                                                                  size: 25,
+                                                                                )),
+                                                                          )
+                                                                        ],
+                                                                      ) :
+                                                                      Row(
+                                                                        children: [
+                                                                          InkWell(child:
+                                                                          Container(
+                                                                              margin: EdgeInsets.only(right: 28, bottom: 40),
+                                                                              child: Text("    ")
+                                                                          ),
+                                                                          ),
+
+                                                                        ],
+                                                                      ),
+                                                                      Column(
+                                                                          children: [
+                                                                            SingleChildScrollView(
+                                                                              scrollDirection: Axis.horizontal,
+                                                                              child: Row(
+                                                                                  children: <
+                                                                                      Widget>[
+                                                                                    Column(
+                                                                                        children: [
+                                                                                          Column(
+                                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                            children: [
+                                                                                              Stack(children: [
+                                                                                                InkWell(
+                                                                                                  onTap:(){
+                                                                                                    Get.to(ProductDeatil(controller.listpoduct_discount.elementAt(index).id));
+                                                                                                  },
+                                                                                                  child: Container(
+                                                                                                    margin: EdgeInsets.only(right: 10),
+                                                                                                    width: MediaQuery.of(context).size.width * 0.6,
+                                                                                                    height: 180,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(20),
+                                                                                                      child:
+                                                                                                      Image.network("${api}uploads/product/${item.elementAt(index).image}",
+                                                                                                        fit: BoxFit.cover,
+                                                                                                      ),),
+
+                                                                                                  ),
+                                                                                                ),
+                                                                                                Positioned(
+                                                                                                  left:10,
+                                                                                                  top:20,
+// alignment :Alignment(-1.0, -1.0),// Alignment.topLeft,
+
+                                                                                                  child:
+                                                                                                  InkWell(
+                                                                                                    onTap: () async{
+                                                                                                      print(controller.listpoduct_discount.elementAt(index).id);
+                                                                                                      var data =
+                                                                                                      await AuthServices.doo(
+                                                                                                          product_id: controller.listpoduct_discount.elementAt(index).id);
+                                                                                                      if(data=="add")
+                                                                                                      {
+
+                                                                                                        print("************************before add*************************************");
+                                                                                                        print(controller.listpoduct_f.length);
+
+                                                                                                        Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_discount.elementAt(index).id, id: 9);
+                                                                                                        controller.listpoduct_f.add(g);
+
+                                                                                                        print(controller.listpoduct_f.length);
+                                                                                                        print("************************after add*************************************");
+
+
+
+                                                                                                        print(controller.listpoduct_discount.elementAt(index).isfavorite);
+                                                                                                        print("::::::::::::::::::::::::if::::::::::::::::::::");
+                                                                                                        controller.listpoduct_discount.elementAt(index).isfavorite = true;
+                                                                                                        print(controller.listpoduct_discount.elementAt(index).isfavorite);
+                                                                                                        controller.changeCol(data,1,controller.listpoduct_discount.elementAt(index).id);}
+
+                                                                                                      else{
+
+                                                                                                        controller.listpoduct_discount.elementAt(index).isfavorite = false;
+
+
+
+
+                                                                                                        print("************************before remove*************************************");
+                                                                                                        print(controller.listpoduct_f.length);
+
+
+                                                                                                        for(int i=0;i<controller.listpoduct_f.length;i++){
+                                                                                                          if(controller.listpoduct_discount.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
+                                                                                                            controller.listpoduct_f.removeAt(i);
+
+                                                                                                        }
+
+                                                                                                        print(controller.listpoduct_f.length);
+                                                                                                        print("************************after remove*************************************");
+
+
+                                                                                                        controller.changeCol(data,2,controller.listpoduct_discount.elementAt(index).id);
+                                                                                                      }
+
+
+
+                                                                                                    },
+                                                                                                    child: CircleAvatar(
+                                                                                                      backgroundColor: Themes.color2,
+                                                                                                      child: Icon(
+                                                                                                        Icons.favorite,
+                                                                                                        color:
+                                                                                                        controller.check( controller.listpoduct_discount.elementAt(index).id)
+                                                                                                            ? Colors.red:
+                                                                                                              Colors.black,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ),
+
+                                                                                                )
+                                                                                              ],),
+
+
+
+                                                                                              Row(children:[
+                                                                                                Container(
+
+                                                                                                  margin: EdgeInsets.only(right: 20),
+                                                                                                  child:
+                                                                                                  Row(
+                                                                                                    children: [
+                                                                                                      Text(
+                                                                                                          "${controller.listpoduct_discount.elementAt(index).product_name} ",
+                                                                                                          style: TextStyle( color: controller.col==1?Colors.white: Colors.black,fontWeight: FontWeight.normal,fontSize: 16)
+                                                                                                      ),
+                                                                                                      SizedBox(width: 5,),
+                                                                                                      Icon(
+                                                                                                        controller.listpoduct_discount[index].rating==0?
+                                                                                                        Icons.mood_bad:
+                                                                                                        controller.listpoduct_discount[index].rating==1?
+                                                                                                        Icons.sentiment_satisfied :
+                                                                                                        Icons.sentiment_very_satisfied_outlined,
+                                                                                                        color:
+                                                                                                        controller.listpoduct_discount[index].rating==0?
+                                                                                                        Colors.red:
+                                                                                                        controller.listpoduct_discount[index].rating==1?
+                                                                                                        Colors.orange :
+                                                                                                        Colors.green,
+
+//  sampleController3.col==1?Colors.white: Colors.green,
+
+
+                                                                                                      ),
+                                                                                                      Container(
+                                                                                                          margin: EdgeInsets.only(
+                                                                                                            right: MediaQuery.of(context).size.width * 0.2,),
+                                                                                                          child: Text(
+                                                                                                              "${controller.listpoduct_discount.elementAt(index).costPrice}" +" ل.س ",
+                                                                                                              style: TextStyle( color: sampleController3.col==1?Colors.white: Colors.red,)
+                                                                                                          )),
+                                                                                                    ],
+                                                                                                  ),),
+                                                                                              ]),
+                                                                                            ],),
+
+                                                                                        ]),
+                                                                                    SizedBox(
+                                                                                      width: 25,
+                                                                                    ),
+                                                                                  ]),
+                                                                            ),
+                                                                          ]),
+
+                                                                      SizedBox(
+                                                                        height: 20,
+                                                                      ),
+                                                                    ]);
+                                                            })
+//////////////////////////////////////////////////////////////////////////////////////////
+                                                        ),
+                                                        Row(children: [
+                                                          Container(
+                                                              margin:
+                                                              EdgeInsets.only(
+                                                                  right: 150,
+                                                                  top: 1,
+                                                                  bottom: 10),
+                                                              child: TextButton(
+                                                                child: Text(
+                                                                    "عرض المزيد",
+                                                                    style:
+                                                                    TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color:
+                                                                    sampleController3.col==1?Colors.white:Colors.black,)
+
+                                                                ),
+                                                                onPressed: () {
+                                                                  Get.to(
+                                                                      Seggestions(
+                                                                        title: "عروض وحسومات",products: [],));
+                                                                },
+                                                              ))
+                                                        ]),
+                                                        Container(
+                                                          margin: EdgeInsets.only(right: 80,left: 80),
+                                                          child: Divider(color: sampleController3.col==0? Colors.black12: Colors.white,
+                                                            thickness: 2,
+                                                            // indent: 10,
+                                                          ),
+                                                        ),
+                                                      ],
+
+                                                    ),
+
+//////////////////////////////////listpoduct_favorite
+                                                    c.listpoduct_favorite.isEmpty   ? Text('') :
+                                                    Column(children: [
                                                       Container(
 
                                                           height: 298, child:
                                                       ListView.builder(
                                                           scrollDirection: Axis.horizontal,
-                                                          itemCount: controller.listpoduct_discount.length,
+                                                          itemCount: controller.listpoduct_favorite.length,
                                                           itemBuilder: (context, index) {
-                                                            var item = controller.listpoduct_discount;
+                                                            var item = controller.listpoduct_favorite;
                                                             return
 
                                                               Column(
@@ -255,49 +494,53 @@ class Product extends GetView<ProductController> {
                                                                     index == 0 ?
                                                                     Row(
                                                                       children: [
-                                                                        InkWell(
-                                                                          child: Container(
-                                                                            margin: EdgeInsets
-                                                                                .only(
-                                                                                right: 28,
-                                                                                bottom: 10),
-                                                                            child: Text(
-                                                                                "عروض وحسومات",
-                                                                                style:
-                                                                                TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
-                                                                                sampleController3.col==1?Colors.white:Colors.black,)
-                                                                            ),
+                                                                        InkWell(child: Container(
+                                                                          margin: EdgeInsets.only(right: 28, bottom: 10),
+                                                                          child: Text("اقتراحات قد تعجبك",
+                                                                              style:   TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
+                                                                              sampleController3.col==1?Colors.white:Colors.black,)
+
                                                                           ),
+                                                                        ),
                                                                           onTap: () {
-                                                                            Get.to(
-                                                                                Seggestions(
-                                                                                  title: "عروض وحسومات",products: [],
-                                                                                ));
+                                                                            Get.to(Seggestions(title: "اقتراحات قد تعجبك",products: [],));
                                                                           },
                                                                         ),
                                                                         Padding(
-                                                                          padding: const EdgeInsets.only(right: 8, bottom: 8),
+                                                                          padding:
+                                                                          const EdgeInsets
+                                                                              .only(
+                                                                              right: 8,
+                                                                              bottom: 8),
                                                                           child: IconButton(
-                                                                              onPressed: () {Get.to(
-                                                                                  Seggestions(title: "عروض وحسومات",products: [],));
+                                                                              onPressed: () {
+                                                                                Get
+                                                                                    .to(
+                                                                                    Seggestions(
+                                                                                      title:
+                                                                                      "اقتراحات قد تعجبك ",products: [],
+                                                                                    ));
                                                                               },
                                                                               icon: Icon(
-                                                                                Icons.arrow_forward,
-                                                                                color: sampleController3.col==1?Colors.white:
-                                                                                Colors.black,
+                                                                                Icons
+                                                                                    .arrow_forward, color:
+                                                                              sampleController3.col==1?Colors.white:
+                                                                              Colors
+                                                                                  .black,
                                                                                 size: 25,
                                                                               )),
                                                                         )
                                                                       ],
                                                                     ) :
                                                                     Row(
-                                                                      children: [
-                                                                        InkWell(child:
-                                                                        Container(
+                                                                      children: [InkWell(
+                                                                        child: Container(
                                                                             margin: EdgeInsets.only(right: 28, bottom: 40),
-                                                                            child: Text("    ")
+                                                                            child: Text(
+                                                                                " ")
                                                                         ),
-                                                                        ),
+
+                                                                      ),
 
                                                                       ],
                                                                     ),
@@ -306,50 +549,48 @@ class Product extends GetView<ProductController> {
                                                                           SingleChildScrollView(
                                                                             scrollDirection: Axis.horizontal,
                                                                             child: Row(
-                                                                                children: <
-                                                                                    Widget>[
+                                                                                children: <Widget>[
                                                                                   Column(
                                                                                       children: [
                                                                                         Column(
                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                                                           children: [
-                                                                                            Stack(children: [
-                                                                                              InkWell(
-                                                                                                onTap:(){
-                                                                                                  Get.to(ProductDeatil(controller.listpoduct_discount.elementAt(index).id));
-                                                                                                },
-                                                                                                child: Container(
-                                                                                                  margin: EdgeInsets.only(right: 10),
-                                                                                                  width: MediaQuery.of(context).size.width * 0.6,
-                                                                                                  height: 180,
-                                                                                                  child: ClipRRect(
-                                                                                                    borderRadius: BorderRadius.circular(20),
-                                                                                                    child:
-                                                                                                    Image.network("${api}uploads/product/${item.elementAt(index).image}",
-                                                                                                      fit: BoxFit.cover,
-                                                                                                    ),),
+                                                                                            Stack(children: [  InkWell(
+                                                                                              onTap:(){
+                                                                                                Get.to(ProductDeatil(controller.listpoduct_favorite.elementAt(index).id));
 
-                                                                                                ),
+                                                                                              } ,
+                                                                                              child: Container(
+                                                                                                margin: EdgeInsets.only(right: 10),
+                                                                                                width: MediaQuery.of(context).size.width * 0.6,
+                                                                                                height: 180,
+                                                                                                child: ClipRRect(
+                                                                                                    borderRadius: BorderRadius.circular(20),
+                                                                                                    child: Image
+                                                                                                        .network(
+                                                                                                      "${api}uploads/product/${item.elementAt(index).image}",
+                                                                                                      fit:BoxFit.cover ,
+                                                                                                    )),
+
                                                                                               ),
+                                                                                            ),
                                                                                               Positioned(
                                                                                                 left:10,
                                                                                                 top:20,
-                                                                                                // alignment :Alignment(-1.0, -1.0),// Alignment.topLeft,
 
                                                                                                 child:
                                                                                                 InkWell(
                                                                                                   onTap: () async{
-                                                                                                    print(controller.listpoduct_discount.elementAt(index).id);
+                                                                                                    print(controller.listpoduct_favorite.elementAt(index).id);
                                                                                                     var data =
                                                                                                     await AuthServices.doo(
-                                                                                                        product_id: controller.listpoduct_discount.elementAt(index).id);
-                                                                                                    if(data=="add")
+                                                                                                        product_id: controller.listpoduct_favorite.elementAt(index).id);  if(data=="add")
                                                                                                     {
 
                                                                                                       print("************************before add*************************************");
                                                                                                       print(controller.listpoduct_f.length);
 
-                                                                                                      Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_discount.elementAt(index).id, id: 9);
+                                                                                                      Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_favorite.elementAt(index).id, id: 9);
                                                                                                       controller.listpoduct_f.add(g);
 
                                                                                                       print(controller.listpoduct_f.length);
@@ -357,15 +598,15 @@ class Product extends GetView<ProductController> {
 
 
 
-                                                                                                      print(controller.listpoduct_discount.elementAt(index).isfavorite);
+                                                                                                      print(controller.listpoduct_favorite.elementAt(index).isfavorite);
                                                                                                       print("::::::::::::::::::::::::if::::::::::::::::::::");
-                                                                                                      controller.listpoduct_discount.elementAt(index).isfavorite = true;
-                                                                                                      print(controller.listpoduct_discount.elementAt(index).isfavorite);
-                                                                                                      controller.changeCol(data,1,controller.listpoduct_discount.elementAt(index).id);}
+                                                                                                      controller.listpoduct_favorite.elementAt(index).isfavorite = true;
+                                                                                                      print(controller.listpoduct_favorite.elementAt(index).isfavorite);
+                                                                                                      controller.changeCol(data,1,controller.listpoduct_favorite.elementAt(index).id);}
 
                                                                                                     else{
 
-                                                                                                      controller.listpoduct_discount.elementAt(index).isfavorite = false;
+                                                                                                      controller.listpoduct_favorite.elementAt(index).isfavorite = false;
 
 
 
@@ -375,7 +616,7 @@ class Product extends GetView<ProductController> {
 
 
                                                                                                       for(int i=0;i<controller.listpoduct_f.length;i++){
-                                                                                                        if(controller.listpoduct_discount.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
+                                                                                                        if(controller.listpoduct_favorite.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
                                                                                                           controller.listpoduct_f.removeAt(i);
 
                                                                                                       }
@@ -384,7 +625,7 @@ class Product extends GetView<ProductController> {
                                                                                                       print("************************after remove*************************************");
 
 
-                                                                                                      controller.changeCol(data,2,controller.listpoduct_discount.elementAt(index).id);
+                                                                                                      controller.changeCol(data,2,controller.listpoduct_favorite.elementAt(index).id);
                                                                                                     }
 
 
@@ -395,16 +636,14 @@ class Product extends GetView<ProductController> {
                                                                                                     child: Icon(
                                                                                                       Icons.favorite,
                                                                                                       color:
-                                                                                                      controller.check( controller.listpoduct_discount.elementAt(index).id)
-                                                                                                          ? Colors.red:Colors.black,
+                                                                                                      controller.check( controller.listpoduct_favorite.elementAt(index).id)
+                                                                                                          ? Colors.red:
+                                                                                                      Colors.black,
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
 
-                                                                                              )
-                                                                                            ],),
-
-
+                                                                                              ),],),
 
                                                                                             Row(children:[
                                                                                               Container(
@@ -414,20 +653,32 @@ class Product extends GetView<ProductController> {
                                                                                                 Row(
                                                                                                   children: [
                                                                                                     Text(
-                                                                                                        "${controller.listpoduct_discount.elementAt(index).name} ",
+                                                                                                        "${controller.listpoduct_favorite.elementAt(index).product_name} ",
                                                                                                         style: TextStyle( color: controller.col==1?Colors.white: Colors.black,fontWeight: FontWeight.normal,fontSize: 16)
                                                                                                     ),
                                                                                                     SizedBox(width: 5,),
                                                                                                     Icon(
-                                                                                                      controller.listpoduct_discount[index].rating==0?
-                                                                                                      Icons.tag_faces_outlined:
-                                                                                                      Icons.tag_faces_outlined,
-                                                                                                      color: sampleController3.col==1?Colors.white: Colors.green, ),
+                                                                                                      controller.listpoduct_favorite[index].rating==0?
+                                                                                                      Icons.mood_bad:
+                                                                                                      controller.listpoduct_favorite[index].rating==1?
+                                                                                                      Icons.sentiment_satisfied :
+                                                                                                      Icons.sentiment_very_satisfied_outlined,
+                                                                                                      color:
+                                                                                                      controller.listpoduct_favorite[index].rating==0?
+                                                                                                      Colors.red:
+                                                                                                      controller.listpoduct_favorite[index].rating==1?
+                                                                                                      Colors.orange :
+                                                                                                      Colors.green,
+
+//  sampleController3.col==1?Colors.white: Colors.green,
+
+
+                                                                                                    ),
                                                                                                     Container(
                                                                                                         margin: EdgeInsets.only(
                                                                                                           right: MediaQuery.of(context).size.width * 0.2,),
                                                                                                         child: Text(
-                                                                                                            "${controller.listpoduct_discount.elementAt(index).costPrice}" +" ل.س ",
+                                                                                                            "${controller.listpoduct_favorite.elementAt(index).costPrice}" +" ل.س ",
                                                                                                             style: TextStyle( color: sampleController3.col==1?Colors.white: Colors.red,)
                                                                                                         )),
                                                                                                   ],
@@ -436,110 +687,126 @@ class Product extends GetView<ProductController> {
                                                                                           ],),
 
                                                                                       ]),
-                                                                                  SizedBox(
-                                                                                    width: 25,
-                                                                                  ),
+                                                                                  SizedBox(width: 25,),
                                                                                 ]),
                                                                           ),
+
                                                                         ]),
 
-                                                                    SizedBox(
-                                                                      height: 20,
-                                                                    ),
                                                                   ]);
                                                           })
-//////////////////////////////////////////////////////////////////////////////////////////
+
                                                       ),
                                                       Row(children: [
                                                         Container(
                                                             margin:
                                                             EdgeInsets.only(
                                                                 right: 150,
-                                                                top: 25,
+                                                                top: 1,
                                                                 bottom: 10),
                                                             child: TextButton(
                                                               child: Text(
                                                                   "عرض المزيد",
                                                                   style:
-                                                                  TextStyle(fontWeight: FontWeight.bold,fontSize: 13,color:
+                                                                  TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color:
                                                                   sampleController3.col==1?Colors.white:Colors.black,)
 
                                                               ),
                                                               onPressed: () {
                                                                 Get.to(
                                                                     Seggestions(
-                                                                        title: "عروض وحسومات",products: [],));
+                                                                      title: "اقتراحات قد تعجبك",products: [],
+                                                                    ));
                                                               },
                                                             ))
-                                                      ]),],),
+                                                      ]),
+                                                      Container(
+                                                        margin: EdgeInsets.only(right: 80,left: 80),
+                                                        child: Divider(color: sampleController3.col==0? Colors.black12: Colors.white,
+                                                          thickness: 2,
+                                                          // indent: 10,
+                                                        ),
+                                                      ),
 
-//////////////////////////////////listpoduct_favorite
-                                                  c.listpoduct_favorite.isEmpty   ? Text('') :
-                                                  Column(children: [
+                                                    ]),
+
+//////////////////////////////////listpoduct_sales
                                                     Container(
 
                                                         height: 298, child:
                                                     ListView.builder(
                                                         scrollDirection: Axis.horizontal,
-                                                        itemCount: controller.listpoduct_favorite.length,
+                                                        itemCount: controller.listpoduct_sales.length,
                                                         itemBuilder: (context, index) {
-                                                          var item = controller.listpoduct_favorite;
+                                                          var item = controller.listpoduct_sales;
                                                           return
 
                                                             Column(
                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                 children: [
-
                                                                   index == 0 ?
                                                                   Row(
                                                                     children: [
-                                                                      InkWell(child: Container(
-                                                                        margin: EdgeInsets.only(right: 28, bottom: 10),
-                                                                        child: Text("اقتراحات قد تعجبك",
-                                                                            style:   TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
-                                                                            sampleController3.col==1?Colors.white:Colors.black,)
-
+                                                                      InkWell(
+                                                                        child: Container(
+                                                                          margin: EdgeInsets
+                                                                              .only(
+                                                                              right: 10,
+                                                                              bottom: 10),
+                                                                          child: Text(
+                                                                              " الأكثر شيوعا  ",
+                                                                              style:
+                                                                              TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
+                                                                              sampleController3.col==1?Colors.white:Colors.black,)
+                                                                          ),
                                                                         ),
-                                                                      ),
                                                                         onTap: () {
-                                                                          Get.to(Seggestions(title: "اقتراحات قد تعجبك",products: [],));
+                                                                          Get.to(
+                                                                              Seggestions(
+                                                                                title: "الأكثر شيوعاً",products: [],
+                                                                              ));
                                                                         },
                                                                       ),
                                                                       Padding(
-                                                                        padding:
-                                                                        const EdgeInsets
+                                                                        padding: const EdgeInsets
                                                                             .only(
-                                                                            right: 8,
+                                                                            right: 40,
                                                                             bottom: 8),
                                                                         child: IconButton(
                                                                             onPressed: () {
                                                                               Get
                                                                                   .to(
                                                                                   Seggestions(
-                                                                                    title:
-                                                                                    "اقتراحات قد تعجبك ",products: [],
+                                                                                    title: "الأكثر شيوعاً",products: [],
                                                                                   ));
                                                                             },
                                                                             icon: Icon(
                                                                               Icons
-                                                                                  .arrow_forward, color:
+                                                                                  .arrow_forward ,color:
+
                                                                             sampleController3.col==1?Colors.white:
                                                                             Colors
                                                                                 .black,
-                                                                              size: 25,
+                                                                              size: 20,
                                                                             )),
                                                                       )
                                                                     ],
                                                                   ) :
                                                                   Row(
-                                                                    children: [InkWell(
-                                                                      child: Container(
-                                                                          margin: EdgeInsets.only(right: 28, bottom: 40),
-                                                                          child: Text(
-                                                                              " ")
-                                                                      ),
+                                                                    children: [
+                                                                      InkWell(
+                                                                        child: Container(
+                                                                            margin:
+                                                                            EdgeInsets
+                                                                                .only(
 
-                                                                    ),
+                                                                                right: 30,
+                                                                                bottom: 40),
+                                                                            child: Text(
+                                                                                "    ")
+                                                                        ),
+
+                                                                      ),
 
                                                                     ],
                                                                   ),
@@ -554,42 +821,43 @@ class Product extends GetView<ProductController> {
                                                                                       Column(
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
-                                                                                          Stack(children: [  InkWell(
-                                                                                            onTap:(){
-                                                                                              Get.to(ProductDeatil(controller.listpoduct_favorite.elementAt(index).id));
-
-                                                                                            } ,
-                                                                                            child: Container(
-                                                                                              margin: EdgeInsets.only(right: 10),
-                                                                                              width: MediaQuery.of(context).size.width * 0.6,
-                                                                                              height: 180,
-                                                                                              child: ClipRRect(
+                                                                                          Stack(
+                                                                                            children: [InkWell(
+                                                                                              onTap:(){
+                                                                                                Get.to(ProductDeatil(controller.listpoduct_sales.elementAt(index).id));
+                                                                                              },
+                                                                                              child:Container(
+                                                                                                margin: EdgeInsets.only(right: 10),
+                                                                                                width: MediaQuery.of(context).size.width * 0.6,
+                                                                                                height: 180,
+                                                                                                child: ClipRRect(
                                                                                                   borderRadius: BorderRadius.circular(20),
-                                                                                                  child: Image
-                                                                                                      .network(
-                                                                                                    "${api}uploads/product/${item.elementAt(index).image}",
-                                                                                                    fit:BoxFit.cover ,
-                                                                                                  )),
+                                                                                                  child: Image.network("${api}uploads/product/${item.elementAt(index).image}",
+                                                                                                    fit: BoxFit.cover,
 
-                                                                                            ),
-                                                                                          ),
-                                                                                            Positioned(
+
+                                                                                                  ),),
+
+                                                                                              ),
+                                                                                            ), Positioned(
                                                                                               left:10,
                                                                                               top:20,
+// alignment :Alignment(-1.0, -1.0),// Alignment.topLeft,
 
                                                                                               child:
                                                                                               InkWell(
                                                                                                 onTap: () async{
-                                                                                                  print(controller.listpoduct_favorite.elementAt(index).id);
+                                                                                                  print(controller.listpoduct_sales.elementAt(index).id);
                                                                                                   var data =
                                                                                                   await AuthServices.doo(
-                                                                                                      product_id: controller.listpoduct_favorite.elementAt(index).id);  if(data=="add")
+                                                                                                      product_id: controller.listpoduct_sales.elementAt(index).id);
+                                                                                                  if(data=="add")
                                                                                                   {
 
                                                                                                     print("************************before add*************************************");
                                                                                                     print(controller.listpoduct_f.length);
 
-                                                                                                    Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_favorite.elementAt(index).id, id: 9);
+                                                                                                    Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_sales.elementAt(index).id, id: 9);
                                                                                                     controller.listpoduct_f.add(g);
 
                                                                                                     print(controller.listpoduct_f.length);
@@ -597,15 +865,15 @@ class Product extends GetView<ProductController> {
 
 
 
-                                                                                                    print(controller.listpoduct_favorite.elementAt(index).isfavorite);
+                                                                                                    print(controller.listpoduct_sales.elementAt(index).isfavorite);
                                                                                                     print("::::::::::::::::::::::::if::::::::::::::::::::");
-                                                                                                    controller.listpoduct_favorite.elementAt(index).isfavorite = true;
-                                                                                                    print(controller.listpoduct_favorite.elementAt(index).isfavorite);
-                                                                                                    controller.changeCol(data,1,controller.listpoduct_favorite.elementAt(index).id);}
+                                                                                                    controller.listpoduct_sales.elementAt(index).isfavorite = true;
+                                                                                                    print(controller.listpoduct_sales.elementAt(index).isfavorite);
+                                                                                                    controller.changeCol(data,1,controller.listpoduct_sales.elementAt(index).id);}
 
                                                                                                   else{
 
-                                                                                                    controller.listpoduct_favorite.elementAt(index).isfavorite = false;
+                                                                                                    controller.listpoduct_sales.elementAt(index).isfavorite = false;
 
 
 
@@ -613,9 +881,10 @@ class Product extends GetView<ProductController> {
                                                                                                     print("************************before remove*************************************");
                                                                                                     print(controller.listpoduct_f.length);
 
+                                                                                                    Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_sales.elementAt(index).id, id: 9);
 
                                                                                                     for(int i=0;i<controller.listpoduct_f.length;i++){
-                                                                                                      if(controller.listpoduct_favorite.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
+                                                                                                      if(controller.listpoduct_sales.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
                                                                                                         controller.listpoduct_f.removeAt(i);
 
                                                                                                     }
@@ -624,7 +893,7 @@ class Product extends GetView<ProductController> {
                                                                                                     print("************************after remove*************************************");
 
 
-                                                                                                    controller.changeCol(data,2,controller.listpoduct_favorite.elementAt(index).id);
+                                                                                                    controller.changeCol(data,2,controller.listpoduct_sales.elementAt(index).id);
                                                                                                   }
 
 
@@ -635,49 +904,62 @@ class Product extends GetView<ProductController> {
                                                                                                   child: Icon(
                                                                                                     Icons.favorite,
                                                                                                     color:
-                                                                                                    controller.check( controller.listpoduct_favorite.elementAt(index).id)
-                                                                                                        ? Colors.red:
-                                                                                                    Colors.black,
+                                                                                                    controller.check( controller.listpoduct_sales.elementAt(index).id)
+                                                                                                        ? Colors.red:Colors.black,
                                                                                                   ),
                                                                                                 ),
                                                                                               ),
 
                                                                                             ),],),
-
                                                                                           Row(children:[
                                                                                             Container(
-
                                                                                               margin: EdgeInsets.only(right: 20),
                                                                                               child:
                                                                                               Row(
                                                                                                 children: [
                                                                                                   Text(
-                                                                                                      "${controller.listpoduct_favorite.elementAt(index).name} ",
+                                                                                                      "${controller.listpoduct_sales.elementAt(index).product_name} ",
                                                                                                       style: TextStyle( color: controller.col==1?Colors.white: Colors.black,fontWeight: FontWeight.normal,fontSize: 16)
                                                                                                   ),
                                                                                                   SizedBox(width: 5,),
                                                                                                   Icon(
-                                                                                                    Icons.tag_faces_outlined,
-                                                                                                    color: sampleController3.col==1?Colors.white: Colors.green, ),
+                                                                                                    controller.listpoduct_sales[index].rating==0?
+                                                                                                    Icons.mood_bad:
+                                                                                                    controller.listpoduct_sales[index].rating==1?
+                                                                                                    Icons.sentiment_satisfied :
+                                                                                                    Icons.sentiment_very_satisfied_outlined,
+                                                                                                    color:
+                                                                                                    controller.listpoduct_sales[index].rating==0?
+                                                                                                    Colors.red:
+                                                                                                    controller.listpoduct_sales[index].rating==1?
+                                                                                                    Colors.orange :
+                                                                                                    Colors.green,
+
+//  sampleController3.col==1?Colors.white: Colors.green,
+
+
+                                                                                                  ),
                                                                                                   Container(
                                                                                                       margin: EdgeInsets.only(
                                                                                                         right: MediaQuery.of(context).size.width * 0.2,),
                                                                                                       child: Text(
-                                                                                                          "${controller.listpoduct_favorite.elementAt(index).costPrice}" +" ل.س ",
+                                                                                                          "${controller.listpoduct_sales.elementAt(index).costPrice}" +" ل.س ",
                                                                                                           style: TextStyle( color: sampleController3.col==1?Colors.white: Colors.red,)
                                                                                                       )),
                                                                                                 ],
                                                                                               ),),
-                                                                                          ]),
+                                                                                          ]
+                                                                                          ),
                                                                                         ],),
 
                                                                                     ]),
                                                                                 SizedBox(width: 25,),
                                                                               ]),
                                                                         ),
-
                                                                       ]),
-
+                                                                  SizedBox(
+                                                                    height: 20,
+                                                                  ),
                                                                 ]);
                                                         })
 
@@ -687,508 +969,298 @@ class Product extends GetView<ProductController> {
                                                           margin:
                                                           EdgeInsets.only(
                                                               right: 150,
-                                                              top: 25,
+                                                              top: 1,
                                                               bottom: 10),
                                                           child: TextButton(
                                                             child: Text(
                                                                 "عرض المزيد",
-                                                                style:
-                                                                TextStyle(fontWeight: FontWeight.bold,fontSize: 13,color:
-                                                                sampleController3.col==1?Colors.white:Colors.black,)
 
+                                                                style:
+                                                                TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color:
+                                                                sampleController3.col==1?Colors.white:Colors.black,)
                                                             ),
                                                             onPressed: () {
                                                               Get.to(
                                                                   Seggestions(
-                                                                    title: "اقتراحات قد تعجبك",products: [],
+                                                                    title: "الأكثر شيوعاً",products: [],
                                                                   ));
                                                             },
                                                           ))
-                                                    ]),]),
-
-//////////////////////////////////listpoduct_sales
-                                                  Container(
-
-                                                      height: 298, child:
-                                                  ListView.builder(
-                                                      scrollDirection: Axis.horizontal,
-                                                      itemCount: controller.listpoduct_sales.length,
-                                                      itemBuilder: (context, index) {
-                                                        var item = controller.listpoduct_sales;
-                                                        return
-
-                                                          Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: [
-                                                                index == 0 ?
-                                                                Row(
-                                                                  children: [
-                                                                    InkWell(
-                                                                      child: Container(
-                                                                        margin: EdgeInsets
-                                                                            .only(
-                                                                            right: 10,
-                                                                            bottom: 10),
-                                                                        child: Text(
-                                                                            " الأكثر شيوعا  ",
-                                                                            style:
-                                                                            TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
-                                                                            sampleController3.col==1?Colors.white:Colors.black,)
-                                                                        ),
-                                                                      ),
-                                                                      onTap: () {
-                                                                        Get.to(
-                                                                            Seggestions(
-                                                                              title: "الأكثر شيوعاً",products: [],
-                                                                            ));
-                                                                      },
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          right: 40,
-                                                                          bottom: 8),
-                                                                      child: IconButton(
-                                                                          onPressed: () {
-                                                                            Get
-                                                                                .to(
-                                                                                Seggestions(
-                                                                                  title: "الأكثر شيوعاً",products: [],
-                                                                                ));
-                                                                          },
-                                                                          icon: Icon(
-                                                                            Icons
-                                                                                .arrow_forward ,color:
-
-                                                                          sampleController3.col==1?Colors.white:
-                                                                          Colors
-                                                                              .black,
-                                                                            size: 20,
-                                                                          )),
-                                                                    )
-                                                                  ],
-                                                                ) :
-                                                                Row(
-                                                                  children: [
-                                                                    InkWell(
-                                                                      child: Container(
-                                                                          margin:
-                                                                          EdgeInsets
-                                                                              .only(
-
-                                                                              right: 30,
-                                                                              bottom: 40),
-                                                                          child: Text(
-                                                                              "    ")
-                                                                      ),
-
-                                                                    ),
-
-                                                                  ],
-                                                                ),
-                                                                Column(
-                                                                    children: [
-                                                                      SingleChildScrollView(
-                                                                        scrollDirection: Axis.horizontal,
-                                                                        child: Row(
-                                                                            children: <Widget>[
-                                                                              Column(
-                                                                                  children: [
-                                                                                    Column(
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        Stack(
-                                                                                          children: [InkWell(
-                                                                                            onTap:(){
-                                                                                              Get.to(ProductDeatil(controller.listpoduct_sales.elementAt(index).id));
-                                                                                            },
-                                                                                            child:Container(
-                                                                                              margin: EdgeInsets.only(right: 10),
-                                                                                              width: MediaQuery.of(context).size.width * 0.6,
-                                                                                              height: 180,
-                                                                                              child: ClipRRect(
-                                                                                                borderRadius: BorderRadius.circular(20),
-                                                                                                child: Image.network("${api}uploads/product/${item.elementAt(index).image}",
-                                                                                                  fit: BoxFit.cover,
-
-
-                                                                                                ),),
-
-                                                                                            ),
-                                                                                          ), Positioned(
-                                                                                            left:10,
-                                                                                            top:20,
-                                                                                            // alignment :Alignment(-1.0, -1.0),// Alignment.topLeft,
-
-                                                                                            child:
-                                                                                            InkWell(
-                                                                                              onTap: () async{
-                                                                                                print(controller.listpoduct_sales.elementAt(index).id);
-                                                                                                var data =
-                                                                                                await AuthServices.doo(
-                                                                                                    product_id: controller.listpoduct_sales.elementAt(index).id);
-                                                                                                if(data=="add")
-                                                                                                {
-
-                                                                                                  print("************************before add*************************************");
-                                                                                                  print(controller.listpoduct_f.length);
-
-                                                                                                  Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_sales.elementAt(index).id, id: 9);
-                                                                                                  controller.listpoduct_f.add(g);
-
-                                                                                                  print(controller.listpoduct_f.length);
-                                                                                                  print("************************after add*************************************");
-
-
-
-                                                                                                  print(controller.listpoduct_sales.elementAt(index).isfavorite);
-                                                                                                  print("::::::::::::::::::::::::if::::::::::::::::::::");
-                                                                                                  controller.listpoduct_sales.elementAt(index).isfavorite = true;
-                                                                                                  print(controller.listpoduct_sales.elementAt(index).isfavorite);
-                                                                                                  controller.changeCol(data,1,controller.listpoduct_sales.elementAt(index).id);}
-
-                                                                                                else{
-
-                                                                                                  controller.listpoduct_sales.elementAt(index).isfavorite = false;
-
-
-
-
-                                                                                                  print("************************before remove*************************************");
-                                                                                                  print(controller.listpoduct_f.length);
-
-                                                                                                  Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_sales.elementAt(index).id, id: 9);
-
-                                                                                                  for(int i=0;i<controller.listpoduct_f.length;i++){
-                                                                                                    if(controller.listpoduct_sales.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
-                                                                                                      controller.listpoduct_f.removeAt(i);
-
-                                                                                                  }
-
-                                                                                                  print(controller.listpoduct_f.length);
-                                                                                                  print("************************after remove*************************************");
-
-
-                                                                                                  controller.changeCol(data,2,controller.listpoduct_sales.elementAt(index).id);
-                                                                                                }
-
-
-
-                                                                                              },
-                                                                                              child: CircleAvatar(
-                                                                                                backgroundColor: Themes.color2,
-                                                                                                child: Icon(
-                                                                                                  Icons.favorite,
-                                                                                                  color:
-                                                                                                  controller.check( controller.listpoduct_sales.elementAt(index).id)
-                                                                                                      ? Colors.red:Colors.black,
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
-
-                                                                                          ),],),
-                                                                                        Row(children:[
-                                                                                          Container(
-                                                                                            margin: EdgeInsets.only(right: 20),
-                                                                                            child:
-                                                                                            Row(
-                                                                                              children: [
-                                                                                                Text(
-                                                                                                    "${controller.listpoduct_sales.elementAt(index).name} ",
-                                                                                                    style: TextStyle( color: controller.col==1?Colors.white: Colors.black,fontWeight: FontWeight.normal,fontSize: 16)
-                                                                                                ),
-                                                                                                SizedBox(width: 5,),
-                                                                                                Icon(
-                                                                                                  Icons.tag_faces_outlined,
-                                                                                                  color: sampleController3.col==1?Colors.white: Colors.green, ),
-                                                                                                Container(
-                                                                                                    margin: EdgeInsets.only(
-                                                                                                      right: MediaQuery.of(context).size.width * 0.2,),
-                                                                                                    child: Text(
-                                                                                                        "${controller.listpoduct_sales.elementAt(index).costPrice}" +" ل.س ",
-                                                                                                        style: TextStyle( color: sampleController3.col==1?Colors.white: Colors.red,)
-                                                                                                    )),
-                                                                                              ],
-                                                                                            ),),
-                                                                                        ]
-                                                                                        ),
-                                                                                      ],),
-
-                                                                                  ]),
-                                                                              SizedBox(width: 25,),
-                                                                            ]),
-                                                                      ),
-                                                                    ]),
-                                                                SizedBox(
-                                                                  height: 20,
-                                                                ),
-                                                              ]);
-                                                      })
-
-                                                  ),
-                                                  Row(children: [
+                                                    ]),
                                                     Container(
-                                                        margin:
-                                                        EdgeInsets.only(
-                                                            right: 150,
-                                                            top: 25,
-                                                            bottom: 10),
-                                                        child: TextButton(
-                                                          child: Text(
-                                                              "عرض المزيد",
-
-                                                              style:
-                                                              TextStyle(fontWeight: FontWeight.bold,fontSize: 13,color:
-                                                              sampleController3.col==1?Colors.white:Colors.black,)
-                                                          ),
-                                                          onPressed: () {
-                                                            Get.to(
-                                                                Seggestions(
-                                                                  title: "الأكثر شيوعاً",products: [],
-                                                                ));
-                                                          },
-                                                        ))
-                                                  ]),
+                                                      margin: EdgeInsets.only(right: 80,left: 80),
+                                                      child: Divider(color: sampleController3.col==0? Colors.black12: Colors.white,
+                                                        thickness: 2,
+                                                        // indent: 10,
+                                                      ),
+                                                    ),
 //////////////////////////////////listpoduct_salary
-                                                  Container(
+                                                    Container(
 
-                                                      height: 298, child:
-                                                  ListView.builder(
-                                                      scrollDirection:
-                                                      Axis.horizontal,
-                                                      itemCount: controller.listpoduct_salary.length,
-                                                      itemBuilder: (context, index) {
-                                                        var item = controller.listpoduct_salary;
-                                                        return
+                                                        height: 298, child:
+                                                    ListView.builder(
+                                                        scrollDirection:
+                                                        Axis.horizontal,
+                                                        itemCount: controller.listpoduct_salary.length,
+                                                        itemBuilder: (context, index) {
+                                                          var item = controller.listpoduct_salary;
+                                                          return
 
-                                                          Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: [
+                                                            Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
 
-                                                                index == 0 ?
-                                                                Row(
-                                                                  children: [
-                                                                    InkWell(
-                                                                      child: Container(
-                                                                        margin:
-                                                                        EdgeInsets
-                                                                            .only(
-                                                                            right: 22,
-                                                                            bottom: 10),
-                                                                        child: Text(
-                                                                            "الأقل سعرا",
-                                                                            style:
-                                                                            TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
-                                                                            sampleController3.col==1?Colors.white:Colors.black,)
-                                                                        ),
-                                                                      ),
-                                                                      onTap: () {
-                                                                        Get.to(
-                                                                            Seggestions(
-                                                                              title:
-                                                                              "الأقل سعراً",products: [],
-                                                                            ));
-                                                                      },
-                                                                    ),
-                                                                    Padding(
-                                                                      padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          right: 30,
-                                                                          bottom: 8),
-                                                                      child: IconButton(
-                                                                          onPressed: () {
-                                                                            Get
-                                                                                .to(
-                                                                                Seggestions(
-                                                                                  title:
-                                                                                  "الأقل سعراً",products: [],
-                                                                                ));
-                                                                          },
-                                                                          icon: Icon(
-                                                                            Icons
-                                                                                .arrow_forward, color:
-                                                                          sampleController3.col==1?Colors.white:
-                                                                          Colors
-                                                                              .black,
-                                                                            size: 25,
-                                                                          )),
-                                                                    )
-                                                                  ],
-                                                                ) :
-                                                                Row(
-                                                                  children: [
-                                                                    InkWell(
-                                                                      child: Container(
+                                                                  index == 0 ?
+                                                                  Row(
+                                                                    children: [
+                                                                      InkWell(
+                                                                        child: Container(
                                                                           margin:
                                                                           EdgeInsets
                                                                               .only(
-
-                                                                              right: 28,
-                                                                              bottom: 40),
+                                                                              right: 22,
+                                                                              bottom: 10),
                                                                           child: Text(
-                                                                              "    ")
+                                                                              "الأقل سعرا",
+                                                                              style:
+                                                                              TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color:
+                                                                              sampleController3.col==1?Colors.white:Colors.black,)
+                                                                          ),
+                                                                        ),
+                                                                        onTap: () {
+                                                                          Get.to(
+                                                                              Seggestions(
+                                                                                title:
+                                                                                "الأقل سعراً",products: [],
+                                                                              ));
+                                                                        },
+                                                                      ),
+                                                                      Padding(
+                                                                        padding:
+                                                                        const EdgeInsets
+                                                                            .only(
+                                                                            right: 30,
+                                                                            bottom: 8),
+                                                                        child: IconButton(
+                                                                            onPressed: () {
+                                                                              Get
+                                                                                  .to(
+                                                                                  Seggestions(
+                                                                                    title:
+                                                                                    "الأقل سعراً",products: [],
+                                                                                  ));
+                                                                            },
+                                                                            icon: Icon(
+                                                                              Icons
+                                                                                  .arrow_forward, color:
+                                                                            sampleController3.col==1?Colors.white:
+                                                                            Colors
+                                                                                .black,
+                                                                              size: 25,
+                                                                            )),
+                                                                      )
+                                                                    ],
+                                                                  ) :
+                                                                  Row(
+                                                                    children: [
+                                                                      InkWell(
+                                                                        child: Container(
+                                                                            margin:
+                                                                            EdgeInsets
+                                                                                .only(
+
+                                                                                right: 28,
+                                                                                bottom: 40),
+                                                                            child: Text(
+                                                                                "    ")
+                                                                        ),
+
                                                                       ),
 
-                                                                    ),
+                                                                    ],
+                                                                  ),
+                                                                  Column(
+                                                                      children: [
+                                                                        SingleChildScrollView(
+                                                                          scrollDirection: Axis.horizontal,
+                                                                          child: Row(
 
-                                                                  ],
-                                                                ),
-                                                                Column(
-                                                                    children: [
-                                                                      SingleChildScrollView(
-                                                                        scrollDirection: Axis.horizontal,
-                                                                        child: Row(
-
-                                                                            children: <Widget>[
-                                                                              Column(
-                                                                                  children: [
-                                                                                    Column(
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        Stack(children: [
-                                                                                          InkWell(
-                                                                                            onTap:(){Get.to(ProductDeatil(controller.listpoduct_salary.elementAt(index).id));},
-                                                                                            child: Container(
-                                                                                              margin: EdgeInsets.only(right: 10),
-                                                                                              width: MediaQuery.of(context).size.width * 0.6,
-                                                                                              height: 180,
-                                                                                              child: ClipRRect(
-                                                                                                borderRadius: BorderRadius.circular(20),
-                                                                                                child: Image.network("${api}uploads/product/${item.elementAt(index).image}",
-                                                                                                  fit: BoxFit.cover,
-
-
-                                                                                                ),),
-
-                                                                                            ),),
-                                                                                          Positioned(
-                                                                                            left:10,
-                                                                                            top:20,
-                                                                                            // alignment :Alignment(-1.0, -1.0),// Alignment.topLeft,
-
-                                                                                            child:
+                                                                              children: <Widget>[
+                                                                                Column(
+                                                                                    children: [
+                                                                                      Column(
+                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                        children: [
+                                                                                          Stack(children: [
                                                                                             InkWell(
-                                                                                              onTap: () async{
-                                                                                                print(controller.listpoduct_salary.elementAt(index).id);
-                                                                                                var data =
-                                                                                                await AuthServices.doo(
-                                                                                                    product_id: controller.listpoduct_salary.elementAt(index).id);
-                                                                                                if(data=="add")
-                                                                                                {
-                                                                                                  controller.listpoduct_salary.elementAt(index).isfavorite = true;
+                                                                                              onTap:(){Get.to(ProductDeatil(controller.listpoduct_salary.elementAt(index).id));},
+                                                                                              child: Container(
+                                                                                                margin: EdgeInsets.only(right: 10),
+                                                                                                width: MediaQuery.of(context).size.width * 0.6,
+                                                                                                height: 180,
+                                                                                                child: ClipRRect(
+                                                                                                  borderRadius: BorderRadius.circular(20),
+                                                                                                  child: Image.network("${api}uploads/product/${item.elementAt(index).image}",
+                                                                                                    fit: BoxFit.cover,
 
 
-                                                                                                  print("************************before add*************************************");
-                                                                                                  print(controller.listpoduct_f.length);
+                                                                                                  ),),
 
-                                                                                                  Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_salary.elementAt(index).id, id: 9);
-                                                                                                  controller.listpoduct_f.add(g);
+                                                                                              ),),
+                                                                                            Positioned(
+                                                                                              left:10,
+                                                                                              top:20,
+// alignment :Alignment(-1.0, -1.0),// Alignment.topLeft,
 
-                                                                                                  print(controller.listpoduct_f.length);
-                                                                                                  print("************************after add*************************************");
+                                                                                              child:
+                                                                                              InkWell(
+                                                                                                onTap: () async{
+                                                                                                  print(controller.listpoduct_salary.elementAt(index).id);
+                                                                                                  var data =
+                                                                                                  await AuthServices.doo(
+                                                                                                      product_id: controller.listpoduct_salary.elementAt(index).id);
+                                                                                                  if(data=="add")
+                                                                                                  {
+                                                                                                    controller.listpoduct_salary.elementAt(index).isfavorite = true;
 
 
-                                                                                                  //controller.changeCol(data,1,controller.listpoduct_salary.elementAt(index).id);
-                                                                                                }
+                                                                                                    print("************************before add*************************************");
+                                                                                                    print(controller.listpoduct_f.length);
 
-                                                                                                else{
+                                                                                                    Favorite_product2 g= new Favorite_product2(product_id: controller.listpoduct_salary.elementAt(index).id, id: 9);
+                                                                                                    controller.listpoduct_f.add(g);
 
-                                                                                                  controller.listpoduct_salary.elementAt(index).isfavorite = false;
+                                                                                                    print(controller.listpoduct_f.length);
+                                                                                                    print("************************after add*************************************");
 
 
-
-
-                                                                                                  print("************************before remove*************************************");
-                                                                                                  print(controller.listpoduct_f.length);
-
-                                                                                                  for(int i=0;i<controller.listpoduct_f.length;i++){
-                                                                                                    if(controller.listpoduct_salary.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
-                                                                                                      controller.listpoduct_f.removeAt(i);
-
+//controller.changeCol(data,1,controller.listpoduct_salary.elementAt(index).id);
                                                                                                   }
 
-                                                                                                  print(controller.listpoduct_f.length);
-                                                                                                  print("************************after remove*************************************");
+                                                                                                  else{
 
-
-                                                                                                  controller.changeCol(data,2,controller.listpoduct_salary.elementAt(index).id);
-                                                                                                }
+                                                                                                    controller.listpoduct_salary.elementAt(index).isfavorite = false;
 
 
 
-                                                                                              },
-                                                                                              child: CircleAvatar(
-                                                                                                backgroundColor: Themes.color2,
-                                                                                                child: Icon(
-                                                                                                  Icons.favorite,
-                                                                                                  color:
-                                                                                                  controller.check( controller.listpoduct_salary.elementAt(index).id)
-                                                                                                      ? Colors.red:Colors.black,
+
+                                                                                                    print("************************before remove*************************************");
+                                                                                                    print(controller.listpoduct_f.length);
+
+                                                                                                    for(int i=0;i<controller.listpoduct_f.length;i++){
+                                                                                                      if(controller.listpoduct_salary.elementAt(index).id==controller.listpoduct_f.elementAt(i).product_id)
+                                                                                                        controller.listpoduct_f.removeAt(i);
+
+                                                                                                    }
+
+                                                                                                    print(controller.listpoduct_f.length);
+                                                                                                    print("************************after remove*************************************");
+
+
+                                                                                                    controller.changeCol(data,2,controller.listpoduct_salary.elementAt(index).id);
+                                                                                                  }
+
+
+
+                                                                                                },
+                                                                                                child: CircleAvatar(
+                                                                                                  backgroundColor: Themes.color2,
+                                                                                                  child: Icon(
+                                                                                                    Icons.favorite,
+                                                                                                    color:
+                                                                                                    controller.check( controller.listpoduct_salary.elementAt(index).id)
+                                                                                                        ? Colors.red:Colors.black,
+                                                                                                  ),
                                                                                                 ),
                                                                                               ),
-                                                                                            ),
 
-                                                                                          ),],),
-                                                                                        Row(children:[
-                                                                                          Container(
+                                                                                            ),],),
+                                                                                          Row(children:[
+                                                                                            Container(
 
-                                                                                            margin: EdgeInsets.only(right: 20),
-                                                                                            child:
-                                                                                            Row(
-                                                                                              children: [
-                                                                                                Text(
-                                                                                                    "${controller.listpoduct_salary.elementAt(index).name} ",
-                                                                                                    style: TextStyle( color: controller.col==1?Colors.white: Colors.black,fontWeight: FontWeight.normal,fontSize: 16)
-                                                                                                ),
-                                                                                                SizedBox(width: 5,),
-                                                                                                Icon(
-                                                                                                  Icons.tag_faces_outlined,
-                                                                                                  color: sampleController3.col==1?Colors.white: Colors.green, ),
-                                                                                                Container(
-                                                                                                    margin: EdgeInsets.only(
-                                                                                                      right: MediaQuery.of(context).size.width * 0.2,),
-                                                                                                    child: Text(
-                                                                                                        "${controller.listpoduct_salary.elementAt(index).costPrice}" +" ل.س ",
-                                                                                                        style: TextStyle( color: sampleController3.col==1?Colors.white: Colors.red,)
-                                                                                                    )),
-                                                                                              ],
-                                                                                            ),),
-                                                                                        ]
-                                                                                        ),
-                                                                                      ],),
-                                                                                  ]),
-                                                                              SizedBox(width: 25,),
-                                                                            ]),
-                                                                      ),
-                                                                    ]),
-                                                                SizedBox(height: 25,),
-                                                              ]);
-                                                      })
-                                                  ),
-                                                  Row(children: [
+                                                                                              margin: EdgeInsets.only(right: 20),
+                                                                                              child:
+                                                                                              Row(
+                                                                                                children: [
+                                                                                                  Text(
+                                                                                                      "${controller.listpoduct_salary.elementAt(index).product_name} ",
+                                                                                                      style: TextStyle( color: controller.col==1?Colors.white: Colors.black,fontWeight: FontWeight.normal,fontSize: 16)
+                                                                                                  ),
+                                                                                                  SizedBox(width: 5,),
+                                                                                                  Icon(
+                                                                                                    controller.listpoduct_salary[index].rating==0?
+                                                                                                    Icons.mood_bad:
+                                                                                                    controller.listpoduct_salary[index].rating==1?
+                                                                                                    Icons.sentiment_satisfied :
+                                                                                                    Icons.sentiment_very_satisfied_outlined,
+                                                                                                    color:
+                                                                                                    controller.listpoduct_salary[index].rating==0?
+                                                                                                    Colors.red:
+                                                                                                    controller.listpoduct_salary[index].rating==1?
+                                                                                                    Colors.orange :
+                                                                                                    Colors.green,
+
+//  sampleController3.col==1?Colors.white: Colors.green,
+
+
+                                                                                                  ),
+                                                                                                  Container(
+                                                                                                      margin: EdgeInsets.only(
+                                                                                                        right: MediaQuery.of(context).size.width * 0.2,),
+                                                                                                      child: Text(
+                                                                                                          "${controller.listpoduct_salary.elementAt(index).costPrice}" +" ل.س ",
+                                                                                                          style: TextStyle( color: sampleController3.col==1?Colors.white: Colors.red,)
+                                                                                                      )),
+                                                                                                ],
+                                                                                              ),),
+                                                                                          ]
+                                                                                          ),
+                                                                                        ],),
+                                                                                    ]),
+                                                                                SizedBox(width: 25,),
+                                                                              ]),
+                                                                        ),
+                                                                      ]),
+                                                                  SizedBox(height: 25,),
+                                                                ]);
+                                                        })
+                                                    ),
+                                                    Row(children: [
+                                                      Container(
+                                                          margin: EdgeInsets.only(right: 150, top: 1, bottom: 1),
+                                                          child: TextButton(
+                                                            child: Text(
+                                                                "عرض المزيد",
+                                                                style:
+                                                                TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color:
+                                                                sampleController3.col==1?Colors.white:Colors.black,)
+                                                            ),
+                                                            onPressed: () {Get.to(
+                                                                Seggestions(
+                                                                  title:
+                                                                  "الأقل سعراً", products: [],
+                                                                ));},
+                                                          ))
+                                                    ]),
                                                     Container(
-                                                        margin: EdgeInsets.only(right: 150, top: 1, bottom: 1),
-                                                        child: TextButton(
-                                                          child: Text(
-                                                              "عرض المزيد",
-                                                              style:
-                                                              TextStyle(fontWeight: FontWeight.bold,fontSize: 13,color:
-                                                              sampleController3.col==1?Colors.white:Colors.black,)
-                                                          ),
-                                                          onPressed: () {Get.to(
-                                                              Seggestions(
-                                                                title:
-                                                                "الأقل سعراً", products: [],
-                                                              ));},
-                                                        ))
-                                                  ]),
+                                                      margin: EdgeInsets.only(right: 80,left: 80),
+                                                      child: Divider(color: sampleController3.col==0? Colors.black12: Colors.white,
+                                                        thickness: 2,
+                                                        // indent: 10,
+                                                      ),
+                                                    ),
 
 
-                                                ],)),
+                                                  ],))),
 
 
-                                          ]);
+
+
+
+
+
+                                        ]);
+
                                       })
                               )
                       )

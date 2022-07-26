@@ -109,7 +109,7 @@ class ProductDeatilController extends GetxController{
       isLoading.value = false ;
 
     }else{
-      print("errorrrrr") ;
+      print("errorrrrrhhhhhhhhhhhhh") ;
     }
 
   }

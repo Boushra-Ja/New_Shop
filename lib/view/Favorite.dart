@@ -31,11 +31,13 @@ class Favorite extends GetView<FavoriteController> {
                   drawer: myDrawer(),
                   body: GetX<FavoriteController>(
                       builder: (c) => Center(
-                          child: c.listfavoite.isEmpty && c.listfavoitestore.isEmpty
-                              ? Center(child: CircularProgressIndicator())
+                          child: c.listfavoite.isEmpty &&  c.check.value=='DATA'
+                              ? Center(child: CircularProgressIndicator()):
+                          c.listfavoite.isEmpty  &&   c.check.value=='NODATA'?
+                          Text("noooo")
                               : GetX<FavoriteController>(
-                              builder: (c) => Center(
-                                  child: c.listfavoite.isEmpty && c.listfavoitestore.isEmpty
+                               builder: (c) => Center(
+                                  child:  c.listfavoite.isEmpty &&  c.check.value=='DATA'
                                       ? CircularProgressIndicator()
                                       : GetBuilder<FavoriteController>(
                                       builder: (controller) {
@@ -272,10 +274,7 @@ class Favorite extends GetView<FavoriteController> {
                                                                       radius: 50,
                                                                       backgroundImage:
                                                                       NetworkImage(
-                                                                        "${MyApp.api}/uploads/stores/${c.listfavoitestore
-                                                                            .elementAt(
-                                                                            i)
-                                                                            .image}",
+                                                                        "${MyApp.api}/uploads/stores/${c.listfavoitestore.elementAt(i).image}",
 
                                                                       ),
                                                                     ),

@@ -35,12 +35,12 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
 
-  static String api = "http://192.168.1.104:8000" ;
+  static String api ="http://192.168.1.105:8000" ;
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => FavoriteController(), fenix: true);
-    Get.lazyPut(() => CartController(), fenix: true);
+    // Get.lazyPut(() => FavoriteController(), fenix: true);
+    // Get.lazyPut(() => CartController(), fenix: true);
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

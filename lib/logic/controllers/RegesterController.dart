@@ -63,7 +63,8 @@ class RegisterController extends GetxController {
           registerFormkey.currentState!.save();
 
           Get.toNamed('/HomePage');
-        } else {
+        }
+        else {
           Get.snackbar("تسجيل دحول ", "خطا في التسجيل...اعد المحاوله!!");
         }
       } finally {

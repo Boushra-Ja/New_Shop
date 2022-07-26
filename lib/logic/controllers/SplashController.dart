@@ -40,7 +40,7 @@ class SplashController extends GetxController {
 
   @override
   void onInit() {
-    // clerestorage();
+  //   clerestorage();
     splash();
     super.onInit();
   }

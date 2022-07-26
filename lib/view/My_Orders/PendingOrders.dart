@@ -24,7 +24,7 @@ class PendingOrders extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                   child: InkWell(
                     onTap: () {
-                     // Get.to(OrderDeatil( order_id: controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.order_id, index: index,status_id: controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.status_id,));
+                      Get.to(()=>OrderDeatil( order_id: controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.order_id, index: index,status_id: controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.status_id,));
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -57,12 +57,12 @@ class PendingOrders extends StatelessWidget {
                         ],
                       ),
                       subtitle: Text(
-                        "تاريخ الطلب ${controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.order_time}",
+                        "تاريخ الطلب ${controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.created_at}",
                         style: Themes.subtitle3,
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                         // Get.to(EditOrder(order_id: controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.order_id , status_id : controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.status_id ));
+                          Get.to(()=>EditOrder(order_id: controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.order_id , status_id : controller.wating_orders[controller.wating_orders.keys.elementAt(index)]!.status_id ));
                         },
                         icon: Icon(
                           Icons.edit,

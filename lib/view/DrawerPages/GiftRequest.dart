@@ -224,7 +224,7 @@ class GiftRequest extends GetView<GiftReqController> {
                                                   filled: true,
                                                   fillColor: Colors.white),
                                               onSaved: (val){
-                                                val == null ? controller.setSelectedAge("") : controller.setSelectedAge(int.parse(val.toString())) ;
+                                                val == null ? controller.setSelectedAge(" ") : controller.setSelectedAge(val.toString()) ;
 
                                               },
                                               validator: (val) {

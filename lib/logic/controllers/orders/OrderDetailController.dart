@@ -37,18 +37,21 @@ class OrderDetailController extends GetxController {
   Future<void> fetch_order_products()async{
 
     final response = await http.get(Uri.parse(
-        '${MyApp.api}/api/all_orderproduct/${order_id}/${status_id}'));
+        '${MyApp.api}/api/all_orderproduct/${order_id}'));
     if (response.statusCode == 200) {
       OrderProductModel orderProductModel = OrderProductModel.fromJson(jsonDecode(response.body));
       order_products.assignAll(orderProductModel.data) ;
 
-      // for(int i = 0 ; i < order_products.length ; i++)
-      // {
-      //   await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
-      // }
+      for(int i = 0 ; i < order_products.length ; i++)
+      {
+        await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
+      }
     }
     else
       print("error");
+
+    print(order_products) ;
+    print(selected_options) ;
 
     isLoading.value = false;
 

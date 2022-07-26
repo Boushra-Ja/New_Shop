@@ -8,9 +8,9 @@ import '../../../main.dart';
 import '../../../view/Seggestions.dart';
 
 class GiftReqController extends GetxController {
-  var selectedAge = 0  ;
+  var selectedAge = " "  ;
   var selectedMaterial =  "";
-  var Gift_party = "" ;
+  var Gift_party = " " ;
   int fromprice = 0 , toprice = 1000;
   var isLoading = true.obs , isLoad = false.obs ;
   List<Product>products = <Product>[].obs ;
@@ -22,7 +22,7 @@ class GiftReqController extends GetxController {
   GlobalKey<FormState> formstate6 = new GlobalKey<FormState>();
 
   var AgeFromlist = [
-    "اطفال" , "شبابي" , "الكبار"
+    "اطفال" , "شبابي" , "الكبار" ,"كل الاعمار"
   ];
 
 
@@ -105,23 +105,16 @@ class GiftReqController extends GetxController {
     formdata3!.save();
     formdata4!.save() ;
     formdata5!.save();
-    formdata6!.save();
+
     isLoad.value = true ;
-    if( formdata5.validate())
+    final response = await http.get(Uri.parse('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedAge}/${selectedMaterial}/${fromprice}/${toprice}')) ;
+    if(response.statusCode == 200)
     {
-      if(formdata6.validate()) {
+      ProductModel pr = ProductModel.fromJson(jsonDecode(response.body)) ;
+      products.assignAll(pr.data) ;
+      Get.to(Seggestions(
+          title: "الاقتراحات", products: products));
 
-        final response = await http.get(Uri.parse('${MyApp.api}/api/Gift_request/${Gift_party}/${selectedAge}/${selectedMaterial}/${fromprice}/${toprice}')) ;
-        if(response.statusCode == 200)
-        {
-          ProductModel pr = ProductModel.fromJson(jsonDecode(response.body)) ;
-          products.assignAll(pr.data) ;
-          Get.to(Seggestions(
-              title: "الاقتراحات", products: products));
-
-        }
-
-      }
     }
     isLoad.value = false;
   }

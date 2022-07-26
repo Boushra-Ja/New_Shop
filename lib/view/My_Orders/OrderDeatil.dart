@@ -35,7 +35,7 @@ class OrderDeatil extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if(controller.order_products.isNotEmpty)
+                if( controller.order_products.isNotEmpty)
                 {
                   return ListView(
                     shrinkWrap: true,
@@ -107,10 +107,7 @@ class OrderDeatil extends StatelessWidget {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                // Text(
-                                //   "تاريخ التسليم الفعلي  3/3/2022",
-                                //   style: Themes.bodyText3,
-                                // ),
+
                               ],
                             ),
                           ),
@@ -126,7 +123,8 @@ class OrderDeatil extends StatelessWidget {
                           SizedBox(
                             height: 25,
                           ),
-                          ListView.builder(
+
+                          controller.order_products.isNotEmpty ? ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               itemCount: controller.order_products.length,
@@ -165,32 +163,33 @@ class OrderDeatil extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                         // ListView.builder(
-                                         //    shrinkWrap: true ,
-                                         //    physics: NeverScrollableScrollPhysics(),
-                                         //    itemCount: controller.selected_options[controller.order_products.elementAt(index).order_product_id]?.length,
-                                         //    itemBuilder: (BuildContext context, int ind) {
-                                         //      return Padding(
-                                         //        padding: const EdgeInsets.only(bottom: 10.0),
-                                         //        child: Row(
-                                         //          children: [
-                                         //            Text(
-                                         //              "${controller.selected_options[controller.order_products.elementAt(index).order_product_id]?.elementAt(ind).name}",
-                                         //              style: Themes.bodyText3,
-                                         //            ),
-                                         //            Text("   ") ,
-                                         //            Text(
-                                         //              "${controller.selected_options[controller.order_products.elementAt(index).order_product_id]?.elementAt(ind).value}",
-                                         //              style: Themes.bodyText3,
-                                         //            ),
-                                         //          ],
-                                         //        ),
-                                         //      );}) ,
+                                        controller.selected_options.containsKey(controller.order_products.elementAt(index).order_product_id) ? ListView.builder(
+                                            shrinkWrap: true ,
+                                            physics: NeverScrollableScrollPhysics(),
+                                            itemCount: controller.selected_options[controller.order_products.elementAt(index).order_product_id]!.length,
+                                            itemBuilder: (BuildContext context, int ind) {
+
+                                              return Padding(
+                                                padding: const EdgeInsets.only(bottom: 10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "${controller.selected_options[controller.order_products.elementAt(index).order_product_id]?.elementAt(ind).name}",
+                                                      style: Themes.bodyText3,
+                                                    ),
+                                                    Text("   ") ,
+                                                    Text(
+                                                      "${controller.selected_options[controller.order_products.elementAt(index).order_product_id]?.elementAt(ind).value}",
+                                                      style: Themes.bodyText3,
+                                                    ),
+                                                  ],
+                                                ),
+                                              );}) : SizedBox.shrink(),
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Text(
-                                          "الكمية  2",
+                                          "الكمية   ${controller.order_products.elementAt(index).amount} ",
                                           style: Themes.bodyText3,
                                         ),
                                         SizedBox(
@@ -200,7 +199,8 @@ class OrderDeatil extends StatelessWidget {
                                     ),
                                   ),
                                 );
-                              }),
+                              }) : SizedBox.shrink(),
+
                           SizedBox(
                             height: 30,
                           )
@@ -212,6 +212,36 @@ class OrderDeatil extends StatelessWidget {
                 return Center(
                   child:Column(
                     children: [
+                      ClipPath(
+                        child: Container(
+                          color: Themes.color,
+                          height: MediaQuery.of(context).size.height * 0.12,
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                              child: Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 20,
+                                          backgroundColor: Themes.color2,
+                                          child: Center(
+                                            child: IconButton(
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                              icon: Icon(
+                                                Icons.arrow_back,
+                                                color: Themes.color,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ]))),
+                        ),
+                        clipper: MyCustomCLipper(),
+                      ),
                       SizedBox(height: 100,),
                       Container(
                         height: MediaQuery.of(context).size.height * 0.3,

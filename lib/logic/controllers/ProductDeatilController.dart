@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:new_shop/logic/controllers/orders/ShoppingBasket.dart';
 import 'package:new_shop/models/Boshra/orders/OrderProduct.dart';
 import 'dart:convert';
 import 'package:new_shop/models/Boshra/products/ProductModel.dart';
@@ -205,10 +206,10 @@ class ProductDeatilController extends GetxController{
 
   void addTo_Basket()async{
 
-    OrderProduct orderProduct =  OrderProduct(product_id: product_id, store_id: product.store_id, store_name: product.store_name,
+    ShoppingBasket orderProduct =  ShoppingBasket(product_id: product_id, store_id: product.store_id, store_name: product.store_name,
         store_image: product.image, delivery_time: "", order_time: "", product_name: product.product_name, product_image: product.image, gift_order: 'no', amount: 1 , selling_price: product.selling_price , discount_id: product.discount_id , discount_value: product.discount_value);
 
-    var l = OrderProduct.serialize(orderProduct) ;
+    var l = ShoppingBasket.serialize(orderProduct) ;
 
     String? stringofitems = await storage.read(key: 'basket');
     List<dynamic> listofitems = [];

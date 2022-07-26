@@ -28,7 +28,7 @@ class EditOrderController extends GetxController{
   Future<void> fetch_order_products()async{
 
     final response = await http.get(Uri.parse(
-        '${MyApp.api}/api/all_orderproduct/${order_id}/${status_id}'));
+        '${MyApp.api}/api/all_orderproduct/${order_id}'));
     if (response.statusCode == 200) {
       OrderProductModel orderProductModel = OrderProductModel.fromJson(jsonDecode(response.body));
       order_products.assignAll(orderProductModel.data) ;
@@ -36,7 +36,7 @@ class EditOrderController extends GetxController{
       for(int i = 0 ; i < order_products.length ; i++)
         {
           await get_all_options(order_products.elementAt(i).product_id) ;
-         // await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
+          await fetchOptions_selected(order_products.elementAt(i).order_product_id) ;
         }
     }
     else
@@ -148,7 +148,7 @@ class EditOrderController extends GetxController{
         },
         body: jsonEncode(<String, dynamic>{
           'product_id' : order_products.elementAt(ind).product_id,
-        //  'order_id' :order_products.elementAt(ind).order_id ,
+          'order_id' :order_products.elementAt(ind).order_id ,
           'amount' :  order_products.elementAt(ind).amount ,
           'gift_order' :  order_products.elementAt(ind).gift_order
         }));
@@ -156,7 +156,7 @@ class EditOrderController extends GetxController{
     if(response.statusCode == 200)
       {
         print('success') ;
-        Get.snackbar("تم تعديل الطلب", "قم بتحديث الصفحة..") ;
+        Get.snackbar("تم تعديل الطلب", "") ;
       }
 
   }
@@ -164,7 +164,5 @@ class EditOrderController extends GetxController{
   void onInit() async{
     super.onInit();
     await fetch_order_products() ;
-
-
   }
 }

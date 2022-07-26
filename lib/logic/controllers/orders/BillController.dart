@@ -18,6 +18,8 @@ class BillController extends GetxController{
   List<Bill> products_bill = <Bill>[].obs;
 
   Future<void> fetch_bill()async{
+
+    print(order_id) ;
     final response = await http.get(Uri.parse('${MyApp.api}/api/bill/${order_id}')) ;
 
     if(response.statusCode == 200 ) {
@@ -28,8 +30,13 @@ class BillController extends GetxController{
         {
           ////يجب ضربه بالكمية
           total_price += (products_bill.elementAt(i).selling_price );
-          price_after_discount += (products_bill.elementAt(i).selling_price*products_bill.elementAt(i).discount_value)/100;
+          if(products_bill.elementAt(i).discount_value != 0)
+             price_after_discount += (products_bill.elementAt(i).selling_price*products_bill.elementAt(i).discount_value)/100;
+
+          else
+            price_after_discount = total_price/1.0 ;
         }
+      print(products_bill) ;
       isLoading.value = false;
     }
 

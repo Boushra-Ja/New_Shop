@@ -14,7 +14,7 @@ class ShowDiscounts extends StatelessWidget{
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Themes.color2,
             body: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -74,68 +74,55 @@ class ShowDiscounts extends StatelessWidget{
                     ),
                   ) :Stack(
                     children: [
-                      Positioned(
+                      Center(
                         child: Container(
-                          height:
-                          MediaQuery.of(context).size.height * 0.35,
+                            height:
+                            MediaQuery.of(context).size.height ,
+                          width :MediaQuery.of(context).size.width ,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('images/discount.jpg'),
-                                fit: BoxFit.contain),
+                              image: DecorationImage(
+                                  image: AssetImage('images/discount.jpg'),
+                                  fit: BoxFit.contain),
+                            ),
                           ),
-                        ),
                       ),
-                      Positioned(
-                          top: MediaQuery.of(context).size.height * 0.3,
-                          right: 0,
-                          left: 0,
-                          bottom: 0,
-                          child: ListView.builder(
+
+                       ListView.builder(
                               reverse: true,
                               shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemCount: controller.discount_list.length,
                               itemBuilder: (BuildContext, index) {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0),
+                                      horizontal: 20.0 , vertical: 20),
                                   child: Container(
+
                                     width: MediaQuery.of(context)
                                         .size
                                         .width -
                                         40,
+
                                     decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Themes.color
+                                            color: Colors.grey
                                                 .withOpacity(0.4),
-                                            spreadRadius: 5,
-                                            blurRadius: 7,
+                                            spreadRadius: 2,
+                                            blurRadius:3,
                                             offset: Offset(0,
                                                 3), // changes position of shadow
                                           ),
                                         ],
                                         borderRadius:
                                         BorderRadius.circular(30),
-                                        color: Themes.color2),
+                                        color: Colors.white.withOpacity(0.6)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(20.0),
                                       child: Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height *
-                                                0.2,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'images/1.jpg'),
-                                                  fit: BoxFit.contain),
-                                            ),
-                                          ),
                                           SizedBox(
                                             height: 30,
                                           ),
@@ -171,7 +158,7 @@ class ShowDiscounts extends StatelessWidget{
                                     ),
                                   ),
                                 );
-                              }))
+                              })
                     ],
                   );
                 }))));

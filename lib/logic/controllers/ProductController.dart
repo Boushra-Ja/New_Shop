@@ -90,6 +90,7 @@ class ProductController extends GetxController {
 
 
     final response = await http.get(Uri.parse('${MyApp.api}/api/Show_p'));
+    print("/////////////////////////////////////////////////////////////////////////");
 
     if (response.statusCode == 200) {
       ClassificationModel classificationModel = ClassificationModel.fromJson(jsonDecode(response.body));
@@ -373,6 +374,8 @@ class ProductController extends GetxController {
 
   @override
   void onInit() {
+    print("errorr000000000000rrrsales");
+
     get();
     getData2();
     print("كلب");

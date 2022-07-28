@@ -94,4 +94,48 @@ print("this dooo");
       return "null";}
   }
 
+   static AddOrder({required store_id,required delivery_time,required delivery_price,required customer_id}) async {
+
+
+    var response = await http.post(Uri.parse('${MyApp.api}/api/orders'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(<String, String>{
+          "store_id": store_id,
+          "delivery_time": delivery_time,
+          "delivery_price":delivery_price,
+          "customer_id":customer_id,
+
+
+        }));
+
+
+    print(response.statusCode);
+    print(response.body) ;
+    if (response.statusCode == 200||response.statusCode == 201) {
+         print(response.body) ;
+       }else
+        return null;
+  }
+   static AddOrderProduct({required product_id,required order_id,required amount,required gift_order}) async {
+
+
+    var response = await http.post(Uri.parse('${MyApp.api}/api/order_product'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(<String, dynamic>{
+          "product_id": product_id,
+          "order_id": 2,
+          "amount":amount,
+          "gift_order":gift_order,
+
+        }));
+
+
+    print(response.statusCode);
+    print(response.body) ;
+    if (response.statusCode == 200||response.statusCode == 201) {
+         print(response.body) ;
+       }else
+        return null;
+  }
+
 }

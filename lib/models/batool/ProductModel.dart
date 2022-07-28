@@ -19,11 +19,11 @@ class products {
   late var image;
   late  var product_name;
   late  var rating;
-  late var sellingPrice;
+  late var selling_price;
   late var costPrice;
   late var numberOfSales;
 
-   bool isfavorite=false;
+   bool isFavourite =false;
    int count_0=0,count_1=0,count_2=0;
 
   products(
@@ -31,7 +31,7 @@ class products {
         required this.id,
         required  this.image,
         required  this.product_name,
-        required  this.sellingPrice,
+        required  this.selling_price,
         required  this.costPrice,
         required  this.numberOfSales,
         required  this.rating,
@@ -44,7 +44,7 @@ class products {
     image = json['image'];
     rating = json['rating'];
     product_name = json['name'];//product_name
-    sellingPrice = json['selling_price'];
+    selling_price = json['selling_price'];
     costPrice = json['cost_price'];
     numberOfSales = json['number_of_sales'];
 
@@ -56,7 +56,7 @@ class products {
     data['image'] = this.image;
     data['rating'] = this.rating;
     data['name'] = this.product_name;
-    data['selling_price'] = this.sellingPrice;
+    data['selling_price'] = this.selling_price;
     data['cost_price'] = this.costPrice;
     data['number_of_sales'] = this.numberOfSales;
 

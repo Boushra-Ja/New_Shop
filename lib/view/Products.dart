@@ -128,7 +128,7 @@ class Product extends GetView<ProductController> {
                                                   return
                                                     Container(
                                                         padding: EdgeInsets.only(right:10,left: 20),
-                                                        margin: EdgeInsets.only(top:10,bottom: 50,left: 10,right: 5),
+                                                        margin: EdgeInsets.only(top:10,bottom: 30,left: 10,right: 5),
                                                         child:  DecoratedBox(
                                                             decoration: BoxDecoration(
                                                                 color:Colors.white, //background color of dropdown button
@@ -257,7 +257,7 @@ class Product extends GetView<ProductController> {
                                                                             padding: const EdgeInsets.only(right: 8, bottom: 8),
                                                                             child: IconButton(
                                                                                 onPressed: () {Get.to(
-                                                                                    Seggestions(title: "عروض وحسومات",products: [],));
+                                                                                    Seggestions(title: "عروض وحسومات",products: controller.listpoduct_discount,));
                                                                                 },
                                                                                 icon: Icon(
                                                                                   Icons.arrow_forward,
@@ -335,15 +335,15 @@ class Product extends GetView<ProductController> {
 
 
 
-                                                                                                        print(controller.listpoduct_discount.elementAt(index).isfavorite);
+                                                                                                        print(controller.listpoduct_discount.elementAt(index).isFavourite);
                                                                                                         print("::::::::::::::::::::::::if::::::::::::::::::::");
-                                                                                                        controller.listpoduct_discount.elementAt(index).isfavorite = true;
-                                                                                                        print(controller.listpoduct_discount.elementAt(index).isfavorite);
+                                                                                                        controller.listpoduct_discount.elementAt(index).isFavourite = true;
+                                                                                                        print(controller.listpoduct_discount.elementAt(index).isFavourite);
                                                                                                         controller.changeCol(data,1,controller.listpoduct_discount.elementAt(index).id);}
 
                                                                                                       else{
 
-                                                                                                        controller.listpoduct_discount.elementAt(index).isfavorite = false;
+                                                                                                        controller.listpoduct_discount.elementAt(index).isFavourite = false;
 
 
 
@@ -459,7 +459,7 @@ class Product extends GetView<ProductController> {
                                                                 onPressed: () {
                                                                   Get.to(
                                                                       Seggestions(
-                                                                        title: "عروض وحسومات",products: [],));
+                                                                        title: "عروض وحسومات",products: controller.listpoduct_discount,));
                                                                 },
                                                               ))
                                                         ]),
@@ -503,7 +503,7 @@ class Product extends GetView<ProductController> {
                                                                           ),
                                                                         ),
                                                                           onTap: () {
-                                                                            Get.to(Seggestions(title: "اقتراحات قد تعجبك",products: [],));
+                                                                            Get.to(Seggestions(title: "اقتراحات قد تعجبك",products: controller.listpoduct_favorite,));
                                                                           },
                                                                         ),
                                                                         Padding(
@@ -518,7 +518,7 @@ class Product extends GetView<ProductController> {
                                                                                     .to(
                                                                                     Seggestions(
                                                                                       title:
-                                                                                      "اقتراحات قد تعجبك ",products: [],
+                                                                                      "اقتراحات قد تعجبك ",products: controller.listpoduct_favorite,
                                                                                     ));
                                                                               },
                                                                               icon: Icon(
@@ -598,15 +598,15 @@ class Product extends GetView<ProductController> {
 
 
 
-                                                                                                      print(controller.listpoduct_favorite.elementAt(index).isfavorite);
+                                                                                                      print(controller.listpoduct_favorite.elementAt(index).isFavourite);
                                                                                                       print("::::::::::::::::::::::::if::::::::::::::::::::");
-                                                                                                      controller.listpoduct_favorite.elementAt(index).isfavorite = true;
-                                                                                                      print(controller.listpoduct_favorite.elementAt(index).isfavorite);
+                                                                                                      controller.listpoduct_favorite.elementAt(index).isFavourite = true;
+                                                                                                      print(controller.listpoduct_favorite.elementAt(index).isFavourite);
                                                                                                       controller.changeCol(data,1,controller.listpoduct_favorite.elementAt(index).id);}
 
                                                                                                     else{
 
-                                                                                                      controller.listpoduct_favorite.elementAt(index).isfavorite = false;
+                                                                                                      controller.listpoduct_favorite.elementAt(index).isFavourite = false;
 
 
 
@@ -715,7 +715,7 @@ class Product extends GetView<ProductController> {
                                                               onPressed: () {
                                                                 Get.to(
                                                                     Seggestions(
-                                                                      title: "اقتراحات قد تعجبك",products: [],
+                                                                      title: "اقتراحات قد تعجبك",products: controller.listpoduct_favorite,
                                                                     ));
                                                               },
                                                             ))
@@ -763,7 +763,7 @@ class Product extends GetView<ProductController> {
                                                                         onTap: () {
                                                                           Get.to(
                                                                               Seggestions(
-                                                                                title: "الأكثر شيوعاً",products: [],
+                                                                                title: "الأكثر شيوعاً",products: controller.listpoduct_sales,
                                                                               ));
                                                                         },
                                                                       ),
@@ -777,7 +777,7 @@ class Product extends GetView<ProductController> {
                                                                               Get
                                                                                   .to(
                                                                                   Seggestions(
-                                                                                    title: "الأكثر شيوعاً",products: [],
+                                                                                    title: "الأكثر شيوعاً", products: controller.listpoduct_sales,
                                                                                   ));
                                                                             },
                                                                             icon: Icon(
@@ -865,15 +865,15 @@ class Product extends GetView<ProductController> {
 
 
 
-                                                                                                    print(controller.listpoduct_sales.elementAt(index).isfavorite);
+                                                                                                    print(controller.listpoduct_sales.elementAt(index).isFavourite);
                                                                                                     print("::::::::::::::::::::::::if::::::::::::::::::::");
-                                                                                                    controller.listpoduct_sales.elementAt(index).isfavorite = true;
-                                                                                                    print(controller.listpoduct_sales.elementAt(index).isfavorite);
+                                                                                                    controller.listpoduct_sales.elementAt(index).isFavourite = true;
+                                                                                                    print(controller.listpoduct_sales.elementAt(index).isFavourite);
                                                                                                     controller.changeCol(data,1,controller.listpoduct_sales.elementAt(index).id);}
 
                                                                                                   else{
 
-                                                                                                    controller.listpoduct_sales.elementAt(index).isfavorite = false;
+                                                                                                    controller.listpoduct_sales.elementAt(index).isFavourite = false;
 
 
 
@@ -982,7 +982,7 @@ class Product extends GetView<ProductController> {
                                                             onPressed: () {
                                                               Get.to(
                                                                   Seggestions(
-                                                                    title: "الأكثر شيوعاً",products: [],
+                                                                    title: "الأكثر شيوعاً",products: controller.listpoduct_sales,
                                                                   ));
                                                             },
                                                           ))
@@ -1031,7 +1031,7 @@ class Product extends GetView<ProductController> {
                                                                           Get.to(
                                                                               Seggestions(
                                                                                 title:
-                                                                                "الأقل سعراً",products: [],
+                                                                                "الأقل سعراً",products: controller.listpoduct_salary,
                                                                               ));
                                                                         },
                                                                       ),
@@ -1047,7 +1047,7 @@ class Product extends GetView<ProductController> {
                                                                                   .to(
                                                                                   Seggestions(
                                                                                     title:
-                                                                                    "الأقل سعراً",products: [],
+                                                                                    "الأقل سعراً",products: controller.listpoduct_salary,
                                                                                   ));
                                                                             },
                                                                             icon: Icon(
@@ -1121,7 +1121,7 @@ class Product extends GetView<ProductController> {
                                                                                                       product_id: controller.listpoduct_salary.elementAt(index).id);
                                                                                                   if(data=="add")
                                                                                                   {
-                                                                                                    controller.listpoduct_salary.elementAt(index).isfavorite = true;
+                                                                                                    controller.listpoduct_salary.elementAt(index).isFavourite = true;
 
 
                                                                                                     print("************************before add*************************************");
@@ -1139,7 +1139,7 @@ class Product extends GetView<ProductController> {
 
                                                                                                   else{
 
-                                                                                                    controller.listpoduct_salary.elementAt(index).isfavorite = false;
+                                                                                                    controller.listpoduct_salary.elementAt(index).isFavourite = false;
 
 
 

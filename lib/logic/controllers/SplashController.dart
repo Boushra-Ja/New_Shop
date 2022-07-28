@@ -16,7 +16,7 @@ class SplashController extends GetxController {
     late var result = ''.obs;
 
     try {
-      token.value=(await storage.read(key: 'token'))!;
+     token.value=(await storage.read(key: 'token'))!;
       print(token);
       result.value = 'OK';
     } catch (e) {
@@ -41,14 +41,18 @@ class SplashController extends GetxController {
 
   @override
   void onInit() {
-  //   clerestorage();
+     //clerestorage();
+
     splash();
 
     super.onInit();
   }
 
   splash() async {
-    await storage.write(key: 'basket', value: null);
+    // await storage.write(key: 'basket', value: null);
+
+
+
 
     try {
       loading.value = true;

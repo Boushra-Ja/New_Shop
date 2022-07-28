@@ -73,6 +73,10 @@ class RegisterController extends GetxController {
           Get.snackbar("تسجيل دحول ", "خطا في التسجيل...اعد المحاوله!!");
         }
       } finally {
+        print("__________________________________");
+        var n=     await (storage.read(key: 'id'));
+
+        print(n);
         isLoading(false);
       }
     }

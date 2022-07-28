@@ -67,25 +67,30 @@ class FavoriteController extends GetxController {
   FetchData_favorite_store() async {
 
     final response = await http.get(Uri.parse('${MyApp.api}/api/FavoriteStore/Show_Favorite'));
-    ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
-    listfavoitestore.assignAll(shopModel.data );
-    print("===============================================================");
-
     print(response.body);
-    print("===============================================================");
+   // if(response.body!=null)
+    {
+      ShopModel shopModel = ShopModel.fromJson(jsonDecode(response.body)) ;
+      listfavoitestore.assignAll(shopModel.data );
+      print("===============================================================");
 
-    if (response.statusCode == 200) {
+      print(response.body);
+      print("===============================================================");
+
+      if (response.statusCode == 200) {
 
 
 
-      for(int i=0;i<listfavoitestore.length;i++)
-      {
-        for(int k=0;k<listfavoitestore[i].all_review.length;k++)
-          listfavoitestore[i].review += listfavoitestore[i].all_review.elementAt(k)['value'] as int ;
-           int j=(listfavoitestore[i].review / 3) .toInt();  ;
-            listfavoitestore[i].review = j    ;
+        for(int i=0;i<listfavoitestore.length;i++)
+        {
+          for(int k=0;k<listfavoitestore[i].all_review.length;k++)
+            listfavoitestore[i].review += listfavoitestore[i].all_review.elementAt(k)['value'] as int ;
+          int j=(listfavoitestore[i].review / 3) .toInt();  ;
+          listfavoitestore[i].review = j    ;
 
+        }
       }
+
     }
 
 

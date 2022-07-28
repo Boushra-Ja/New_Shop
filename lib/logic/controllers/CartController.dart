@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:new_shop/models/batool/CartModel.dart';
 import '../../main.dart';
+import '../../models/Boshra/orders/OrderProduct.dart';
+import 'orders/ShoppingBasket.dart';
 
 class CartController extends GetxController {
 
@@ -13,21 +15,28 @@ class CartController extends GetxController {
  late TextEditingController
  CartAmountcontroller;
 
- var ListCArt = <Carts>[].obs;
+ var ListCArt = <ShoppingBasket>[];
+  Map<int ,List<ShoppingBasket> >map1={};
  var check=''.obs;
+ var IsNullBasket=''.obs;
 
- var chexkboxValue = ['no','no','no','no','no','no','no','no','','','','','','',].obs ;
-  List<String> radio = ["yes", "no"];
-
+ var chexkboxValue = ['no','no','no','no','no','no','no','no'].obs ;
 
 
 
  void setchexkboxValue(String val,String id){
 
-   print(id);
-   print(val);
-   int h=int.parse(id);
-   chexkboxValue[h-1]=val;
+
+   // if(id=='1')
+     chexkboxValue[0]=val;
+   //
+
+
+
+    int h=int.parse(id);
+  // print(h);
+  //   chexkboxValue[h-1]=val;
+
    update();
  }
 
@@ -51,83 +60,75 @@ class CartController extends GetxController {
 
   List_Cart() async {
 
-    final response = await http.get(Uri.parse('${MyApp.api}/api/index'));
+  IsNullBasket.value= await storage.read(key: 'basket') as String;
 
-       print(response.body);
-       CartsModel cartModel = CartsModel.fromJson(jsonDecode(response.body)) ;
-       ListCArt.assignAll(cartModel.data);
+   // print("?????????????????????????????????????????????????????????????????????????????");
+   // print(IsNullBasket.value);
+   // print("?????????????????????????????????????????????????????????????????????????????");
 
 
-   //  if(response.statusCode==200 && ListCArt.isEmpty) {
-   //    check.value='NODATA';
-   //    print( check.value);
+   String? stringofitems = await storage.read(key: 'basket');
+   if(stringofitems!=null)
+   {
+
+     List<dynamic> listofitems = jsonDecode(stringofitems);
+
+     List<dynamic> temp = [] ;
+
+     for(int i =  0 ; i < listofitems.length ; i++)
+     {
+       ShoppingBasket model = ShoppingBasket.fromJson(jsonDecode(listofitems.elementAt(i)));
+
+       if(map1.containsKey(model.store_id))
+         map1[model.store_id]?.add(model);
+       else
+         map1[model.store_id] =  [model] ;
+
+
+
+
+
+
+     }
+
+
+  }
+
+
+
+   //   print("?????????????????????????????????????????????????????????????????????????????");
+   //   print("99999999999999999999999999999");
+   // //  print(map1.values.elementAt(1).length);
    //
-   //    update();
    //
-   //  }
+   //   print("?????????????????????????????????????????????????????????????????????????????");
    //
-   // else
-
-     if (response.statusCode == 200 && ListCArt.isNotEmpty) {
-      // check.value='DATA';
-      // print( check.value);
-      // print( ListCArt.length);
-      // update();
-      // update();
-      for(int i=0;i<ListCArt.length;i ++)
-      {
-        for(int k=0;k<ListCArt[i].myProducts[0].all_review.length;k++) {
-          ListCArt[i].myProducts[0].review += ListCArt[i].myProducts[0].all_review.elementAt(k)['value'] as int;
-        }
-
-      }
-      for(int i=0;i<ListCArt.length;i++)
-      {
-        for(int k=0;k<ListCArt[i].myProducts[0].all_reviews.length;k++) {
-          ListCArt[i].myProducts[0].reviews+= ListCArt[i].myProducts[0].all_reviews.elementAt(k)['value'] as int;
-        }
-        // print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
-        //
-        //     print( ListCArt[i].myProducts[0].reviews);
-        // print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
-      }
-     // for(int i=0;i<ListCArt.length;i++)
-     //      {
-     //
-     //        print(ListCArt[i].myProducts[i].reviews);
-     //
-     //      }
-
-
-
-    }
-
-
-
-
 
 
 
    }
 
 
+   // for(int i = 0; i <ListCArt.length ; i++)
+   // {
+   //    print(ListCArt);
+   //
+   //
+   //
+   // }
+
+
 
    @override
   void onInit() {
 
-
-
-
-
-     CartAmountcontroller=TextEditingController();
-
-
+     //CartAmountcontroller=TextEditingController();
      List_Cart();
-     for(int i=0;i<5;i++) {
-       chexkboxValue[i] ='no';
-     }
-
-
+     // for(int i=0;i<5;i++) {
+     //   chexkboxValue[i] ='no';
+     // }
+     //
+     //
 
 
    }

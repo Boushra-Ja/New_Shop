@@ -9,6 +9,8 @@ class Initial_Binding extends  Bindings{
   void dependencies() {
     Get.put<ShopPageController>(ShopPageController()) ;
     Get.put<OrdersController>(OrdersController()) ;
-    Get.lazyPut<HomeController>(() => HomeController(),fenix: true);  }
+  //  Get.lazyPut<HomeController>(() => HomeController(),fenix: true);
+
+  }
 
 }
